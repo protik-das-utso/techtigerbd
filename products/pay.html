@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment — StreamyBD</title>
+  <meta name="description"
+    content="লোকাল পেমেন্ট (bKash, Nagad, Rocket)। TrxID দিলেই ভেরিফাই — অটো হলে ইমিডিয়েট ডেলিভারি, নয়তো WhatsApp এ দ্রুত ডেলিভারি।">
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="../assets/pay.css?v=1">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="/"><span class="brand-logo">S</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary" style="display:flex;gap:12px">
+        <a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap card" role="main">
+    <div class="headline">
+      <div class="badge">Payment</div>
+      <h2 id="payTitle" class="h2" style="margin:.2rem 0 0">—</h2>
+    </div>
+
+    <!-- Reviews CTA -->
+    <div class="review-banner" style="margin:.6rem 0 1rem">
+      <span class="badge badge--accent">No fake reviews</span>
+      <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+        rel="noopener nofollow">
+        ⭐ 1,000+ Real Reviews — Facebook Group
+      </a>
+    </div>
+
+    <!-- Payment methods -->
+    <div class="pay-card-grid" id="payCards">
+      <button type="button" class="pay-card selected" data-method="bkash" aria-pressed="true">
+        <img src="../assets/images/bkash.png" alt="bKash"><b>bKash</b>
+      </button>
+      <button type="button" class="pay-card" data-method="nagad" aria-pressed="false">
+        <img src="../assets/images/nagad.svg" alt="Nagad"><b>Nagad</b>
+      </button>
+      <button type="button" class="pay-card" data-method="rocket" aria-pressed="false">
+        <img src="../assets/images/rocket.png" alt="Rocket"><b>Rocket</b>
+      </button>
+    </div>
+
+    <div class="note" style="display:flex;align-items:center;gap:8px">
+      Send Money to <b id="payNum">01881738485</b>
+      <button type="button" class="btn" id="copyPayNum" title="Copy number" aria-label="Copy number">Copy</button>
+    </div>
+
+    <div style="margin:8px 0 10px;font-size:18px;font-weight:900">Total: <span id="payTotal">৳0</span></div>
+
+    <div class="inputs" aria-label="Payment inputs">
+      <input class="input" id="payTrxID" placeholder="TrxID (যেমন: CF89QDYS21)">
+      <input class="input" id="paySenderNum" placeholder="Mobile Number (ঐচ্ছিক)">
+      <input class="input" id="payEmail" placeholder="Email (ঐচ্ছিক)">
+    </div>
+
+    <!-- Collapsible steps (one-line collapsed) -->
+    <details class="step-toggle">
+      <summary>পেমেন্ট ধাপ (ক্লিক করলে খুলবে)</summary>
+      <ol>
+        <li>Step 1: <b id="stepPayMethod">bKash/Nagad/Rocket</b>-এ <b>Send Money</b> করুন (<span
+            id="stepPayNum">01881738485</span>).</li>
+        <li>Step 2: TrxID লিখুন (যেমন: CF89QDYS21).</li>
+        <li>Step 3: <b>Proceed</b> চাপুন ভেরিফাইয়ের জন্য।</li>
+        <li>Step 4: অটো হলে সাথে সাথে ডেলিভারি; না হলে <b>WhatsApp</b>-এ দ্রুত ডেলিভারি।</li>
+      </ol>
+    </details>
+
+    <div class="actions">
+      <a class="btn" href="/#plans">Back</a>
+      <div class="right">
+        <button type="button" class="btn" id="btnWhatsApp">Contact WhatsApp</button>
+        <button type="button" class="btn btn-primary" id="payProceed">Proceed</button>
+      </div>
+    </div>
+
+    <div id="resultPanel" class="result" aria-live="polite"></div>
+  </main>
+
+  <script>
+    (function () {
+      // ---------- Config ----------
+      const GAS_URL = "https://script.google.com/macros/s/AKfycbyLjru6Gqm9qlXUWgDYPCMaGGeEIam0OrWRguPVTGYj73eI6zyt745aZaWRLreVJmGt/exec";
+      const WHATSAPP_URL = "https://wa.me/8801881738485";
+
+      // ---------- Helpers ----------
+      const copyToClipboard = async (text) => {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          toast('Copied!');
+        } catch (e) {
+          toast('Copy failed. Please copy manually.');
+        }
+      };
+
+      const $ = (q, r = document) => r.querySelector(q);
+      const fmtTk = v => "৳" + Number(v || 0);
+      const toast = (msg) => {
+        try {
+          const t = document.createElement('div'); t.textContent = msg;
+          t.style.cssText = "position:fixed;z-index:99999;left:50%;transform:translateX(-50%);bottom:20px;background:#161821;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.35);";
+          document.body.appendChild(t); setTimeout(() => t.remove(), 2200);
+        } catch (e) { alert(msg); }
+      };
+      // ---- Delivery guides (BN) ----
+      const GUIDE_SHARED_HTML = `
+<div class="guide-card">
+  <strong>Shared Account নির্দেশনা</strong>
+  <ul>
+    <li>সর্বোচ্চ ১ ডিভাইস লগিন।</li>
+    <li>Watch History এলোমেলো হয়ে যেতে পারে।</li>
+    <li>CrunchyList এলোমেলো হয়ে যেতে পারে।</li>
+    <li>আপনার নামে কোনো প্রোফাইল থাকবে না।</li>
+    <li>নিজে নিজে মাঝেমধ্যে Log Out হতে পারে (আবার Same Mail Pass এই লগিন হবে)।</li>
+    <li>★ ভিডিও দেখতে কোনো সমস্যা নেই</li>
+  </ul>
+</div>`.trim();
+
+      const GUIDE_PERSONAL_HTML = `
+<div class="guide-card">
+  <strong>Personal Profile নির্দেশনা</strong>
+  <ul>
+    <li>সর্বোচ্চ ২ ডিভাইস লগিন।</li>
+    <li>আপনার নামে ১ টা প্রোফাইল থাকবে।</li>
+    <li>Watch History এলোমেলো হবে না।</li>
+    <li>আলাদা Crunchylist থাকবে।</li>
+    <li>Logout Issue নেই।</li>
+    <li>প্রতিমাসে রিনিউ করতে পারবেন।</li>
+  </ul>
+</div>`.trim();
+
+      // ---------- Read from URL ----------
+      const url = new URL(location.href);
+      const p = {
+        product: url.searchParams.get('product') || 'Product',
+        plan: url.searchParams.get('plan') || '',
+        mode: url.searchParams.get('mode') || 'manual', // 'manual' | 'auto-cr' | 'freefire'
+        service: url.searchParams.get('service') || '', // auto-cr
+        productkey: url.searchParams.get('productkey') || '', // manual
+        price: Number(url.searchParams.get('price') || 0),
+        qty: Number(url.searchParams.get('qty') || 1),
+        uid: url.searchParams.get('uid') || '', // freefire
+        uc: url.searchParams.get('uc') || ''    // freefire
+      };
+      const total = p.price * (p.qty || 1);
+
+      // ---------- Paint header ----------
+      const fullTitle = p.product + (p.plan ? (' • ' + p.plan) : '');
+      $('#payTitle').textContent = fullTitle;
+      $('#payTotal').textContent = fmtTk(total);
+
+      // ---------- Method selection ----------
+      const mapNum = { bkash: "01881738485", nagad: "01881738485", rocket: "018292553669" };
+      let payMethod = "bkash";
+      const cards = document.getElementById('payCards');
+      cards?.addEventListener('click', (e) => {
+        const c = e.target.closest('.pay-card'); if (!c) return;
+        cards.querySelectorAll('.pay-card').forEach(x => { x.classList.remove('selected'); x.setAttribute('aria-pressed', 'false'); });
+        c.classList.add('selected'); c.setAttribute('aria-pressed', 'true');
+        payMethod = c.dataset.method || "bkash";
+        const num = mapNum[payMethod] || "01881738485";
+        $('#payNum').textContent = num;
+        $('#stepPayNum').textContent = num;
+        $('#stepPayMethod').textContent = payMethod.charAt(0).toUpperCase() + payMethod.slice(1);
+      });
+
+      document.getElementById('copyPayNum')?.addEventListener('click', async () => {
+        const num = document.getElementById('payNum')?.textContent.trim() || '';
+        if (num) await copyToClipboard(num);
+      });
+
+      // ---------- WhatsApp ----------
+      function openWhatsApp(trx, statusText) {
+        const generic = `Hi, Contacting through streamybd.com\nI have a query`;
+        if (!trx) {
+          window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(generic)}`, '_blank'); return;
+        }
+        const lines = [
+          `I ordered "${fullTitle}"`,
+          `Validity: ${p.plan || '1 Month'}`,
+          `Status: ${statusText || 'Pending'}`,
+          `Trxid: ${trx}`,
+          `Amount: ${total ? (total + ' BDT') : ''}`.trim(),
+          `please proceed with next`
+        ].filter(Boolean);
+        window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+      }
+      document.getElementById('btnWhatsApp')?.addEventListener('click', () => openWhatsApp(""));
+
+      // ---------- Proceed ----------
+      document.getElementById('payProceed')?.addEventListener('click', async () => {
+        const trx = ($('#payTrxID').value || '').trim();
+        if (!trx) { toast('Please enter TrxID.'); return; }
+        const phone = ($('#paySenderNum').value || '').trim();
+        const email = ($('#payEmail').value || '').trim();
+        const contactQuery = `&contact_email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`;
+        const panel = $('#resultPanel'); panel.innerHTML = '<div class="muted">Processing…</div>';
+
+        try {
+          // Auto delivery
+          if (p.mode === 'auto-cr') {
+            const url = `${GAS_URL}?trxid=${encodeURIComponent(trx)}&service=${encodeURIComponent(p.service)}${contactQuery}`;
+            const r = await fetch(url);
+            const data = await r.json();
+
+            panel.innerHTML = '';
+            if (data && data.success) {
+              const acc = data.account || {};
+
+              // detect shared vs personal (checks service or account fields)
+              const isShared = /shared/i.test(
+                (p.service || '') + ' ' + (acc.service || '') + ' ' + (acc.plan || '') + ' ' + (acc.type || '')
+              );
+
+              // guidance cards (inline styles so no extra CSS needed)
+              const GUIDE_SHARED_HTML = `
+      <div style="margin-top:10px;padding:10px 12px;background:#fff7ef;border:1px dashed #f5a463;border-radius:12px;color:#7a3b00;font-size:14px;line-height:1.55;">
+        <strong style="display:block;margin-bottom:6px;">Shared Account নির্দেশনা</strong>
+        <ul style="margin:.25rem 0 0;padding-left:1.15rem;">
+          <li>🧹 App Data Clear করে লগিন দিন।</li>
+<li>📱 সর্বোচ্চ ১ ডিভাইস লগিন।</li>
+<li>🚫 প্রোফাইল নাম পরিবর্তন করবেন না।</li>
+<li>🙏 Thank you</li>
+<li>🗓 Ex: 30 Day</li>
+<li>📞 WhatsApp: 01881738485</li>
+
+        </ul>
+      </div>`.trim();
+
+              const GUIDE_PERSONAL_HTML = `
+      <div style="margin-top:10px;padding:10px 12px;background:#eefbf3;border:1px dashed #66c18c;border-radius:12px;color:#0b5c32;font-size:14px;line-height:1.55;">
+        <strong style="display:block;margin-bottom:6px;">Personal Profile নির্দেশনা</strong>
+        <ul style="margin:.25rem 0 0;padding-left:1.15rem;">
+          <li>📱২ ডিভাইসের বেশি লগিন দিবেন না।</li>
+<li>👤সবসময় আপনাকে দেওয়া প্রোফাইল ব্যবহার করবেন</li>
+<li>🔁 Same Account রিনিউ করতে চাইলে অন্তত ২ দিন আগে জানাতে হবে।</li>
+<li>🙏 Thank you</li>
+<li>🗓️ Ex: +30 Day</li>
+<li>📞 Whatsapp: +8801881738485</li>
+
+        </ul>
+      </div>`.trim();
+
+              // paint success + credentials
+              const blockId = 'deliv-' + Math.random().toString(36).slice(2);
+
+              panel.insertAdjacentHTML('beforeend', `
+  <div id="${blockId}">
+    <div style="font-weight:800;margin-bottom:8px">✅ Delivered</div>
+
+    <div style="display:grid;gap:8px">
+      <div>
+        <div class="muted" style="font-size:12px">Email/Username</div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <b id="${blockId}-mail">${acc.mail || ''}</b>
+          <button class="btn copy-btn" data-target="${blockId}-mail" aria-label="Copy email/username" title="Copy">Copy</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="muted" style="font-size:12px">Password</div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <b id="${blockId}-pass">${acc.pass || ''}</b>
+          <button class="btn copy-btn" data-target="${blockId}-pass" aria-label="Copy password" title="Copy">Copy</button>
+        </div>
+      </div>
+
+      ${acc.profile ? `
+      <div>
+        <div class="muted" style="font-size:12px">Profile</div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <b id="${blockId}-profile">${acc.profile}</b>
+          <button class="btn copy-btn" data-target="${blockId}-profile" aria-label="Copy profile" title="Copy">Copy</button>
+        </div>
+      </div>` : ``}
+    </div>
+
+    ${isShared ? GUIDE_SHARED_HTML : GUIDE_PERSONAL_HTML}
+
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="btn" id="${blockId}-copyAll" aria-label="Copy all">Copy All</button>
+      <button class="btn" id="waC1">Contact WhatsApp</button>
+    </div>
+  </div>
+`);
+
+              // ——— helpers
+              const root = panel.querySelector('#' + blockId);
+
+              const copyToClipboard = async (text) => {
+                if (navigator.clipboard && window.isSecureContext) {
+                  await navigator.clipboard.writeText(text);
+                } else {
+                  // fallback for non-secure contexts/older browsers
+                  const ta = document.createElement('textarea');
+                  ta.value = text;
+                  ta.style.position = 'fixed';
+                  ta.style.opacity = '0';
+                  document.body.appendChild(ta);
+                  ta.focus();
+                  ta.select();
+                  try { document.execCommand('copy'); } finally { document.body.removeChild(ta); }
+                }
+              };
+
+              const flash = (btn, msg = 'Copied!') => {
+                const prev = btn.textContent;
+                btn.disabled = true;
+                btn.textContent = msg;
+                setTimeout(() => { btn.textContent = prev; btn.disabled = false; }, 900);
+              };
+
+              // per-field copy
+              root.querySelectorAll('.copy-btn').forEach((btn) => {
+                btn.addEventListener('click', async () => {
+                  const id = btn.getAttribute('data-target');
+                  const text = root.querySelector('#' + CSS.escape(id))?.textContent.trim() || '';
+                  await copyToClipboard(text);
+                  flash(btn);
+                });
+              });
+
+              // copy all
+              root.querySelector('#' + blockId + '-copyAll')?.addEventListener('click', async (e) => {
+                const mail = root.querySelector('#' + CSS.escape(blockId + '-mail'))?.textContent.trim();
+                const pass = root.querySelector('#' + CSS.escape(blockId + '-pass'))?.textContent.trim();
+                const prof = root.querySelector('#' + CSS.escape(blockId + '-profile'))?.textContent.trim();
+
+                const lines = [];
+                if (mail) lines.push(`Email/Username: ${mail}`);
+                if (pass) lines.push(`Password: ${pass}`);
+                if (prof) lines.push(`Profile: ${prof}`);
+
+                await copyToClipboard(lines.join('\n'));
+                flash(e.currentTarget, 'All copied!');
+              });
+
+
+              document.getElementById('waC1')?.addEventListener('click', () => openWhatsApp(trx, 'Paid'));
+            } else {
+              panel.innerHTML = `<div style="font-weight:800;color:#ff5c7c;margin-bottom:8px">❌ Delivery failed</div>
+                         <div class="muted">${(data && data.message) || 'Unknown error'}</div>
+                         <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="waF1">Contact WhatsApp</button></div>`;
+              document.getElementById('waF1')?.addEventListener('click', () => openWhatsApp(trx, 'Failed'));
+            }
+            return;
+          }
+
+          // Free Fire
+          if (p.mode === 'freefire') {
+            if (!p.uid || !p.uc) { panel.innerHTML = '<div class="muted">UID এবং প্যাক সিলেক্ট করে আবার চেষ্টা করুন।</div>'; return; }
+            const url = `${GAS_URL}?action=freefire_topup&trxid=${encodeURIComponent(trx)}&uid=${encodeURIComponent(p.uid)}&uc=${encodeURIComponent(p.uc)}${contactQuery}`;
+            const r = await fetch(url); const data = await r.json();
+            panel.innerHTML = '';
+            if (data && data.success) {
+              panel.innerHTML = `<div style="font-weight:800;margin-bottom:6px">✅ Top-up successful</div>
+            <div><b>IGN:</b> ${data.ign || '-'}</div>
+            <div><b>Pack:</b> ${data.amount || p.uc}</div>
+            <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="waOk">Contact WhatsApp</button></div>`;
+              document.getElementById('waOk')?.addEventListener('click', () => openWhatsApp(trx, 'Paid'));
+            } else {
+              panel.innerHTML = `<div style="font-weight:800;color:#ff5c7c;margin-bottom:6px">❌ Top-up failed</div>
+            <div class="muted">${(data && data.message) || 'Unknown error'}</div>
+            <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="waFail">Contact WhatsApp</button></div>`;
+              document.getElementById('waFail')?.addEventListener('click', () => openWhatsApp(trx, 'Failed'));
+            }
+            return;
+          }
+
+          // Manual (verify only)
+          const url2 = `${GAS_URL}?action=verify_only&trxid=${encodeURIComponent(trx)}&product=${encodeURIComponent(p.productkey || '')}${contactQuery}`;
+          const r2 = await fetch(url2); const data2 = await r2.json();
+          panel.innerHTML = '';
+          if (data2 && data2.success) {
+            panel.innerHTML = `<div style="font-weight:800;margin-bottom:6px">✅ Payment verified</div>
+          <div class="muted">এখন WhatsApp এ ডেলিভারি নিন।</div>
+          <div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn--accent" id="waGet">Get Account on WhatsApp</button></div>`;
+            document.getElementById('waGet')?.addEventListener('click', () => openWhatsApp(trx, 'Paid'));
+          } else {
+            panel.innerHTML = `<div style="font-weight:800;color:#ff5c7c;margin-bottom:6px">❌ Verification failed</div>
+          <div class="muted">${(data2 && data2.message) || 'Unknown error'}</div>
+          <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="waErr">Contact WhatsApp</button></div>`;
+            document.getElementById('waErr')?.addEventListener('click', () => openWhatsApp(trx, 'Failed'));
+          }
+        } catch (err) {
+          panel.innerHTML = `<div style="font-weight:800;color:#ff5c7c;margin-bottom:6px">❌ Network error</div><div class="muted">${String(err)}</div>
+        <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="waNet">Contact WhatsApp</button></div>`;
+          document.getElementById('waNet')?.addEventListener('click', () => openWhatsApp(trx, 'Pending'));
+        }
+      });
+
+      // Initialize step numbers
+      const defNum = document.getElementById('payNum').textContent.trim();
+      document.getElementById('stepPayNum').textContent = defNum;
+    })();
+  </script>
+
+</body>
+
+</html>

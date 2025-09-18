@@ -1,0 +1,638 @@
+/* Shared CSS for product detail pages (based on chatgpt.html) */
+
+:root {
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --card-2: #f9fafb;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #10a37f;
+    --accent-ink: #ffffff;
+    --border: #e5e7eb;
+    --success: #22c55e;
+    --shadow: 0 6px 20px rgba(2, 6, 23, .06), 0 1px 1px rgba(2, 6, 23, .04);
+    --radius: 16px;
+}
+
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: clamp(13px, 0.6vw + 9px, 15px);
+    line-height: 1.55;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: min(1100px, 94vw);
+    margin: 0 auto;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(160%) blur(6px);
+    background: rgba(255, 255, 255, .85);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.brand-logo {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #34d399, var(--accent));
+    color: #111;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+.avail.in {
+    background: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
+
+.avail {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: .25rem .6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .85rem;
+    border: 1px solid transparent;
+}
+
+nav.primary a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 12px;
+    font-size: .92rem;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.card .btn {
+    font-size: clamp(12px, 0.8vw, 14px);
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chip {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    padding: .55rem .75rem;
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: box-shadow .18s ease, background-color .18s ease, color .18s ease;
+    font-size: clamp(12px, 0.8vw, 14px);
+}
+
+.chip:hover {
+    box-shadow: 0 6px 16px rgba(15, 23, 42, .06);
+}
+
+.chip:focus {
+    outline: none;
+}
+
+/* Price pill (neutral by default; plan grid will override) */
+.chip small.price {
+    background: color-mix(in oklab, var(--accent) 12%, #fff);
+    color: var(--text);
+    font-weight: 800;
+    padding: .12rem .38rem;
+    border-radius: 8px;
+    margin-left: .45rem;
+    border: 1px solid color-mix(in oklab, var(--accent) 35%, #fff);
+}
+
+/* Remove focus outline; do not suppress box-shadow so plan-grid active styles remain visible */
+.chip--plan[aria-selected="true"],
+.chips:not(.plan-grid) .chip.active {
+    outline: none;
+}
+
+/* Plan grid: compact, equal, animated */
+.plan-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.plan-group .chips {
+    display: grid;
+    /* Auto-fit as many columns as space allows, each at least 220px */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+/* keep plan group headings left-aligned */
+.plan-group h4 {
+    margin: 0 0 6px;
+}
+
+.plan-grid .chip--plan {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 64px;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    /* label | price */
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1.5px solid #e6eaf3;
+    background: #fff;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #0f172a;
+    cursor: pointer;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    box-shadow: 0 3px 10px rgba(17, 24, 39, .06);
+    white-space: normal;
+    /* allow wrapping for long labels */
+    overflow-wrap: anywhere;
+    /* prevent overlap in narrow widths */
+    position: relative;
+}
+
+.plan-grid .chip--plan:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(17, 24, 39, .12);
+    border-color: #e3e8f5;
+}
+
+/* When active, don't apply hover translate to avoid transform conflicts with pulse */
+.plan-grid .chip--plan.active:hover,
+.plan-grid .chip--plan[aria-selected="true"]:hover {
+    transform: none;
+}
+
+.plan-grid .chip--plan.active,
+.plan-grid .chip--plan[aria-selected="true"] {
+    border-color: color-mix(in oklab, var(--accent) 65%, #fff);
+    border-width: 2px;
+    background: linear-gradient(180deg, #fff, color-mix(in oklab, var(--accent) 10%, #fff));
+    box-shadow: 0 12px 26px color-mix(in oklab, var(--accent) 22%, transparent);
+}
+
+/* Border shade effect ring (subtle accent glow around every plan) */
+.plan-grid .chip--plan::after {
+    content: "";
+    position: absolute;
+    inset: -1.5px;
+    /* slightly outside the border */
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 22%, transparent);
+    opacity: .28;
+    transition: opacity .18s ease, box-shadow .18s ease;
+}
+
+.plan-grid .chip--plan:hover::after {
+    opacity: .42;
+    box-shadow: 0 0 0 2.6px color-mix(in oklab, var(--accent) 30%, transparent);
+}
+
+.plan-grid .chip--plan.active::after,
+.plan-grid .chip--plan[aria-selected="true"]::after {
+    opacity: .65;
+    box-shadow:
+        0 0 0 3px color-mix(in oklab, var(--accent) 42%, transparent),
+        0 6px 18px 2px color-mix(in oklab, var(--accent) 24%, transparent);
+}
+
+.plan-grid .chip--plan small.price {
+    margin-left: 0;
+    /* grid handles alignment */
+    justify-self: end;
+    align-self: center;
+    padding: .22rem .6rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 900;
+    color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 12%, #fff);
+    border: 1px solid color-mix(in oklab, var(--accent) 40%, #fff);
+}
+
+@keyframes planPulse {
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(0.98)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+/* Forms */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.label {
+    color: var(--muted);
+    font-size: .88rem;
+    margin-bottom: .35rem;
+    display: block;
+}
+
+/* Only center the "প্ল্যান / Plan" and "পরিমাণ / Quantity" labels */
+.form-field:has(#pPlans)>.label,
+.form-field:has(#pQty)>.label,
+label:has(#pQty)>.label {
+    text-align: center;
+}
+
+/* Center quantity control and keep compact */
+.qty {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    width: fit-content;
+    margin: .25rem auto 0;
+}
+
+.qty .btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    padding: 0 12px;
+    height: 38px;
+    cursor: pointer;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1;
+}
+
+.qty .input {
+    width: 70px;
+    height: 38px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    color: var(--text);
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Summary: softer background and accent total */
+.summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 10px;
+    align-items: center;
+    background: #f9fafb;
+    border: 1px solid #eef0f4;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.summary .price {
+    font-size: 1.25rem;
+    color: var(--accent);
+    font-weight: 900;
+}
+
+/* Buttons */
+.btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    padding: clamp(8px, 1.1vw, 12px) clamp(12px, 1.8vw, 16px);
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: clamp(12px, 0.8vw, 14px);
+    line-height: 1.1;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, .06);
+}
+
+.btn--accent {
+    background: linear-gradient(135deg, var(--accent));
+    color: var(--accent-ink);
+}
+
+.btn-ghost {
+    background: transparent;
+}
+
+.review-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Hero layout */
+.product-hero {
+    display: grid;
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px 0 10px;
+    align-items: start;
+}
+
+.art-card {
+    position: sticky;
+    top: clamp(64px, 8vh, 92px);
+    align-self: start;
+    background: linear-gradient(160deg, #f1f5f9, #ffffff);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.art-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+}
+
+/* Bigger, bolder product title */
+.panel h1 {
+    font-weight: 900;
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+    line-height: 1.2;
+    margin: 0 0 .6rem;
+    letter-spacing: -0.01em;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: .3rem 0 .9rem;
+}
+
+.brand-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .3rem .55rem;
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: .92rem;
+}
+
+.brand-chip img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.price-tag {
+    display: flex;
+    align-items: baseline;
+    gap: .4rem;
+    font-weight: 800;
+}
+
+.price-tag .amount {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+}
+
+.price-tag .ccy {
+    color: var(--muted);
+    font-size: .88rem;
+}
+
+/* Availability badge (In/Low/Out) */
+.avail {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: .25rem .6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .85rem;
+    border: 1px solid transparent;
+}
+
+.avail.in {
+    background: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
+
+.avail.low {
+    background: #fff7ed;
+    color: #9a3412;
+    border-color: #fed7aa;
+}
+
+.avail.oos {
+    background: #fff1f2;
+    color: #9f1239;
+    border-color: #fecdd3;
+}
+
+.stars {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    font-size: .9rem;
+    color: #f59e0b;
+}
+
+.stars .cnt {
+    color: var(--muted);
+    margin-left: .35rem;
+    font-size: .85rem;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.badge--accent {
+    background: #ecfeff;
+    color: #0e7490;
+    border: 1px dashed #a5f3fc;
+    padding: .22rem .48rem;
+    border-radius: 10px;
+    font-size: .85rem;
+}
+
+.hr-soft {
+    height: 1px;
+    background: var(--border);
+    margin: 10px 0;
+}
+
+.desc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-top: 12px;
+}
+
+.desc-card h3 {
+    margin: .15rem 0 .35rem;
+    font-size: 1rem;
+}
+
+.desc-card p {
+    margin: .35rem 0 .5rem;
+    color: var(--muted);
+}
+
+.desc-card ul {
+    margin: .2rem 0 .7rem 1.1rem;
+    line-height: 1.55;
+    font-size: .95rem;
+}
+
+.desc-card details {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: .75rem .9rem;
+    background: var(--card-2);
+}
+
+.desc-card details+details {
+    margin-top: .5rem;
+}
+
+.chips[aria-hidden="true"] .chip {
+    background: #eef2f7;
+    border-color: #d9e1ea;
+    color: #334155;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6);
+    font-weight: 600;
+    pointer-events: none;
+    padding: .6rem .85rem;
+}
+
+@media (max-width: 880px) {
+    .product-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .art-card {
+        position: relative;
+        top: auto;
+        max-width: min(92vw, 520px);
+        margin: 0 auto;
+    }
+
+    .art-img {
+        object-fit: contain;
+        background-color: var(--card-2);
+    }
+
+    .panel {
+        padding: 14px;
+    }
+}
+
+/* No fixed overrides needed; auto-fit covers small screens too */
+
+/* Full-screen loader overlay (used by app.js) */
+#pageLoader {
+    position: fixed;
+    inset: 0;
+    background: rgba(247, 248, 251, .9);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99998;
+}
+
+#pageLoader .box {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    min-width: 240px;
+}
+
+#pageLoader .spin {
+    width: 36px;
+    height: 36px;
+    color: var(--accent);
+}
+
+#pageLoader .stat {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+/* Accessibility: remove default focus outline on plan chips */
+.plan-grid .chip--plan:focus {
+    outline: none;
+}

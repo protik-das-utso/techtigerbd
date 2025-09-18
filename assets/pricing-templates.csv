@@ -1,0 +1,10 @@
+sku,price,currency,notes
+chatgpt_shared_1m,400,BDT,Shared • 1 Month
+chatgpt_shared_2m,800,BDT,Shared • 2 Months
+chatgpt_shared_3m,1200,BDT,Shared • 3 Months
+chatgpt_personal_1m,2500,BDT,Personal • 1 Month
+chatgpt_personal_2m,5000,BDT,Personal • 2 Months
+chatgpt_personal_3m,7500,BDT,Personal • 3 Months
+chatgpt_about,,,"<p>ChatGPT দিয়ে রাইটিং, কোডিং, ডক/ইমেজ চ্যাট—সব একসাথে সুবিধাজনকভাবে ব্যবহার করুন।</p><ul><li>লোকাল পেমেন্ট: bKash / Nagad / Rocket</li><li>দ্রুত ডেলিভারি</li></ul>"
+chatgpt_shared_guide,,,"<ul><li>সর্বোচ্চ ১ ডিভাইস লগইন রাখুন</li><li>Chat History মাঝে মাঝে এলোমেলো হতে পারে</li><li>পাসওয়ার্ড পরিবর্তন করবেন না</li><li>★ সাধারণ ইউসেজের জন্য OK</li></ul>"
+chatgpt_personal_guide,,,"<ul><li>নিজস্ব প্রোফাইল/অ্যাক্সেস—আপনার ডেটা আলাদা</li><li>১–২ ডিভাইসে নরমাল ইউসেজ</li><li>Chat History এলোমেলো হবে না</li><li>প্রতিমাসে রিনিউ করা যাবে</li></ul>"

@@ -1,0 +1,107 @@
+{
+  "updatedAt": "2025-09-18T19:57:00.270Z",
+  "sources": [
+    {
+      "url": "https://doc-00-0k-sheets.googleusercontent.com/pub/54bogvaave6cua4cdnls17ksc4/bh59dlv7cuvq30bg09bgn5k5hg/1758225415000/108048262684420602991/*/e@2PACX-1vSnbsW6WhpLrxynW5ulRz-chNVLpD-sUOFtTeGFrQpzLTEcVousfG-zw0cP9HhxylZiV4nUUppvhCBk?gid=1620198612&single=true&output=csv",
+      "ok": true,
+      "format": "csv",
+      "keyCount": 10
+    },
+    {
+      "url": "https://doc-00-0k-sheets.googleusercontent.com/pub/54bogvaave6cua4cdnls17ksc4/bh59dlv7cuvq30bg09bgn5k5hg/1758225415000/108048262684420602991/*/e@2PACX-1vSnbsW6WhpLrxynW5ulRz-chNVLpD-sUOFtTeGFrQpzLTEcVousfG-zw0cP9HhxylZiV4nUUppvhCBk?gid=0&single=true&output=csv",
+      "ok": true,
+      "format": "csv",
+      "keyCount": 11
+    },
+    {
+      "url": "https://doc-00-0k-sheets.googleusercontent.com/pub/54bogvaave6cua4cdnls17ksc4/bh59dlv7cuvq30bg09bgn5k5hg/1758225415000/108048262684420602991/*/e@2PACX-1vSnbsW6WhpLrxynW5ulRz-chNVLpD-sUOFtTeGFrQpzLTEcVousfG-zw0cP9HhxylZiV4nUUppvhCBk?gid=580013488&single=true&output=csv",
+      "ok": true,
+      "format": "csv",
+      "keyCount": 5
+    }
+  ],
+  "data": {
+    "cr_1m_shared": 78,
+    "cr_6m_shared": 87,
+    "cr_1y_shared": 1200,
+    "cr_1m_personal": 2500,
+    "cr_6m_personal": 5000,
+    "cr_1y_personal": 7500,
+    "stock": "",
+    "crunchyroll_about": "",
+    "crunchyroll_shared_guide": "",
+    "crunchyroll_personal_guide": "",
+    "chatgpt_shared_1m": 1,
+    "chatgpt_shared_2m": 80,
+    "chatgpt_shared_3m": 1200,
+    "chatgpt_personal_1m": 2500,
+    "chatgpt_personal_2m": 5000,
+    "chatgpt_personal_3m": 7500,
+    "chatgpt_about": "",
+    "chatgpt_shared_guide": "",
+    "chatgpt_personal_guide": "",
+    "netflix_personal_1m": 6500,
+    "netflix_about": "",
+    "netflix_shared_guide": "",
+    "netflix_personal_guide": "",
+    "chatgpt_personal_6m": 10,
+    "chatgpt_stock": "Available",
+    "crunchyroll_stock": "Available",
+    "netflix_stock": "Available"
+  },
+  "products": {
+    "crunchyroll": {
+      "prices": {
+        "1m_shared": 78,
+        "6m_shared": 87,
+        "1y_shared": 1200,
+        "1m_personal": 2500,
+        "6m_personal": 5000,
+        "1y_personal": 7500
+      },
+      "content": {
+        "about": "",
+        "shared_guide": "",
+        "personal_guide": ""
+      },
+      "stock": "Available",
+      "sourceUrls": [
+        "https://doc-00-0k-sheets.googleusercontent.com/pub/54bogvaave6cua4cdnls17ksc4/bh59dlv7cuvq30bg09bgn5k5hg/1758225415000/108048262684420602991/*/e@2PACX-1vSnbsW6WhpLrxynW5ulRz-chNVLpD-sUOFtTeGFrQpzLTEcVousfG-zw0cP9HhxylZiV4nUUppvhCBk?gid=1620198612&single=true&output=csv"
+      ]
+    },
+    "chatgpt": {
+      "prices": {
+        "shared_1m": 1,
+        "shared_2m": 80,
+        "shared_3m": 1200,
+        "personal_1m": 2500,
+        "personal_2m": 5000,
+        "personal_3m": 7500,
+        "personal_6m": 10
+      },
+      "content": {
+        "about": "",
+        "shared_guide": "",
+        "personal_guide": ""
+      },
+      "stock": "Available",
+      "sourceUrls": [
+        "https://doc-00-0k-sheets.googleusercontent.com/pub/54bogvaave6cua4cdnls17ksc4/bh59dlv7cuvq30bg09bgn5k5hg/1758225415000/108048262684420602991/*/e@2PACX-1vSnbsW6WhpLrxynW5ulRz-chNVLpD-sUOFtTeGFrQpzLTEcVousfG-zw0cP9HhxylZiV4nUUppvhCBk?gid=0&single=true&output=csv"
+      ]
+    },
+    "netflix": {
+      "prices": {
+        "personal_1m": 6500
+      },
+      "content": {
+        "about": "",
+        "shared_guide": "",
+        "personal_guide": ""
+      },
+      "stock": "Available",
+      "sourceUrls": [
+        "https://doc-00-0k-sheets.googleusercontent.com/pub/54bogvaave6cua4cdnls17ksc4/bh59dlv7cuvq30bg09bgn5k5hg/1758225415000/108048262684420602991/*/e@2PACX-1vSnbsW6WhpLrxynW5ulRz-chNVLpD-sUOFtTeGFrQpzLTEcVousfG-zw0cP9HhxylZiV4nUUppvhCBk?gid=580013488&single=true&output=csv"
+      ]
+    }
+  }
+}

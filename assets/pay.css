@@ -1,0 +1,331 @@
+/* Payment page CSS extracted from products/pay.html */
+
+:root {
+    --bg: #f5f7fb;
+    --text: #0f172a;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --border: #e6eaf3;
+    --shadow: rgba(17, 24, 39, .08);
+    --accent: #7c5cff;
+    --accent-ink: #2b1f6a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+    text-decoration: none;
+}
+
+/* Topbar */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(180%) blur(6px);
+    background: rgba(245, 247, 251, .7);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+}
+
+.brand {
+    display: inline-flex;
+    gap: .5rem;
+    align-items: center;
+    font-weight: 900;
+    color: var(--text);
+}
+
+.brand-logo {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 900;
+}
+
+/* Layout */
+.wrap {
+    max-width: 960px;
+    margin: 22px auto;
+    padding: 18px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 14px 26px var(--shadow);
+}
+
+.h2 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin: .25rem 0 0;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: 12px;
+    font-weight: 800;
+    color: #475569;
+    padding: .25rem .55rem;
+    border-radius: 999px;
+    background: #eef2ff;
+    border: 1px solid #dfe5ff;
+}
+
+.badge--accent {
+    background: color-mix(in oklab, var(--accent) 12%, #fff);
+    color: var(--accent-ink);
+    border: 1px solid color-mix(in oklab, var(--accent) 40%, #fff);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* Payment options */
+.pay-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin: 12px 0 16px;
+}
+
+.pay-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+    box-shadow: 0 8px 22px var(--shadow);
+}
+
+.pay-card:hover {
+    transform: translateY(-2px);
+}
+
+.pay-card.selected {
+    border-color: var(--accent);
+    box-shadow: 0 18px 40px color-mix(in oklab, var(--accent) 24%, transparent);
+}
+
+.pay-card img {
+    height: 34px;
+}
+
+/* Inputs & buttons */
+.input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    border-radius: 12px;
+    padding: .7rem .9rem;
+    outline: none;
+    font: inherit;
+}
+
+.input:focus {
+    border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 16%, transparent);
+}
+
+.inputs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+}
+
+.inputs .input {
+    flex: 1;
+    min-width: 240px;
+}
+
+.btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    border-radius: 12px;
+    padding: .78rem 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .08s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px var(--shadow);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: #111827;
+    color: #fff;
+    border-color: #111827;
+}
+
+.btn--accent {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.btn-pop {
+    box-shadow: 0 16px 36px color-mix(in oklab, var(--accent) 28%, rgba(0, 0, 0, .28));
+}
+
+/* Details / steps */
+.step-toggle {
+    margin-top: 8px;
+}
+
+.step-toggle summary {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 900;
+    color: var(--text);
+    padding: .35rem 0;
+    position: relative;
+}
+
+.step-toggle summary::marker {
+    display: none;
+}
+
+.step-toggle[open] summary {
+    margin-bottom: .2rem;
+}
+
+.step-toggle summary::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: .5rem;
+    transform: rotate(0deg);
+    transition: transform .12s;
+}
+
+.step-toggle[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.step-toggle ol {
+    margin: .3rem 0 0;
+    padding-left: 1.15rem;
+}
+
+/* Result panel */
+.result {
+    min-height: 48px;
+    margin-top: 14px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+/* Utility */
+.headline {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.review-banner {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.note {
+    color: #111827;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.right {
+    display: flex;
+    gap: 10px;
+}
+
+/* Guide card */
+.guide-card {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #fff7ef;
+    border: 1px dashed #f5a463;
+    border-radius: 12px;
+    color: #7a3b00;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.guide-card strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.guide-card ul {
+    margin: .25rem 0 0;
+    padding-left: 1.15rem;
+}
+
+/* Responsive */
+@media (max-width:560px) {
+    .h2 {
+        font-size: 24px;
+    }
+
+    .pay-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
