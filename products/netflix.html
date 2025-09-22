@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Netflix Personal কিনুন — StreamyBD</title>
+
+  <!-- Favicons / keep your assets -->
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ttigerbd.com/products/netflix.html">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="bn_BD">
+  <meta property="og:site_name" content="StreamyBD">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Netflix Personal — StreamyBD">
+  <meta property="og:description"
+    content="নিজস্ব Netflix Personal অ্যাকাউন্ট: Full HD, ব্যক্তিগত প্রোফাইল, সহজ লোকাল পেমেন্ট। প্রতি মাসে রিনিউ করা যাবে।">
+  <meta property="og:url" content="https://ttigerbd.com/products/netflix.html">
+
+  <!-- Preview image (1200×630 recommended) -->
+  <meta property="og:image" content="https://ttigerbd.com/assets/og/netflix.jpg">
+  <meta property="og:image:secure_url" content="https://ttigerbd.com/assets/og/netflix.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Netflix Personal — StreamyBD product preview">
+
+  <!-- Optional product pricing (helps some scrapers) -->
+  <meta property="product:price:amount" content="300">
+  <meta property="product:price:currency" content="BDT">
+  <meta property="product:availability" content="in stock"><!-- or 'out of stock' -->
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Netflix Personal — StreamyBD">
+  <meta name="twitter:description"
+    content="নিজস্ব Netflix Personal অ্যাকাউন্ট: Full HD, ব্যক্তিগত প্রোফাইল, সহজ লোকাল পেমেন্ট।">
+  <meta name="twitter:image" content="https://ttigerbd.com/assets/og/netflix_personal_og.jpg">
+
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+
+  <!-- Keep your original bundle (won’t break functionality) -->
+  <link rel="stylesheet" href="../assets/styles.css?v=mp21" />
+  <link rel="stylesheet" href="../assets/products.css?v=1.0" />
+  <script defer src="../assets/app.js?v=mp21"></script>
+  <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+
+
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --card-2: #f3f7fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #ff4800;
+      /* Prime Video blue */
+      --accent-ink: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 20px rgba(2, 6, 23, .06), 0 1px 1px rgba(2, 6, 23, .04);
+      --radius: 16px;
+    }
+  </style>
+
+
+</head>
+
+<!-- Toggle stock here: true = in stock, false = stock out -->
+
+<body data-instock="true">
+  <header class="topbar">
+    <div class="container inner">
+      <a class="brand" href="/"><span class="brand-logo">N</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding:16px 0 0" data-page="product" data-product="Netflix Personal">
+    <nav class="crumbs" style="color:var(--muted);font-size:.9rem;margin:10px 0">
+      <a href="/" style="color:inherit;text-decoration:none">Home</a> / <span>Netflix Personal</span>
+    </nav>
+
+    <section class="product-hero">
+      <!-- Left: Poster -->
+      <div class="art-card" aria-hidden="true">
+        <img id="posterImg" class="art-img" src="../assets/brand/netflix.jpg" alt="Netflix poster" loading="eager"
+          decoding="async" />
+      </div>
+
+      <!-- Right: Controls -->
+      <div class="panel">
+        <h1>Netflix Personal</h1>
+
+        <div id="priceStart"></div>
+        <div class="price-row">
+          <span class="brand-chip"><img id="brandLogo" src="../assets/brand/netflix.jpg"
+              alt="Netflix logo">Netflix</span>
+          <div class="price-tag"><span class="amount" id="pUnitHero">৳300.00</span><span class="ccy">BDT</span></div>
+          <span id="pAvail" class="avail in">In Stock</span>
+          <div class="stars" aria-label="Average rating"><span>★★★★★</span><span class="cnt">(99+)</span></div>
+        </div>
+
+        <div class="review-banner" style="margin:.2rem 0 .6rem">
+          <span class="badge--accent">No fake reviews</span>
+          <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+            rel="noopener nofollow">⭐ 1,000+ Real Reviews — Facebook Group</a>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <span class="label">প্ল্যান / Plan</span>
+            <div class="plan-grid chips" id="pPlans">
+              <div class="plan-group" data-type="personal">
+                <h4>Personal Plan</h4>
+                <div class="chips">
+                  <button class="chip chip--plan" data-id="1m" data-price="300" data-mode="manual"
+                    data-productkey="manual_netflix_personal">
+                    1 Month — Personal <small class="price">৳300</small>
+                  </button>
+                  <button class="chip chip--plan" data-id="1m" data-price="300" data-mode="manual"
+                    data-productkey="manual_netflix_personal">
+                    1 Month — Personal <small class="price">৳300</small>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <label class="form-field">
+            <div class="qty-label label-bilingual" data-theme="netflix">
+              <span>পরিমাণ / Quantity</span>
+            </div>
+            <div class="qty-wrapper" data-theme="netflix">
+              <div class="qty">
+                <button class="btn decrease" id="pQtyMinus" aria-label="Decrease quantity"
+                  title="কমিয়ে দিন / Decrease">
+                </button>
+                <input class="input center" id="pQty" type="number" min="1" max="99" value="1" aria-label="Quantity" />
+                <button class="btn increase" id="pQtyPlus" aria-label="Increase quantity"
+                  title="বাড়িয়ে দিন / Increase">
+                </button>
+              </div>
+            </div>
+          </label>
+
+          <div class="summary" id="pSummary">
+            <div>ইউনিট</div>
+            <div id="pUnit">৳300</div>
+            <div>মোট / Total</div>
+            <div id="pTotal" class="price">৳300</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-ghost" onclick="history.back()">Back</button>
+          <button class="btn btn--accent btn-pop btn-pay" id="pPayNow">Pay Now</button>
+        </div>
+
+        <div class="pros"><span class="tag">Ad-free</span><span class="tag">Full HD</span><span class="tag">Personal
+            account</span>Mobile/T<span></span></div>
+
+
+        <!-- Details -->
+        <div class="desc-card">
+          <h3>Netflix কী?</h3>
+          <p>
+            Netflix হলো একটি জনপ্রিয় অনলাইন স্ট্রিমিং প্ল্যাটফর্ম যেখানে হাজারো মুভি, সিরিজ, ডকুমেন্টারি, অ্যানিমে ও
+            Netflix Originals দেখা যায়।
+            ইন্টারনেট থাকলেই আপনি মোবাইল, কম্পিউটার, ট্যাব বা স্মার্ট টিভিতে যেকোনো সময় কনটেন্ট স্ট্রিম করতে পারবেন।
+          </p>
+
+          <h3>কেন Netflix ব্যবহার করবেন?</h3>
+          <ul>
+            <li><strong>বৃহৎ লাইব্রেরি:</strong> হলিউড, বলিউড, কোরিয়ান/জাপানিজ, অ্যানিমে সহ নানা ভাষার কনটেন্ট।</li>
+            <li><strong>Netflix Originals:</strong> শুধু Netflix-এ—মানসম্মত সিরিজ/মুভির এক্সক্লুসিভ সংগ্রহ।</li>
+            <li><strong>ব্যক্তিগতকৃত সুপারিশ:</strong> আপনার দেখা প্যাটার্ন অনুযায়ী স্মার্ট রিকমেন্ডেশন।</li>
+            <li><strong>মাল্টি-ডিভাইস সাপোর্ট:</strong> মোবাইল, ট্যাব, পিসি, স্মার্ট টিভিতে সহজে দেখা যায়।</li>
+            <li><strong>অফলাইন ডাউনলোড:</strong> অনেক টাইটেল আগে থেকে ডাউনলোড করে ইন্টারনেট ছাড়াই দেখা যায়।</li>
+            <li><strong>সাবটাইটেল/ডাব:</strong> বহু ভাষার সাবটাইটেল ও ডাব (টাইটেলভেদে ভিন্ন হতে পারে)।</li>
+            <li><strong>প্যারেন্টাল কন্ট্রোল:</strong> বাচ্চাদের জন্য প্রোফাইল/রেস্ট্রিকশন সেট করা যায়।</li>
+          </ul>
+
+          <h3>Netflix Personal (এই পেজের প্ল্যান) কেন নেবেন?</h3>
+          <ul>
+            <li><strong>নিজস্ব অ্যাকাউন্ট:</strong> মেইল+পাস আপনার কাছে থাকবে, প্রোফাইল ১টা—আপনার পছন্দমতো লিস্ট/হিস্টরি
+              নিরাপদ।</li>
+            <li><strong>কোয়ালিটি:</strong> Full HD দেখার সুবিধা (আপনার ডিভাইস ও নেট স্পিডের ওপর নির্ভরশীল)।</li>
+            <li><strong>লোকাল পেমেন্ট:</strong> bKash/Nagad ইত্যাদিতে সহজ পেমেন্ট ও মাসিক রিনিউ অপশন।</li>
+            <li><strong>সাপোর্ট:</strong> যে কোনো সমস্যায় দ্রুত সহায়তা (WhatsApp/মেসেঞ্জার)।</li>
+          </ul>
+
+          <h3>কাদের জন্য উপযুক্ত?</h3>
+          <ul>
+            <li>ব্যক্তিগত ব্যবহারকারী—এক সময়ে এক স্ক্রিনে দেখলেই যথেষ্ট যাদের জন্য।</li>
+            <li>যারা Netflix Originals/আন্তর্জাতিক সিরিজ-মুভির বড় লাইব্রেরি চান।</li>
+          </ul>
+
+          <h3>কিছু টিপস</h3>
+          <ul>
+            <li>একসাথে এক ডিভাইসে দেখা যাবে—একই সময়ে একাধিক স্ক্রিনে স্ট্রিম করা যাবে না।</li>
+            <li>কনটেন্ট ক্যাটালগ অঞ্চলভেদে ভিন্ন হতে পারে (বাংলাদেশ/আপনার লোকেশন অনুযায়ী)।</li>
+            <li>সেরা অভিজ্ঞতার জন্য স্থিতিশীল ইন্টারনেট স্পিড রাখুন (Full HD-এর জন্য ভালো ব্যান্ডউইথ)।</li>
+          </ul>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <small class="muted">© <span id="year"></span> StreamyBD</small>
+      <small class="muted">Reviews are public on our FB Group</small>
+    </div>
+  </footer>
+
+  <!-- Optional WhatsApp -->
+
+
+  <script>
+    /* Mirror unit price to big hero price */
+    (function mirrorPrice() {
+      function sync() {
+        var unit = document.getElementById('pUnit');
+        var hero = document.getElementById('pUnitHero');
+        if (unit && hero) { hero.textContent = (unit.textContent || '').replace(/\s+/g, '') + '.00'; }
+      }
+      var mo = new MutationObserver(sync);
+      var unitEl = document.getElementById('pUnit');
+      if (unitEl) { mo.observe(unitEl, { characterData: true, childList: true, subtree: true }); }
+      sync();
+    })();
+
+    /* Auto-scroll on mobile to pricing */
+    (function autoScrollMobile() {
+      try {
+        var isMobile = window.matchMedia('(max-width: 880px)').matches;
+        if (!isMobile) return;
+        if (sessionStorage.getItem('nf_auto_scrolled') === '1') return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.addEventListener('load', function () {
+          var target = document.getElementById('priceStart') || document.getElementById('pPlans') || document.querySelector('.price-row');
+          if (!target) return;
+          var y = target.getBoundingClientRect().top + window.scrollY - 8;
+          setTimeout(function () {
+            window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+            sessionStorage.setItem('nf_auto_scrolled', '1');
+          }, 250);
+        });
+      } catch (e) { }
+    })();
+
+    /* Simple stock gate: toggle <body data-instock="true|false"> */
+    (function stockGate() {
+      var pay = document.getElementById('pPayNow');
+      var avail = document.getElementById('pAvail');
+      function apply() {
+        var inStock = (document.body.getAttribute('data-instock') !== 'false');
+        if (inStock) {
+          pay.disabled = false;
+          pay.setAttribute('aria-disabled', 'false');
+          avail.textContent = 'In Stock';
+          avail.classList.remove('oos'); avail.classList.add('in');
+        } else {
+          pay.disabled = true;
+          pay.setAttribute('aria-disabled', 'true');
+          avail.textContent = 'Stock Out';
+          avail.classList.remove('in'); avail.classList.add('oos');
+        }
+      }
+      apply();
+      if (pay) {
+        pay.addEventListener('click', function (e) {
+          if (pay.disabled) { e.preventDefault(); e.stopPropagation(); }
+        }, true);
+      }
+      /* Optional: observe attribute changes if you edit in devtools */
+      new MutationObserver(apply).observe(document.body, { attributes: true, attributeFilter: ['data-instock'] });
+    })();
+  </script>
+</body>
+
+</html>

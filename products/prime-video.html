@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prime Video কিনুন — StreamyBD</title>
+
+  <!-- Favicons (optional keep same) -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#00a8e1">
+  <meta name="theme-color" content="#0b1b2b">
+
+  <!-- OG / Twitter -->
+  <link rel="canonical" href="https://ttigerbd.com/products/prime-video.html">
+  <meta name="description"
+    content="Prime Video Shared — instant delivery via bKash. Watch movies & series in HD/4K on mobile/TV.">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="StreamyBD">
+  <meta property="og:url" content="https://ttigerbd.com/products/prime-video.html">
+  <meta property="og:title" content="Prime Video Shared — StreamyBD">
+  <meta property="og:description" content="Shared account • Instant bKash delivery • HD/4K • Mobile/TV • Downloads.">
+  <meta property="og:image" content="https://ttigerbd.com/assets/brand/Prime Video.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="bn_BD">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prime Video Shared — StreamyBD">
+  <meta name="twitter:description" content="Shared account • Instant bKash delivery • HD/4K • Mobile/TV • Downloads.">
+  <meta name="twitter:image" content="https://ttigerbd.com/assets/brand/Prime Video.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=mp21" />
+  <link rel="stylesheet" href="../assets/products.css?v=1.0" />
+  <script defer src="../assets/app.js?v=mp21"></script>
+  <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+  <!-- Integrated, page-scoped CSS (StreamyBD saved style) -->
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --card-2: #f3f7fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #00a8e1;
+      /* Prime Video blue */
+      --accent-ink: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 20px rgba(2, 6, 23, .06), 0 1px 1px rgba(2, 6, 23, .04);
+      --radius: 16px;
+    }
+  </style>
+</head>
+<!-- Set checkout target here -->
+
+<body data-checkout="./pay.html">
+  <!-- Header -->
+  <header class="topbar">
+    <div class="container inner">
+      <a class="brand" href="/"><span class="brand-logo">P</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container" style="padding:16px 0 0" data-page="product" data-product="Prime Video Shared">
+    <nav class="crumbs" style="color:var(--muted);font-size:.9rem;margin:10px 0">
+      <a href="/" style="color:inherit;text-decoration:none">Home</a> / <span>Prime Video</span>
+    </nav>
+
+    <section class="product-hero">
+      <!-- Left: poster (square, scalable) -->
+      <div class="art-card" aria-hidden="true">
+        <img id="posterImg" class="art-img" src="../assets/brand/Prime Video.jpg" alt="Prime Video poster"
+          loading="eager" decoding="async" />
+      </div>
+
+      <!-- Right: controls -->
+      <div class="panel">
+        <h1>Prime Video — <span style="font-weight:600">Shared Account</span></h1>
+
+        <div id="priceStart"></div>
+        <div class="price-row">
+          <span class="brand-chip"><img id="brandLogo" src="../assets/brand/Prime Video.jpg"
+              alt="Prime Video logo">Prime Video</span>
+          <div class="price-tag">
+            <span class="amount" id="pUnitHero">৳50.00</span><span class="ccy">BDT</span>
+          </div>
+          <div class="stars" aria-label="Average rating">★★★★★ <span class="cnt">(popular)</span></div>
+        </div>
+
+        <div class="review-banner" style="margin:.2rem 0 .6rem">
+          <span class="badge--accent">⚡ Instant delivery via bKash</span>
+          <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+            rel="noopener nofollow">⭐ 1,000+ Real Reviews — Facebook Group</a>
+        </div>
+
+        <!-- Plans -->
+        <div class="form-grid">
+          <div class="form-field">
+            <span class="label">প্ল্যান / Plan</span>
+            <div class="plan-grid chips" id="pPlans">
+              <div class="plan-group" data-type="shared">
+                <h4>Shared (Auto-delivery)</h4>
+                <div class="chips">
+                  <button class="chip chip--plan" data-id="1m_auto_prime_shared" data-price="50" data-mode="auto-cr"
+                    data-service="prime_shared">
+                    1 Month — Prime Video (Shared) <small class="price">৳50</small>
+                  </button>
+                  <!-- You can add more durations later if needed -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qty -->
+          <label class="form-field">
+            <div class="qty-label label-bilingual" data-theme="prime">
+              <span>পরিমাণ / Quantity</span>
+            </div>
+            <div class="qty-wrapper" data-theme="prime">
+              <div class="qty">
+                <button class="btn decrease" id="pQtyMinus" aria-label="Decrease quantity"
+                  title="কমিয়ে দিন / Decrease">
+                </button>
+                <input class="input center" id="pQty" type="number" min="1" max="99" value="1" aria-label="Quantity" />
+                <button class="btn increase" id="pQtyPlus" aria-label="Increase quantity"
+                  title="বাড়িয়ে দিন / Increase">
+                </button>
+              </div>
+            </div>
+          </label>
+
+          <!-- Price widget -->
+          <div class="summary" id="pSummary">
+            <div>ইউনিট</div>
+            <div id="pUnit">৳50</div>
+            <div>মোট / Total</div>
+            <div id="pTotal" class="price">৳50</div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button class="btn btn-ghost" onclick="history.back()">Back</button>
+          <button class="btn btn--accent btn-pop btn-pay" id="pPayNow">Pay Now</button>
+        </div>
+
+
+        <div class="pros"><span class="tag">HD/4K</span><span class="tag">Mobile/TV</span><span
+            class="tag">Downloads</span><span class="tag">Multi-genre</span></div>
+
+        <!-- Description -->
+        <div class="desc-card">
+          <h3>What is Prime Video?</h3>
+          <p>
+            Prime Video is Amazon’s streaming service for movies, series, and exclusive originals. Watch in HD/4K on
+            phone, tablet, PC, or smart TV—plus download to view offline. This plan is a <strong>Shared
+              Account</strong>,
+            delivered <strong>instantly via bKash</strong> after payment.
+          </p>
+
+          <h3>Why is it important?</h3>
+          <ul>
+            <li><strong>Huge library:</strong> Hollywood hits, originals, sports &amp; more.</li>
+            <li><strong>Everywhere:</strong> Mobile, TV apps, game consoles, web.</li>
+            <li><strong>Quality:</strong> HD/4K playback and offline downloads (where available).</li>
+            <li><strong>Value:</strong> Affordable shared access for regular viewers.</li>
+          </ul>
+
+          <details open>
+            <summary>Delivery &amp; Usage Rules</summary>
+            <ul>
+              <li>সর্বোচ্চ <strong>১ ডিভাইস</strong> লগইন (একই সময়ে একটাই ডিভাইস)।</li>
+              <li><strong>Watchlist/History</strong> এলোমেলো হয়ে যেতে পারে (শেয়ার্ড বলে)।</li>
+              <li>আপনার নামে <strong>আলাদা প্রোফাইল</strong> থাকবে না।</li>
+              <li>কখনও লগ-আউট হলে দেওয়া <strong>মেইল/পাস</strong> দিয়ে আবার লগইন করবেন।</li>
+              <li>★ ভিডিও দেখা <strong>স্বাভাবিকভাবে হবে</strong> — কন্টেন্ট প্লেব্যাক ইস্যু নেই।</li>
+              <li><strong>কোনো ইনফো পরিবর্তন করবেন না</strong> (নাইলে অ্যাকাউন্ট লক হতে পারে)।</li>
+
+            </ul>
+            <p class="muted" style="margin-top:.4rem">
+              Need help? WhatsApp: <a href="https://wa.me/8801881738485" target="_blank"
+                rel="noopener">+8801881738485</a>
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <small class="muted">© <span id="year"></span> StreamyBD</small>
+      <small class="muted">Reviews are public on our FB Group</small>
+    </div>
+  </footer>
+
+  <!-- Helpers: mirror price + minimal plan/qty + Pay Now redirect + mobile auto-scroll -->
+  <script>
+    (function mirrorPrice() {
+      function sync() {
+        var unit = document.getElementById('pUnit');
+        var hero = document.getElementById('pUnitHero');
+        if (unit && hero) { hero.textContent = (unit.textContent || '').replace(/\s+/g, '') + '.00'; }
+      }
+      var mo = new MutationObserver(sync);
+      var unitEl = document.getElementById('pUnit');
+      if (unitEl) { mo.observe(unitEl, { characterData: true, childList: true, subtree: true }); }
+      sync();
+    })();
+
+    (function minimalChipSelect() {
+      var plans = document.querySelectorAll('.chip--plan');
+      var unit = document.getElementById('pUnit');
+      var total = document.getElementById('pTotal');
+      var qty = document.getElementById('pQty');
+      function money(x) { return '৳' + x; }
+      function recalc() {
+        var sel = document.querySelector('.chip--plan[aria-selected="true"]') || plans[0];
+        var price = parseFloat(sel?.dataset.price || '50');
+        var q = Math.max(1, parseInt(qty.value || '1', 10));
+        unit.textContent = money(price);
+        total.textContent = money(price * q);
+      }
+      plans.forEach(btn => {
+        btn.addEventListener('click', () => {
+          plans.forEach(b => b.setAttribute('aria-selected', 'false'));
+          btn.setAttribute('aria-selected', 'true');
+          recalc();
+        });
+      });
+      // Quantity system is now handled by quantity-system.js
+      recalc();
+    })();
+
+    (function wirePayNow() {
+      var payBtn = document.getElementById('pPayNow');
+      if (!payBtn || payBtn.dataset.wired === '1') return;
+      payBtn.dataset.wired = '1';
+
+      payBtn.addEventListener('click', function (e) {
+        if (payBtn.disabled || payBtn.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
+
+        var sel = document.querySelector('.chip--plan[aria-selected="true"]') || document.querySelector('.chip--plan');
+        if (!sel) { alert('Please select a plan first.'); return; }
+        var qtyEl = document.getElementById('pQty');
+        var qty = Math.max(1, parseInt(qtyEl && qtyEl.value || '1', 10));
+
+        var product = (document.querySelector('main')?.dataset.product) || document.title || 'Product';
+        var planId = sel.dataset.service || sel.dataset.productkey || sel.dataset.id || 'plan';
+        var price = sel.dataset.price || '';
+        var mode = sel.dataset.mode || '';
+
+        var checkoutBase = payBtn.dataset.checkout || document.body.dataset.checkout || '/pay.html';
+        var qs = new URLSearchParams({ product, plan: planId, qty: String(qty), price, mode });
+
+        window.location.href = checkoutBase + '?' + qs.toString();
+      }, { passive: true });
+    })();
+
+    (function autoScrollMobile() {
+      try {
+        var isMobile = window.matchMedia('(max-width: 880px)').matches;
+        if (!isMobile) return;
+        if (sessionStorage.getItem('pv_auto_scrolled') === '1') return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.addEventListener('load', function () {
+          var target = document.getElementById('priceStart') || document.getElementById('pPlans') || document.querySelector('.price-row');
+          if (!target) return;
+          var y = target.getBoundingClientRect().top + window.scrollY - 8;
+          setTimeout(function () {
+            window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+            sessionStorage.setItem('pv_auto_scrolled', '1');
+          }, 250);
+        });
+      } catch (e) { }
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

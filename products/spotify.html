@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Spotify Premium কিনুন — StreamyBD</title>
+  <meta name="description" content="এড‑ফ্রি মিউজিক, হাই‑কোয়ালিটি অডিও, অফলাইন ডাউনলোড, আনলিমিটেড স্কিপ।">
+  <link rel="canonical" href="https://ttigerbd.com/products/spotify.html">
+  <link rel="stylesheet" href="../assets/styles.css?v=mp21" />
+  <link rel="stylesheet" href="../assets/products.css?v=1.0" />
+  <script defer src="../assets/app.js?v=mp21"></script>
+  <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #1db954;
+      --card-2: #f3f7fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #1db954;
+      /* Prime Video blue */
+      --accent-ink: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 20px rgba(2, 6, 23, .06), 0 1px 1px rgba(2, 6, 23, .04);
+      --radius: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container inner">
+      <a class="brand" href="/"><span class="brand-logo">C</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
+    </div>
+  </header>
+  <main class="container" style="padding:24px 0" data-page="product" data-product="Spotify Premium">
+    <nav class="crumbs"><a href="/">Home</a> / <span>Spotify Premium</span></nav>
+    <section>
+      <h1 class="h2">Spotify Premium</h1>
+      <div class="review-banner" style="margin:.3rem 0 .6rem"><span class="badge--accent">No fake reviews</span>
+        <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+          rel="noopener nofollow">⭐ 1,000+ Real Reviews — Facebook Group</a>
+      </div>
+      <span class="brand-chip"><img src="/assets/brand/spotify.png" alt="">Official</span>
+      <p class="muted" style="margin-top:.5rem">এড‑ফ্রি, হাই‑কোয়ালিটি অডিও, অফলাইন ডাউনলোড।</p>
+
+      <div class="product-select card" style="padding:16px;margin-top:12px">
+        <div class="form-grid">
+          <div class="form-field"><span class="label">প্ল্যান / Plan</span>
+            <div class="plan-grid chips" id="pPlans">
+              <button class="chip chip--plan" data-id="1m" data-price="160" data-mode="manual"
+                data-productkey="manual_spotify_1m">1 Month <small class="price">৳160</small></button>
+              <button class="chip chip--plan" data-id="2m" data-price="300" data-mode="manual"
+                data-productkey="manual_spotify_2m">2 Months <small class="price">৳300</small></button>
+            </div>
+          </div>
+          <label class="form-field">
+            <div class="qty-label label-bilingual" data-theme="spotify">
+              <span>পরিমাণ / Quantity</span>
+            </div>
+            <div class="qty-wrapper" data-theme="spotify">
+              <div class="qty">
+                <button class="btn decrease" id="pQtyMinus" aria-label="Decrease quantity"
+                  title="কমিয়ে দিন / Decrease">
+                </button>
+                <input class="input center" id="pQty" type="number" min="1" max="99" value="1" aria-label="Quantity" />
+                <button class="btn increase" id="pQtyPlus" aria-label="Increase quantity"
+                  title="বাড়িয়ে দিন / Increase">
+                </button>
+              </div>
+            </div>
+          </label>
+          <div class="summary">
+            <div>ইউনিট</div>
+            <div id="pUnit">৳160</div>
+            <div>মোট / Total</div>
+            <div id="pTotal" class="price">৳160</div>
+          </div>
+        </div>
+
+        <div class="pros"><span class="tag">Ad‑free</span><span class="tag">High quality</span><span
+            class="tag">Offline</span></div>
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" href="/#plans">Back</a>
+          <button class="btn btn-primary btn--accent btn-pop" id="pPayNow">Pay Now</button>
+          <a class="btn" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+            rel="noopener nofollow">See Facebook Reviews</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap"><small
+        class="muted">© <span id="year"></span> StreamyBD</small><small class="muted">Reviews are public on our FB
+        Group</small></div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment — StreamyBD</title>
+  <meta name="description"
+    content="bKash/Nagad/Rocket দিয়ে StreamyBD তে অর্ডার দিন। স্থানীয় পেমেন্ট, দ্রুত ডেলিভারি, Real Reviews.">
+  <!-- Keep if you still use your global app file -->
+  <script defer src="../assets/app.js?v=mp42"></script>
+
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --card-2: #f3f7fb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #7c5cff;
+      --accent-ink: #ffffff;
+      --border: #e6eaf3;
+      --shadow: rgba(2, 6, 23, .08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", "Helvetica Neue", Arial;
+      scroll-behavior: smooth
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: saturate(180%) blur(6px);
+      background: rgba(245, 247, 251, .7);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .topbar .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px
+    }
+
+    .brand {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      font-weight: 900;
+      color: var(--text)
+    }
+
+    .brand-logo {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 900
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 22px auto;
+      padding: 18px
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 14px 30px var(--shadow)
+    }
+
+    .h2 {
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 0
+    }
+
+    .headline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: 12px;
+      font-weight: 800;
+      color: #475569;
+      padding: .25rem .55rem;
+      border-radius: 999px;
+      background: #eef2ff;
+      border: 1px solid #dfe5ff
+    }
+
+    .badge--accent {
+      background: #efe9ff;
+      border: 1px solid #dcd3ff;
+      color: #4c2bd9
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .pay-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px
+    }
+
+    @media (max-width:680px) {
+      .pay-card-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* 1 per row on mobile */
+
+    .pay-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas: "logo title" "logo desc";
+      gap: 8px 10px;
+      align-items: center;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 14px;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+      box-shadow: 0 8px 22px var(--shadow);
+    }
+
+    .pay-card img {
+      height: 34px
+    }
+
+    .pay-card:hover {
+      transform: translateY(-2px)
+    }
+
+    .pay-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 18px 40px color-mix(in oklab, var(--accent) 24%, transparent)
+    }
+
+    /* Press feedback on mobile */
+    .pay-card.pressed {
+      transform: scale(.98)
+    }
+
+    .input {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      border-radius: 12px;
+      padding: .7rem .9rem;
+      outline: none;
+      font: inherit
+    }
+
+    /* Sweeping animated border for TrxID */
+    .input-anim {
+      border: 2px solid transparent;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(120deg, #7c5cff, #4facfe, #7c5cff) border-box;
+      background-size: 200% 200%;
+      animation: sweep 6s linear infinite;
+      border-radius: 12px;
+    }
+
+    @keyframes sweep {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    .input-anim:focus {
+      outline: none;
+      box-shadow: 0 0 0 4px color-mix(in oklab, #7c5cff 18%, transparent);
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding: .75rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform .15s, box-shadow .15s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(2, 6, 23, .08)
+    }
+
+    .btn--accent {
+      background: linear-gradient(135deg, #8d7bff, #7c5cff);
+      color: var(--accent-ink);
+      border-color: #7c5cff
+    }
+
+    /* Ripple (JS sets --x, --y) */
+    .btn::after {
+      content: "";
+      position: absolute;
+      left: var(--x, 50%);
+      top: var(--y, 50%);
+      width: 0;
+      height: 0;
+      transform: translate(-50%, -50%);
+      background: color-mix(in oklab, #7c5cff 35%, white 65%);
+      opacity: .35;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .btn.rippling::after {
+      animation: ripple .6s ease-out forwards;
+    }
+
+    @keyframes ripple {
+      to {
+        width: 220px;
+        height: 220px;
+        opacity: 0
+      }
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px
+    }
+
+    @media (max-width:700px) {
+      .grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .help {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px
+    }
+
+    .review-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .guide-card {
+      background: var(--card-2);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 8px
+    }
+
+    /* Fade-up reveals for mobile */
+    .reveal {
+      opacity: 0;
+      transform: translateY(8px)
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .5s ease, transform .5s ease
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="/"><span class="brand-logo">S</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary" style="display:flex;gap:12px">
+        <a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap card" role="main">
+    <div class="headline reveal">
+      <div class="badge">Payment</div>
+      <h2 id="payTitle" class="h2" style="margin:.2rem 0 0">—</h2>
+    </div>
+
+    <!-- Reviews CTA -->
+    <div class="review-banner reveal" style="margin:.6rem 0 1rem">
+      <span class="badge badge--accent">No fake reviews</span>
+      <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+        rel="noopener nofollow">
+        ⭐ 1,000+ Real Reviews — Facebook Group
+      </a>
+    </div>
+
+    <!-- Payment methods -->
+    <div class="pay-card-grid" id="payCards">
+      <button type="button" class="pay-card selected reveal" data-method="bkash" aria-pressed="true"
+        style="transition-delay:.02s">
+        <img src="../assets/images/bkash.png" alt="bKash" loading="lazy">
+        <div style="font-weight:800">bKash</div>
+      </button>
+
+      <button type="button" class="pay-card reveal" data-method="nagad" style="transition-delay:.06s">
+        <img src="../assets/images/nagad.svg" alt="Nagad" loading="lazy">
+        <div style="font-weight:800">Nagad</div>
+      </button>
+
+      <button type="button" class="pay-card reveal" data-method="rocket" style="transition-delay:.1s">
+        <img src="../assets/images/rocket.png" alt="Rocket" loading="lazy">
+        <div style="font-weight:800">Rocket</div>
+      </button>
+    </div>
+
+    <div class="grid" style="margin-top:12px">
+      <div class="reveal">
+        <label class="muted">Payment Number</label>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div id="payNum" style="font-weight:900;font-size:18px">01881738485</div>
+          <button id="copyNumInline" class="btn" style="padding:.35rem .6rem;font-size:12px">Copy</button>
+
+        </div>
+
+        <!-- Short Bengali instructions (no <details>) -->
+        <div class="guide-card reveal">
+          <strong>নির্দেশনা</strong>
+          <ul style="margin:.35rem 0 0 1.1rem">
+            <li>bKash/Nagad/Rocket এ <b>Send Money</b> করুন।</li>
+            <li>টাকা পাঠানোর পর <b>TrxID</b> লিখে <b>Proceed</b> চাপুন।</li>
+          </ul>
+        </div>
+
+        <!-- TrxID -->
+        <div class="grid" style="margin-top:12px">
+          <div class="reveal">
+            <label class="muted"><b>Transaction ID (TrxID)✅</b></label>
+            <input id="payTrxID" class="input input-anim" placeholder="e.g. CIG4FTGN8S" autocomplete="one-time-code">
+          </div>
+        </div>
+
+        <!-- Optional info (always visible; stacked on mobile) -->
+        <div class="grid" style="margin-top:12px">
+          <div class="reveal">
+            <label class="muted">Your Number (optional)</label>
+            <input id="paySenderNum" class="input" placeholder="01XXXXXXXXX" inputmode="numeric" pattern="[0-9]*">
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div style="display:flex;align-items:flex-end;gap:10px;margin-top:12px" class="reveal">
+          <button id="copyNum" class="btn">Copy Number</button>
+          <button id="btnWhatsApp" class="btn">Contact WhatsApp</button>
+          <button id="payProceed" class="btn btn--accent">Proceed</button>
+        </div>
+
+        <div id="resultPanel" style="margin-top:12px"></div>
+
+        <div class="guide-card reveal" style="margin-top:12px">
+          <strong>How it works</strong>
+          <ol style="margin:.35rem 0 0 1.1rem">
+            <li>Choose payment method above & send money.</li>
+            <li>Paste your TrxID & press Proceed.</li>
+            <li>We’ll process delivery on the next page.</li>
+          </ol>
+        </div>
+  </main>
+
+  <script>
+    (function () {
+      const GAS_URL = "https://script.google.com/macros/s/AKfycbyLjru6Gqm9qlXUWgDYPCMaGGeEIam0OrWRguPVTGYj73eI6zyt745aZaWRLreVJmGt/exec";
+      const WHATSAPP_URL = "https://wa.me/8801881738485";
+      const isMobile = window.matchMedia('(max-width: 680px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Fade-up reveals (mobile nicety)
+      if (isMobile) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { threshold: .1 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      }
+
+      // Card press + ripple on buttons (mobile)
+      if (isMobile) {
+        // pay-card press feedback
+        document.querySelectorAll('.pay-card').forEach(card => {
+          const d = () => card.classList.remove('pressed');
+          card.addEventListener('touchstart', () => card.classList.add('pressed'), { passive: true });
+          card.addEventListener('touchend', d, { passive: true });
+          card.addEventListener('touchcancel', d, { passive: true });
+        });
+      }
+      // ripple for all .btn
+      const addRipple = (e) => {
+        const b = e.currentTarget;
+        const rect = b.getBoundingClientRect();
+        const x = e.clientX ? (e.clientX - rect.left) : rect.width / 2;
+        const y = e.clientY ? (e.clientY - rect.top) : rect.height / 2;
+        b.style.setProperty('--x', x + 'px');
+        b.style.setProperty('--y', y + 'px');
+        b.classList.remove('rippling');
+        // force reflow
+        void b.offsetWidth;
+        b.classList.add('rippling');
+        setTimeout(() => b.classList.remove('rippling'), 650);
+      };
+      document.addEventListener('click', (ev) => {
+        const btn = ev.target.closest('.btn');
+        if (btn) addRipple(ev);
+      });
+
+      // Read URL params from product page
+      const url = new URL(location.href);
+      const p = {
+        product: url.searchParams.get('product') || 'Product',
+        plan: url.searchParams.get('plan') || '',
+        price: Number(url.searchParams.get('price') || 0),
+        qty: Number(url.searchParams.get('qty') || 1),
+        mode: url.searchParams.get('mode') || 'manual', // auto-cr | manual | freefire
+        service: url.searchParams.get('service') || '',
+        productkey: url.searchParams.get('productkey') || url.searchParams.get('productKey') || '',
+        uid: url.searchParams.get('uid') || '',
+        uc: url.searchParams.get('uc') || '',
+        contact_email: url.searchParams.get('contact_email') || ''
+      };
+
+      // paint title
+      (function setTitle() {
+        const label = p.product + (p.plan ? (' • ' + p.plan) : '');
+        document.getElementById('payTitle').textContent = label;
+      })();
+
+      // select card logic (visual only)
+      (function payCardSelect() {
+        const cards = document.querySelectorAll('.pay-card');
+        const payNum = document.getElementById('payNum');
+        function setNum(m) {
+          const numbers = {
+            bkash: '01881738485',
+            nagad: '01881738485',
+            rocket: '018292553669'
+          };
+          payNum.textContent = numbers[m] || '01XXXXXXXXX';
+          const step = document.getElementById('stepPayNum'); // might not exist
+          if (step) step.textContent = payNum.textContent.trim();
+        }
+        cards.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            cards.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            setNum(btn.dataset.method);
+          });
+        });
+      })();
+
+      // inline copy button (small)
+      (function () {
+        const btnInline = document.getElementById('copyNumInline');
+        if (!btnInline) return;
+        btnInline.addEventListener('click', async () => {
+          const text = document.getElementById('payNum')?.textContent.trim() || '';
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(text);
+            } else {
+              const ta = document.createElement('textarea');
+              ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+              document.body.appendChild(ta); ta.focus(); ta.select();
+              document.execCommand('copy'); ta.remove();
+            }
+            alert('Copied!');
+          } catch (e) { alert('Copied'); }
+        });
+      })();
+
+      // copy number (bottom button)
+      document.getElementById('copyNum')?.addEventListener('click', async (ev) => {
+        const text = document.getElementById('payNum').textContent.trim();
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.focus(); ta.select();
+            document.execCommand('copy'); document.body.removeChild(ta);
+          }
+          addRipple(ev);
+          alert('Copied!');
+        } catch (e) { alert('Copied'); }
+      });
+
+      // WhatsApp helper
+      const openWhatsApp = (statusText = "Pending") => {
+        const total = (p.price || 0) * (p.qty || 1);
+        const lines = [
+          `I want help with my order`,
+          `${p.product}${p.plan ? (' • ' + p.plan) : ''}`,
+          `Validity: ${p.plan || '1 Month'}`,
+          `Status: ${statusText || 'Pending'}`,
+          `Amount: ${total ? (total + ' BDT') : ''}`.trim(),
+          `please proceed with next`
+        ].filter(Boolean);
+        window.open(`${"https://wa.me/8801881738485"}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+      };
+      document.getElementById('btnWhatsApp')?.addEventListener('click', () => openWhatsApp(""));
+
+      // Proceed => go to delivery.html
+      document.getElementById('payProceed')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const trx = (document.getElementById('payTrxID')?.value || '').trim();
+        if (!trx) {
+          // little shake if empty
+          const el = document.getElementById('payTrxID');
+          el.style.animation = 'shake .28s ease';
+          setTimeout(() => el.style.animation = '', 300);
+          return alert('Please enter TrxID.');
+        }
+        const phone = (document.getElementById('paySenderNum')?.value || '').trim();
+        // Get email from URL parameters (passed from product page)
+        const email = p.contact_email || '';
+
+        const qs = new URLSearchParams({
+          trxid: trx,
+          product: p.product,
+          plan: p.plan,
+          mode: p.mode,
+          service: p.service,
+          productkey: p.productkey,
+          price: String(p.price || 0),
+          qty: String(p.qty || 1),
+          uid: p.uid,
+          uc: p.uc,
+          contact_email: email,
+          phone: phone
+        });
+        window.location.href = './delivery.html?' + qs.toString();
+      });
+
+      // Step number init (if exists)
+      const step = document.getElementById('stepPayNum');
+      if (step) step.textContent = (document.getElementById('payNum').textContent.trim());
+
+      // tiny keyframes for shake
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes shake { 10%, 90% { transform: translateX(-1px); }
+          20%, 80% { transform: translateX(2px); }
+          30%, 50%, 70% { transform: translateX(-4px); }
+          40%, 60% { transform: translateX(4px); } }
+      `;
+      document.head.appendChild(style);
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,890 @@
+/* ========================================
+   StreamyBD - Universal Product Pages CSS
+   ======================================== */
+
+/* Base Layout & Typography */
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: clamp(13px, 0.6vw + 9px, 15px);
+    line-height: 1.55;
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: min(1100px, 94vw);
+    margin: 0 auto;
+}
+
+/* ========================================
+   Topbar
+   ======================================== */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(160%) blur(6px);
+    background: rgba(255, 255, 255, .85);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.brand-logo {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+.primary a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 12px;
+    font-size: .92rem;
+}
+
+/* ========================================
+   Product Layout
+   ======================================== */
+.product-hero {
+    display: grid;
+    grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+    gap: 24px;
+    padding: 24px 0 10px;
+    align-items: start;
+}
+
+.art-card {
+    position: sticky;
+    top: clamp(64px, 8vh, 92px);
+    align-self: start;
+    background: linear-gradient(160deg, var(--art-bg-1, #ffe8e8), var(--art-bg-2, #ffffff));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.art-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+/* Right panel */
+.panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+}
+
+.panel h1 {
+    font-size: clamp(1.8rem, 1.25vw, 1.3rem);
+    line-height: 1.25;
+    margin: 0 0 .45rem;
+}
+
+/* ========================================
+   Price, Brand & Reviews
+   ======================================== */
+.price-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: .3rem 0 .9rem;
+    flex-wrap: wrap;
+}
+
+.brand-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .3rem .55rem;
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: .92rem;
+}
+
+.brand-chip img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.price-tag {
+    display: flex;
+    align-items: baseline;
+    gap: .4rem;
+    font-weight: 800;
+}
+
+.price-tag .amount {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+}
+
+.price-tag .ccy {
+    color: var(--muted);
+    font-size: .88rem;
+}
+
+.stars {
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    font-size: .9rem;
+    color: #f59e0b;
+}
+
+.stars .cnt {
+    color: var(--muted);
+    margin-left: .35rem;
+    font-size: .85rem;
+}
+
+/* ========================================
+   Plan Selection
+   ======================================== */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+
+}
+
+.pros .tag {
+    margin-top: 20px;
+    padding: .38rem .6rem;
+    border-radius: 999px;
+    border: 1px solid #d9f0e3;
+    background: #f4fbf7;
+    color: #0a7a3e;
+    font-weight: 700;
+    font-size: .85rem
+}
+
+.info .tag {
+    padding: .38rem .6rem;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    color: #374151;
+    font-weight: 700;
+    font-size: .85rem
+}
+
+
+/* Simple responsive approach */
+@media (min-width: 480px) {
+    .chips {
+        gap: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .chips {
+        gap: 12px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .chips {
+        gap: 14px;
+    }
+}
+
+.plan-group {
+    background: linear-gradient(135deg, var(--card-2) 0%, rgba(255, 255, 255, 0.8) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    width: 100%;
+}
+
+.plan-group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent, #7c5cff), #6d4aef, #5b3ce6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.plan-group:hover::before {
+    opacity: 1;
+}
+
+.plan-group:hover {
+    border-color: var(--accent, #7c5cff);
+    box-shadow: 0 8px 25px rgba(124, 92, 255, 0.15);
+    background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+}
+
+/* Simple responsive plan-group */
+@media (min-width: 768px) {
+    .plan-group {
+        padding: 20px;
+        border-radius: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .plan-group {
+        padding: 24px;
+        border-radius: 20px;
+    }
+}
+
+.plan-group h4 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.plan-group h4::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--accent, #7c5cff);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+#pPlans {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Simple responsive grid - always 1 column, 2 rows */
+@media (min-width: 768px) {
+    #pPlans {
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #pPlans {
+        gap: 24px;
+    }
+}
+
+.chip {
+    --ring: var(--accent-ring, rgba(59, 130, 246, .28));
+    border: 1px solid var(--border);
+    background: #030303;
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, var(--accent) .18s ease, color .18s ease;
+    font-size: clamp(12px, 0.8vw, 14px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    gap: 12px;
+    min-height: 54px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 200px;
+}
+
+.chip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(66, 24, 235, 0.3), transparent);
+    transition: left 0.6s ease;
+    z-index: 0;
+}
+
+.chip:hover::before {
+    left: 100%;
+}
+
+.chip>* {
+    position: relative;
+    z-index: 1;
+}
+
+.chip:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+    border-color: var(--accent, #7c5cff);
+    background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+}
+
+.chip.active {
+    background: linear-gradient(135deg, var(--accent, #7c5cff) 0%, #6d4aef 100%);
+    color: white;
+    border-color: var(--accent, #7c5cff);
+    box-shadow: 0 6px 20px rgba(124, 92, 255, .3);
+}
+
+.chip.active::before {
+    background: linear-gradient(90deg, transparent, var(--accent, #7c5cff), transparent);
+}
+
+.chip small.price {
+    background: rgba(0, 0, 0, .1);
+    color: var(--text);
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-left: auto;
+    font-size: 12px;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+    transition: all .2s ease;
+    flex-shrink: 0;
+    min-width: fit-content;
+}
+
+.chip.active small.price {
+    background: rgba(255, 255, 255, .2);
+
+}
+
+/* Enhanced chip text handling */
+.chip .chip-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.chip .chip-title {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chip .chip-description {
+    font-size: 0.85em;
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsive chip improvements */
+@media (min-width: 480px) {
+    .chip {
+        font-size: 14px;
+        min-width: 220px;
+    }
+}
+
+@media (min-width: 768px) {
+    .chip {
+        padding: 16px 20px;
+        font-size: 15px;
+        border-radius: 16px;
+        min-height: 60px;
+        gap: 16px;
+        min-width: 240px;
+    }
+
+    .chip small.price {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .chip {
+        padding: 18px 24px;
+        min-height: 64px;
+        font-size: 16px;
+        min-width: 260px;
+    }
+
+    .chip small.price {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+.chip--plan[aria-selected="true"],
+.chip.active {
+    outline: 2px solid var(--accent);
+    box-shadow: 0 0 0 4px var(--ring) inset;
+    color: var(--accent);
+}
+
+/* ========================================
+   Modern Quantity System
+   ======================================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+
+/* Quantity Wrapper */
+.qty-wrapper {
+    background: rgba(103, 97, 124, 0.15);
+    border-radius: 20px;
+    padding: 8px;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    min-width: 200px;
+    pointer-events: none;
+}
+
+.qty-wrapper:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 25px var(--accent-shadow, rgba(59, 130, 246, 0.15)), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.qty-wrapper:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-focus, rgba(59, 130, 246, 0.1)), 0 8px 25px var(--accent-shadow, rgba(59, 130, 246, 0.15));
+}
+
+.qty {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    border-radius: 16px;
+    overflow: visible;
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.qty .btn {
+    appearance: none;
+    border: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    color: #475569;
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+    flex-shrink: 0;
+}
+
+/* Decrease button - Left chevron style */
+.qty .btn.decrease {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    border-color: #ef4444;
+}
+
+.qty .btn.decrease:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.qty .btn.decrease::before {
+    content: "◀";
+    font-size: 16px;
+    animation: pulse-left 2s infinite;
+}
+
+/* Increase button - Right chevron style */
+.qty .btn.increase {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border-color: #10b981;
+}
+
+.qty .btn.increase:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.qty .btn.increase::before {
+    content: "▶";
+    font-size: 16px;
+    animation: pulse-right 2s infinite;
+}
+
+.qty .btn:active {
+    transform: scale(0.92);
+    transition: transform 0.1s;
+}
+
+.qty .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    animation: none;
+}
+
+/* Animations */
+@keyframes pulse-left {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-2px);
+    }
+}
+
+@keyframes pulse-right {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(2px);
+    }
+}
+
+/* Quantity input */
+.qty .input {
+    width: 80px;
+    height: 44px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    color: #1e293b;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    pointer-events: auto;
+    flex-shrink: 0;
+}
+
+.qty .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-focus, rgba(59, 130, 246, 0.1));
+    background: #ffffff;
+    transform: scale(1.02);
+}
+
+.qty .input:hover {
+    border-color: #94a3b8;
+}
+
+/* Quantity Label */
+.qty-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: #374151;
+    pointer-events: none;
+}
+
+.form-field .label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: #374151;
+    pointer-events: none;
+
+
+}
+
+.form-field .label::before {
+    content: "📦";
+    font-size: 16px;
+}
+
+.qty-label::before {
+    content: "📦";
+    font-size: 16px;
+}
+
+.label-bilingual,
+.label {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark, #2563eb) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    pointer-events: none;
+    font-size: 1.5rem;
+
+}
+
+/* Form field protection */
+.form-field {
+    pointer-events: none;
+}
+
+.form-field .qty-wrapper {
+    pointer-events: auto;
+}
+
+.form-field #pPlans {
+    pointer-events: auto;
+}
+
+.form-field .chip {
+    pointer-events: auto;
+}
+
+.form-field #pEmail {
+    pointer-events: auto;
+}
+
+.form-field .input {
+    pointer-events: auto;
+}
+
+/* ========================================
+   Summary & Actions
+   ======================================== */
+.summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 10px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.summary .price {
+    font-weight: 800;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+    flex-direction: row;
+}
+
+.btn {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    padding: clamp(8px, 1.1vw, 12px) clamp(12px, 1.8vw, 16px);
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: clamp(12px, 0.8vw, 14px);
+    line-height: 1.1;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 10px 20px rgba(15, 23, 42, .06);
+}
+
+.btn-pop {
+    filter: saturate(100%);
+}
+
+
+.btn-ghost {
+    background: transparent;
+}
+
+.btn-pay {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 8px 25px var(--accent-shadow, rgba(59, 130, 246, 0.15));
+    width: 100%;
+    min-height: 56px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 16px 24px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    justify-content: center;
+}
+
+.btn-pay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 1s ease;
+    z-index: 0;
+}
+
+.btn-pay:hover::before {
+    left: 100%;
+}
+
+
+
+.btn-pay>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   Features & Tags
+   ======================================== */
+.pros {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.hr-soft {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 14px 0;
+}
+
+/* ========================================
+   Navigation
+   ======================================== */
+.crumbs {
+    font-size: .9rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.crumbs a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 880px) {
+    .product-hero {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .art-card {
+        position: relative;
+        top: clamp(0px, 0vh, 0px);
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .qty-wrapper {
+        min-width: 180px;
+    }
+
+    .qty .btn {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+
+    .qty .input {
+        width: 70px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-pay {
+        min-height: 60px;
+        font-size: 18px;
+        padding: 18px 24px;
+        border-radius: 18px;
+    }
+}
+
+details {
+    margin-top: 16px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}

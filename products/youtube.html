@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YouTube Premium কিনুন — StreamyBD</title>
+
+  <!-- Keep your existing assets (won't break functionality) -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+
+  <!-- Shared Product Styling -->
+  <link rel="stylesheet" href="../assets/styles.css?v=mp21" />
+  <link rel="stylesheet" href="../assets/products.css?v=1.0" />
+  <script defer src="../assets/app.js?v=mp21"></script>
+  <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+
+  <!-- OG / Twitter -->
+  <link rel="canonical" href="https://ttigerbd.com/products/youtube.html">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="StreamyBD">
+  <meta property="og:url" content="https://ttigerbd.com/products/youtube.html">
+  <meta property="og:title" content="YouTube Premium — StreamyBD">
+  <meta property="og:description" content="Ad-free, Background play, Downloads — লোকাল পেমেন্টে দ্রুত ডেলিভারি।">
+  <meta property="og:image" content="https://ttigerbd.com/assets/brand/youtube.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="bn_BD">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YouTube Premium — StreamyBD">
+  <meta name="twitter:description" content="Ad-free + Background + HD Download — দ্রুত ডেলিভারি।">
+  <meta name="twitter:image" content="https://ttigerbd.com/assets/brand/youtube.jpg">
+
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --card-2: #f9fafb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #f50000;
+      /* ChatGPT green */
+      --accent-ink: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 20px rgba(2, 6, 23, .06), 0 1px 1px rgba(2, 6, 23, .04);
+      --radius: 16px;
+    }
+  </style>
+
+</head>
+
+<body class="product-youtube">
+
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="container inner">
+        <a class="brand" href="/"><span class="brand-logo">Y</span><span>Streamy<span class="muted">BD</span></span></a>
+        <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
+      </div>
+    </header>
+
+    <main class="container" style="padding:16px 0 0" data-page="product" data-product="YouTube Premium">
+      <nav class="crumbs" style="color:var(--muted);font-size:.9rem;margin:10px 0">
+        <a href="/" style="color:inherit;text-decoration:none">Home</a> / <span>YouTube Premium</span>
+      </nav>
+
+      <section class="product-hero">
+        <!-- Left: poster -->
+        <div class="art-card" aria-hidden="true">
+          <img id="posterImg" class="art-img" src="../assets/brand/youtube.jpg" alt="YouTube Premium poster"
+            loading="eager" decoding="async" />
+        </div>
+
+        <!-- Right: controls -->
+        <div class="panel">
+          <h1>YouTube Premium</h1>
+
+          <div id="priceStart"></div>
+          <div class="price-row">
+            <span class="brand-chip"><img id="brandLogo" src="../assets/brand/youtube.jpg"
+                alt="YouTube logo">YouTube</span>
+            <div class="price-tag">
+              <span class="amount" id="pUnitHero">৳50.00</span>
+              <span class="ccy">BDT</span>
+            </div>
+            <div class="stars" aria-label="Average rating">★★★★★ <span class="cnt"></span></div>
+          </div>
+
+          <div class="review-banner" style="margin:.2rem 0 .6rem">
+            <span class="badge--accent">No fake reviews</span>
+            <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+              rel="noopener nofollow">⭐ 1,000+ Real Reviews — Facebook Group</a>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <span class="label">প্ল্যান / Plan</span>
+              <div class="plan-grid chips" id="pPlans">
+                <div class="plan-group" data-type="nonrenew">
+                  <h4>Non-renew</h4>
+                  <div class="chips">
+                    <button class="chip chip--plan" data-id="nonrenew" data-price="50" data-mode="manual"
+                      data-productkey="manual_youtube_nonrenew">
+                      1 Month — Non-renew <small class="price">৳50</small>
+                    </button>
+                  </div>
+
+                </div>
+
+                <div class="plan-group" data-type="renew">
+                  <h4>Renewable</h4>
+                  <div class="chips">
+                    <button class="chip chip--plan" data-id="renew" data-price="150" data-mode="manual"
+                      data-productkey="manual_youtube_renew">
+                      1 Month — Renewable <small class="price">৳150</small>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <label class="form-field">
+              <div class="qty-label label-bilingual" data-theme="youtube">
+                <span>পরিমাণ / Quantity</span>
+              </div>
+              <div class="qty-wrapper" data-theme="youtube">
+                <div class="qty">
+                  <button class="btn decrease" id="pQtyMinus" aria-label="Decrease quantity"
+                    title="কমিয়ে দিন / Decrease">
+                  </button>
+                  <input class="input center" id="pQty" type="number" min="1" max="99" value="1"
+                    aria-label="Quantity" />
+                  <button class="btn increase" id="pQtyPlus" aria-label="Increase quantity"
+                    title="বাড়িয়ে দিন / Increase">
+                  </button>
+                </div>
+              </div>
+            </label>
+
+            <label class="form-field">
+              <div class="label">Email (required)</div>
+              <input class="input" id="pEmail" type="email" placeholder="Enter your email address" required
+                style="width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 14px;" />
+            </label>
+
+
+            <!-- Price widget (keep IDs for your existing logic) -->
+            <div class="summary" id="pSummary">
+              <div>ইউনিট</div>
+              <div id="pUnit">৳50</div>
+              <div>মোট / Total</div>
+              <div id="pTotal" class="price">৳50</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-ghost" onclick="history.back()">Back</button>
+            <button class="btn btn--accent btn-pop btn-pay" id="pPayNow">Pay Now</button>
+          </div>
+
+          <div class="pros"><span class="tag">Ad-free</span><span class="tag">Background play</span><span
+              class="tag">Downloads</span><span class="tag">YouTube Music</span></div>
+
+
+          <!-- Description -->
+          <div class="desc-card">
+            <h3>Renewable YouTube — ডিটেইলস</h3>
+            <ul>
+              <li>একই মেইলে প্রতিমাসে নিতে পারবেন।</li>
+              <li>২ মাস পর পর মেইল চেঞ্জ করা <strong>লাগবে না</strong>।</li>
+              <li>পূর্বে <strong>দুইবার</strong> নিয়ে Restrict খাওয়া অ্যাকাউন্টে সার্ভিস দেওয়া হবে না।</li>
+            </ul>
+            <h3>Non Renewable YouTube — ডিটেইলস</h3>
+            <ul>
+              <li>একই মেইলে প্রতিমাসে নিতে পারবেন না।</li>
+              <li>২ মাস পর পর মেইল চেঞ্জ করা <strong>লাগবে</strong>।</li>
+              <li>পূর্বে <strong>দুইবার</strong> নিয়ে Restrict খাওয়া অ্যাকাউন্টে সার্ভিস দেওয়া হবে না।</li>
+            </ul>
+
+            <h3>কি সুবিধা পাবেন?</h3>
+            <ul>
+              <li><strong>Ad-free</strong> YouTube + <strong>Background play</strong> / PiP</li>
+              <li><strong>Downloads</strong> (কনটেন্ট অফলাইনে)</li>
+              <li><strong>YouTube Music Premium</strong> অ্যাক্সেস</li>
+              <li><strong>In your personal Mail</strong> অ্যাক্সেস</li>
+              <li>লোকাল পেমেন্ট: bKash / Nagad / Rocket</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+        <small class="muted">© <span id="year"></span> StreamyBD</small>
+        <small class="muted">Reviews are public on our FB Group</small>
+      </div>
+    </footer>
+
+    <!-- Tiny helpers: price mirror + mobile auto-scroll -->
+    <script>
+      (function mirrorPrice() {
+        function sync() {
+          var unit = document.getElementById('pUnit');
+          var hero = document.getElementById('pUnitHero');
+          if (unit && hero) { hero.textContent = (unit.textContent || '').replace(/\s+/g, '') + '.00'; }
+        }
+        var mo = new MutationObserver(sync);
+        var unitEl = document.getElementById('pUnit');
+        if (unitEl) { mo.observe(unitEl, { characterData: true, childList: true, subtree: true }); }
+        sync();
+      })();
+
+      (function autoScrollMobile() {
+        try {
+          var isMobile = window.matchMedia('(max-width: 880px)').matches;
+          if (!isMobile) return;
+          if (sessionStorage.getItem('yt_auto_scrolled') === '1') return;
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.addEventListener('load', function () {
+            var target = document.getElementById('priceStart') || document.getElementById('pPlans') || document.querySelector('.price-row');
+            if (!target) return;
+            var y = target.getBoundingClientRect().top + window.scrollY - 8;
+            setTimeout(function () {
+              window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+              sessionStorage.setItem('yt_auto_scrolled', '1');
+            }, 250);
+          });
+        } catch (e) { }
+      })();
+
+      // Quantity system is now handled by quantity-system.js
+
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+
+</html>

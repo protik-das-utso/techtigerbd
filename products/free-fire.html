@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="bn" data-theme="light">
+
+<head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Free Fire UC Top-up — StreamyBD</title>
+  <meta name="description" content="UID দিলেই সরাসরি টপ-আপ—পছন্দের Diamond প্যাক বেছে নিন; TrxID দিলেই দ্রুত ভেরিফাই।">
+  <link rel="canonical" href="https://ttigerbd.com/products/free-fire.html">
+  <link rel="stylesheet" href="../assets/styles.css?v=mp21" />
+  <link rel="stylesheet" href="../assets/products.css?v=1.0" />
+  <script defer src="../assets/app.js?v=mp21"></script>
+  <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+  <style>
+    :root {
+      --accent: #ff8800
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container inner">
+      <a class="brand" href="/"><span class="brand-logo">C</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding:24px 0" data-page="product" data-product="Free Fire UC Top-up">
+    <nav class="crumbs"><a href="/">Home</a> / <span>Free Fire UC Top-up</span></nav>
+
+    <section>
+      <h1 class="h2">Free Fire UC Top-up</h1>
+      <div class="review-banner" style="margin:.3rem 0 1rem">
+        <span class="badge--accent">No fake reviews</span>
+        <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+          rel="noopener nofollow">
+          ⭐ 1,000+ Real Reviews — Facebook Group
+        </a>
+      </div>
+
+      <div class="product-select card" style="padding:16px">
+        <div class="form-grid">
+          <label class="form-field">
+            <span class="label">Free Fire UID</span>
+            <input class="input" id="ffUid" placeholder="আপনার UID লিখুন">
+          </label>
+
+          <div class="form-field">
+            <span class="label">ডায়মন্ড প্যাক</span>
+            <div class="plan-grid chips" id="pPlans">
+              <!-- UC buttons; data-uc & data-price are read by JS below -->
+              <button class="chip chip--plan" data-id="uc_20" data-uc="20" data-label="25 Diamond" data-price="25">25
+                Diamond <small class="price">৳25</small></button>
+              <button class="chip chip--plan" data-id="uc_36" data-uc="36" data-label="50 Diamond" data-price="45">50
+                Diamond <small class="price">৳45</small></button>
+              <button class="chip chip--plan" data-id="uc_80" data-uc="80" data-label="115 Diamond" data-price="83">115
+                Diamond <small class="price">৳83</small></button>
+              <button class="chip chip--plan" data-id="uc_160" data-uc="160" data-label="240 Diamond"
+                data-price="160">240 Diamond <small class="price">৳160</small></button>
+              <button class="chip chip--plan" data-id="uc_161" data-uc="161" data-label="Weekly Membership"
+                data-price="160">Weekly Membership <small class="price">৳160</small></button>
+              <button class="chip chip--plan" data-id="uc_405" data-uc="405" data-label="610 Diamond"
+                data-price="400">610 Diamond <small class="price">৳400</small></button>
+              <button class="chip chip--plan" data-id="uc_800" data-uc="800" data-label="Monthly Membership"
+                data-price="800">Monthly Membership <small class="price">৳800</small></button>
+              <button class="chip chip--plan" data-id="uc_810" data-uc="810" data-label="1240 Diamond"
+                data-price="800">1240 Diamond <small class="price">৳800</small></button>
+              <button class="chip chip--plan" data-id="uc_1625" data-uc="1625" data-label="2530 Diamond"
+                data-price="1600">2530 Diamond <small class="price">৳1600</small></button>
+            </div>
+          </div>
+
+          <label class="form-field">
+            <span class="label">পরিমাণ / Quantity</span>
+            <div class="qty">
+              <button class="btn" id="pQtyMinus" type="button">–</button>
+              <input class="input center" id="pQty" type="number" min="1" value="1">
+              <button class="btn" id="pQtyPlus" type="button">+</button>
+            </div>
+          </label>
+
+          <div class="summary">
+            <div>ইউনিট</div>
+            <div id="pUnit">৳25</div>
+            <div>মোট / Total</div>
+            <div id="pTotal" class="price">৳25</div>
+          </div>
+        </div>
+
+        <div class=""></div>
+        <div class="pros">
+          <span class="tag">Direct top-up</span>
+          <span class="tag">Local pay</span>
+          <span class="tag">Fast verify</span>
+        </div>
+
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" href="/#plans">Back</a>
+          <button class="btn btn-primary btn--accent btn-pop" id="pPayNow" type="button">Pay Now</button>
+          <a class="btn" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+            rel="noopener nofollow">See Facebook Reviews</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <small class="muted">© <span id="year"></span> StreamyBD</small>
+      <small class="muted">Reviews are public on our FB Group</small>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const $ = (q, r = document) => r.querySelector(q);
+      const plansWrap = $('#pPlans');
+      const qty = $('#pQty');
+      const unit = $('#pUnit');
+      const total = $('#pTotal');
+      const uidInput = $('#ffUid');
+
+      function activeBtn() { return plansWrap.querySelector('.chip--plan.active'); }
+      function updateTotals() {
+        const btn = activeBtn(); if (!btn) return;
+        const price = parseInt(btn.dataset.price || '0', 10);
+        const q = Math.max(1, parseInt(qty.value || '1', 10));
+        unit.textContent = '৳' + price;
+        total.textContent = '৳' + (price * q);
+      }
+
+      plansWrap.querySelectorAll('.chip--plan').forEach((b, idx) => {
+        b.addEventListener('click', () => {
+          plansWrap.querySelectorAll('.chip--plan').forEach(x => x.classList.remove('active'));
+          b.classList.add('active'); updateTotals();
+        });
+        if (idx === 0) { b.classList.add('active'); }
+      });
+      $('#pQtyMinus').addEventListener('click', () => { qty.value = Math.max(1, (parseInt(qty.value || '1', 10) - 1)); updateTotals(); });
+      $('#pQtyPlus').addEventListener('click', () => { qty.value = Math.max(1, (parseInt(qty.value || '1', 10) + 1)); updateTotals(); });
+      qty.addEventListener('input', updateTotals);
+      updateTotals();
+
+      // Navigate to pay.html with all details
+      $('#pPayNow').addEventListener('click', () => {
+        const btn = activeBtn(); if (!btn) { alert('একটি প্যাক সিলেক্ট করুন'); return; }
+        const uc = btn.dataset.uc;
+        const price = parseInt(btn.dataset.price || '0', 10);
+        const label = btn.dataset.label || btn.textContent.trim();
+        const q = Math.max(1, parseInt(qty.value || '1', 10));
+        const uid = (uidInput.value || '').trim();
+        if (!uid) { if (!confirm('UID খালি রাখা হয়েছে। তারপরও এগোতে চান?')) return; }
+        const params = new URLSearchParams({
+          product: 'Free Fire UC Top-up',
+          plan: label,
+          mode: 'freefire',
+          uc: uc,
+          uid: uid,
+          price: price.toString(),
+          qty: q.toString()
+        });
+        location.href = `./pay.html?${params.toString()}`;
+      });
+    })();
+  </script>
+</body>
+
+</html>

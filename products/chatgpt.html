@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChatGPT কিনুন — StreamyBD</title>
+
+  <!-- Favicons (keep your existing) -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
+  <meta name="theme-color" content="#111827">
+
+  <!-- Optional OG -->
+  <link rel="canonical" href="https://ttigerbd.com/products/chatgpt.html">
+  <meta name="description"
+    content="ChatGPT for writing, coding, and image/doc chats — choose Shared or Personal. Local payments and fast delivery.">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="StreamyBD">
+  <meta property="og:url" content="https://ttigerbd.com/products/chatgpt.html">
+  <meta property="og:title" content="ChatGPT — StreamyBD">
+  <meta property="og:description"
+    content="Writing • Coding • Doc/Image chat. Shared or Personal plans with local payments.">
+  <meta property="og:image" content="https://ttigerbd.com/assets/brand/chatgpt.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="bn_BD">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ChatGPT — StreamyBD">
+  <meta name="twitter:description" content="Writing • Coding • Doc/Image chat. Shared or Personal plans.">
+  <link rel="stylesheet" href="../assets/styles.css?v=mp21" />
+  <link rel="stylesheet" href="../assets/products.css?v=1.0" />
+  <script defer src="../assets/app.js?v=mp21"></script>
+  <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+  <!-- Integrated, page-scoped CSS (saved StreamyBD style) -->
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --card-2: #f9fafb;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #10a37f;
+      /* ChatGPT green */
+      --accent-ink: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 20px rgba(2, 6, 23, .06), 0 1px 1px rgba(2, 6, 23, .04);
+      --radius: 16px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="container inner">
+      <a class="brand" href="/"><span class="brand-logo">C</span><span>Streamy<span class="muted">BD</span></span></a>
+      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container" style="padding:16px 0 0" data-page="product" data-product="ChatGPT">
+    <nav class="crumbs" style="color:var(--muted);font-size:.9rem;margin:10px 0">
+      <a href="/" style="color:inherit;text-decoration:none">Home</a> / <span>ChatGPT</span>
+    </nav>
+
+    <section class="product-hero">
+      <!-- Left: poster -->
+      <div class="art-card" aria-hidden="true">
+        <img id="posterImg" class="art-img" src="../assets/brand/chatgpt.jpg" alt="ChatGPT poster" loading="eager"
+          decoding="async" />
+      </div>
+
+      <!-- Right: controls -->
+      <div class="panel">
+        <h1>ChatGPT</h1>
+
+        <div id="priceStart"></div>
+        <div class="price-row">
+          <span class="brand-chip"><img id="brandLogo" src="../assets/brand/chatgpt.png"
+              alt="ChatGPT logo">ChatGPT</span>
+          <div class="price-tag">
+            <span class="amount" id="pUnitHero">৳200.00</span>
+            <span class="ccy">BDT</span>
+          </div>
+          <div class="stars" aria-label="Average rating">★★★★★ <span class="cnt"></span></div>
+        </div>
+
+        <div class="review-banner" style="margin:.2rem 0 .6rem">
+          <span class="badge--accent">No fake reviews</span>
+          <a class="btn btn--accent btn-pop" href="https://www.facebook.com/groups/1181102146665654" target="_blank"
+            rel="noopener nofollow">⭐ 1,000+ Real Reviews — Facebook Group</a>
+        </div>
+
+        <!-- Plans -->
+        <div class="form-grid">
+          <div class="form-field">
+            <span class="label">প্ল্যান / Plan</span>
+            <div class="plan-grid chips" id="pPlans">
+              <div class="plan-group" data-type="shared">
+                <h4>Shared</h4>
+                <div class="chips">
+                  <button class="chip chip--plan" data-id="shared" data-price="200" data-mode="manual"
+                    data-productkey="manual_chatgpt_shared">
+                    1 Month — Shared <small class="price">৳200</small>
+                  </button>
+                </div>
+              </div>
+
+              <div class="plan-group" data-type="personal">
+                <h4>Personal</h4>
+                <div class="chips">
+                  <button class="chip chip--plan" data-id="personal" data-price="1500" data-mode="manual"
+                    data-productkey="manual_chatgpt_personal">
+                    1 Month — Personal <small class="price">৳1500</small>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qty -->
+          <label class="form-field">
+            <div class="qty-label label-bilingual" data-theme="chatgpt">
+              <span>পরিমাণ / Quantity</span>
+            </div>
+            <div class="qty-wrapper" data-theme="chatgpt">
+              <div class="qty">
+                <button class="btn decrease" id="pQtyMinus" aria-label="Decrease quantity"
+                  title="কমিয়ে দিন / Decrease">
+                </button>
+                <input class="input center" id="pQty" type="number" min="1" max="99" value="1" aria-label="Quantity" />
+                <button class="btn increase" id="pQtyPlus" aria-label="Increase quantity"
+                  title="বাড়িয়ে দিন / Increase">
+                </button>
+              </div>
+            </div>
+          </label>
+
+          <!-- Email field (conditional) -->
+          <label class="form-field" id="emailField" style="display: none;">
+            <div class="label">Email (required for Personal plan)</div>
+            <p>*** In which email you want to get access.</p>
+            <input class="input" id="pEmail" type="email" placeholder="Enter your email address"
+              style="width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 14px;" />
+          </label>
+
+          <!-- Price widget -->
+          <div class="summary" id="pSummary">
+            <div>ইউনিট</div>
+            <div id="pUnit">৳200</div>
+            <div>মোট / Total</div>
+            <div id="pTotal" class="price">৳200</div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button class="btn btn-ghost" onclick="history.back()">Back</button>
+          <button class="btn btn--accent btn-pop btn-pay" id="pPayNow">Pay Now</button>
+        </div>
+
+        <div class="pros"><span class="tag">Profile</span><span class="tag">Family‑friendly</span><span class="tag">Fast
+            delivery</span></div>
+
+        <!-- Description -->
+        <div class="desc-card">
+          <h3>What is ChatGPT?</h3>
+          <p>
+            ChatGPT is an AI assistant that can understand instructions in natural language and generate helpful
+            responses.
+            It can draft and rewrite text, explain complex topics, create code snippets, summarize documents, analyze
+            data, and
+            even chat about PDFs and images when supported.
+          </p>
+
+          <h3>Why is it necessary?</h3>
+          <ul>
+            <li><strong>Productivity:</strong> Save hours on emails, briefs, reports, and research summaries.</li>
+            <li><strong>Coding help:</strong> Boilerplate, snippets, debugging ideas, and API examples in seconds.</li>
+            <li><strong>Learning:</strong> Turn complex ideas into simple explanations with examples and step-by-step
+              guides.</li>
+            <li><strong>Creativity:</strong> Brainstorm campaign ideas, scripts, posts, and outlines on demand.</li>
+            <li><strong>Multimodal:</strong> When enabled, reason over images/docs for faster understanding.</li>
+          </ul>
+
+          <details>
+            <summary>Shared — Quick Rules & Notes</summary>
+            <ul>
+              <li><strong>Don’t change any info.</strong></li>
+              <li><strong>Don’t login on more than 1 device.</strong></li>
+              <li>লগিন করার সময়, Code চাইলে <strong>“Try Another Method”</strong> দিয়ে, <strong>Email</strong> অপশন
+                সিলেক্ট করুন।</li>
+              <li>WhatsApp: <a href="https://wa.me/8801881738485" target="_blank" rel="noopener">+8801881738485</a></li>
+              <li><strong>DO NOT ADD TEAMMATE — ACCOUNT WILL BE BANNED •.</strong></li>
+            </ul>
+            <p class="muted" style="margin-top:.4rem">
+              Shared is the most affordable way to try ChatGPT features for writing/coding. Keep usage moderate and
+              follow the access rules
+              to avoid lockouts.
+            </p>
+          </details>
+
+          <details>
+            <summary>Personal — What you get</summary>
+            <ul>
+              <li>You get access <strong>in your own account</strong> (clean history, your settings, stable access).
+              </li>
+              <li>Better privacy: your prompts, history, and files aren’t mixed with others.</li>
+              <li>More reliable login and fewer usage limits compared to a shared seat.</li>
+
+            </ul>
+            <p class="muted" style="margin-top:.4rem">
+              Personal is best for regular users, professionals, and teams who need consistent availability and
+              control over data, devices, and settings.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <small class="muted">© <span id="year"></span> StreamyBD</small>
+      <small class="muted">Reviews are public on our FB Group</small>
+    </div>
+  </footer>
+
+  <!-- Helpers: mirror price + minimal plan/qty logic + mobile auto-scroll -->
+  <script>
+    (function mirrorPrice() {
+      function sync() {
+        var unit = document.getElementById('pUnit');
+        var hero = document.getElementById('pUnitHero');
+        if (unit && hero) { hero.textContent = (unit.textContent || '').replace(/\s+/g, '') + '.00'; }
+      }
+      var mo = new MutationObserver(sync);
+      var unitEl = document.getElementById('pUnit');
+      if (unitEl) { mo.observe(unitEl, { characterData: true, childList: true, subtree: true }); }
+      sync();
+    })();
+
+    (function minimalChipSelect() {
+      var plans = document.querySelectorAll('.chip--plan');
+      var unit = document.getElementById('pUnit');
+      var total = document.getElementById('pTotal');
+      var qty = document.getElementById('pQty');
+      function money(x) { return '৳' + x; }
+      function recalc() {
+        var sel = document.querySelector('.chip--plan[aria-selected="true"]') || plans[0];
+        var price = parseFloat(sel?.dataset.price || '200');
+        var q = Math.max(1, parseInt(qty.value || '1', 10));
+        unit.textContent = money(price);
+        total.textContent = money(price * q);
+      }
+      plans.forEach(btn => {
+        btn.addEventListener('click', () => {
+          plans.forEach(b => b.setAttribute('aria-selected', 'false'));
+          btn.setAttribute('aria-selected', 'true');
+          recalc();
+        });
+      });
+      // Quantity system is now handled by quantity-system.js
+      recalc();
+    })();
+
+    (function autoScrollMobile() {
+      try {
+        var isMobile = window.matchMedia('(max-width: 880px)').matches;
+        if (!isMobile) return;
+        if (sessionStorage.getItem('cg_auto_scrolled') === '1') return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.addEventListener('load', function () {
+          var target = document.getElementById('priceStart') || document.getElementById('pPlans') || document.querySelector('.price-row');
+          if (!target) return;
+          var y = target.getBoundingClientRect().top + window.scrollY - 8;
+          setTimeout(function () {
+            window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+            sessionStorage.setItem('cg_auto_scrolled', '1');
+          }, 250);
+        });
+      } catch (e) { }
+    })();
+
+    // Email field visibility for Personal plan
+    (function initEmailToggle() {
+      const emailField = document.getElementById('emailField');
+      const emailInput = document.getElementById('pEmail');
+      const plans = document.querySelectorAll('.chip--plan');
+
+      function toggleEmailField() {
+        const personalPlan = document.querySelector('.chip--plan[data-id="personal"]');
+        const isPersonalSelected = personalPlan && personalPlan.classList.contains('active');
+
+        if (isPersonalSelected) {
+          emailField.style.display = 'block';
+          emailInput.setAttribute('required', 'required');
+        } else {
+          emailField.style.display = 'none';
+          emailInput.removeAttribute('required');
+          emailInput.value = ''; // Clear email when switching away from personal
+        }
+      }
+
+      // Listen for plan changes
+      plans.forEach(plan => {
+        plan.addEventListener('click', () => {
+          setTimeout(toggleEmailField, 100); // Small delay to ensure active class is updated
+        });
+      });
+
+      // Check initial state
+      toggleEmailField();
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
