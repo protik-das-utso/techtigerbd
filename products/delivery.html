@@ -5,8 +5,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Delivery — Tech Tiger BD</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/og.jpg">
   <meta name="robots" content="noindex,follow" />
   <meta name="theme-color" content="#ffffff" />
+
+  <!-- Header -->
+  <link rel="stylesheet" href="../components/header/header-component.css">
+  <script defer src="../components/header/header-component.js"></script>
 
   <style>
     :root {
@@ -303,14 +308,6 @@
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="/"><span class="brand-logo">D</span><span>Streamy<span class="muted">BD</span></span></a>
-      <nav class="primary" style="display:flex;gap:12px">
-        <a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a>
-      </nav>
-    </div>
-  </header>
 
   <main class="wrap card" role="main" data-page="delivery">
     <div class="headline">
@@ -396,10 +393,16 @@
   </main>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+    });
+  </script>
+
+  <script>
     (function () {
       // ===== Config (same as your pay/app) =====
       const GAS_URL = "https://script.google.com/macros/s/AKfycbyLjru6Gqm9qlXUWgDYPCMaGGeEIam0OrWRguPVTGYj73eI6zyt745aZaWRLreVJmGt/exec";
-      const WHATSAPP_URL = "https://wa.me/8801881738485";
+      const WHATSAPP_URL = "https://wa.me/8801883044415";
 
       // ===== Helpers =====
       const $ = (q, r = document) => r.querySelector(q);

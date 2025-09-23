@@ -16,6 +16,12 @@
     content="bKash/Nagad/Rocket দিয়ে Tech Tiger BD তে অর্ডার দিন। স্থানীয় পেমেন্ট, দ্রুত ডেলিভারি, Real Reviews.">
   <!-- Keep if you still use your global app file -->
   <script defer src="../assets/app.js?v=mp42"></script>
+  <meta name="description"
+    content="bKash/Nagad/Rocket দিয়ে Tech Tiger BD তে অর্ডার দিন। স্থানীয় পেমেন্ট, দ্রুত ডেলিভারি, Real Reviews.">
+
+  <!-- Header -->
+  <link rel="stylesheet" href="../components/header/header-component.css">
+  <script defer src="../components/header/header-component.js"></script>
 
   <style>
     :root {
@@ -50,43 +56,6 @@
 
     a:hover {
       text-decoration: underline
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: saturate(180%) blur(6px);
-      background: rgba(245, 247, 251, .7);
-      border-bottom: 1px solid var(--border)
-    }
-
-    .topbar .inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px
-    }
-
-    .brand {
-      display: inline-flex;
-      gap: .5rem;
-      align-items: center;
-      font-weight: 900;
-      color: var(--text)
-    }
-
-    .brand-logo {
-      display: inline-grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 8px;
-      font-weight: 900
     }
 
     .wrap {
@@ -326,15 +295,6 @@
 
 <body>
 
-  <header class="topbar">
-    <div class="inner">
-      <a class="brand" href="/"><span class="brand-logo">S</span><span>Streamy<span class="muted">BD</span></span></a>
-      <nav class="primary" style="display:flex;gap:12px">
-        <a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a>
-      </nav>
-    </div>
-  </header>
-
   <main class="wrap card" role="main">
     <div class="headline reveal">
       <div class="badge">Payment</div>
@@ -373,7 +333,7 @@
       <div class="reveal">
         <label class="muted">Payment Number</label>
         <div style="display:flex;align-items:center;gap:8px">
-          <div id="payNum" style="font-weight:900;font-size:18px">01881738485</div>
+          <div id="payNum" style="font-weight:900;font-size:18px">01883044415</div>
           <button id="copyNumInline" class="btn" style="padding:.35rem .6rem;font-size:12px">Copy</button>
 
         </div>
@@ -421,11 +381,16 @@
           </ol>
         </div>
   </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+    });
+  </script>
 
   <script>
     (function () {
       const GAS_URL = "https://script.google.com/macros/s/AKfycbyLjru6Gqm9qlXUWgDYPCMaGGeEIam0OrWRguPVTGYj73eI6zyt745aZaWRLreVJmGt/exec";
-      const WHATSAPP_URL = "https://wa.me/8801881738485";
+      const WHATSAPP_URL = "https://wa.me/8801883044415";
       const isMobile = window.matchMedia('(max-width: 680px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Fade-up reveals (mobile nicety)
@@ -495,12 +460,20 @@
         const cards = document.querySelectorAll('.pay-card');
         const payNum = document.getElementById('payNum');
         function setNum(m) {
-          const numbers = {
+          // Check if product is Crunchyroll for different payment numbers
+          const isCrunchyroll = p.product && p.product.toLowerCase().includes('crunchyroll');
+
+          const numbers = isCrunchyroll ? {
             bkash: '01881738485',
             nagad: '01881738485',
             rocket: '018292553669'
+          } : {
+            bkash: '01883044415',
+            nagad: '01883044415',
+            rocket: '01883044415'
           };
-          payNum.textContent = numbers[m] || '01XXXXXXXXX';
+
+          payNum.textContent = numbers[m] || '01883044415';
           const step = document.getElementById('stepPayNum'); // might not exist
           if (step) step.textContent = payNum.textContent.trim();
         }
@@ -511,6 +484,9 @@
             setNum(btn.dataset.method);
           });
         });
+
+        // Set initial payment number based on product and default selected method (bkash)
+        setNum('bkash');
       })();
 
       // inline copy button (small)
@@ -561,7 +537,7 @@
           `Amount: ${total ? (total + ' BDT') : ''}`.trim(),
           `please proceed with next`
         ].filter(Boolean);
-        window.open(`${"https://wa.me/8801881738485"}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+        window.open(`${"https://wa.me/8801883044415"}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
       };
       document.getElementById('btnWhatsApp')?.addEventListener('click', () => openWhatsApp(""));
 
@@ -611,6 +587,11 @@
       `;
       document.head.appendChild(style);
     })();
+
+    // Initialize Header Component
+    document.addEventListener('DOMContentLoaded', function () {
+      HeaderComponent.create(HeaderComponent.configs.pay);
+    });
   </script>
 </body>
 

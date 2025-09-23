@@ -3,9 +3,7 @@
 
 <head>
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="icon" type="image/svg+xml" href="../assets/og.jpg">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
   <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
   <meta name="theme-color" content="#111827">
@@ -19,6 +17,10 @@
   <link rel="stylesheet" href="../assets/products.css?v=1.0">
   <script defer src="../assets/app.js?v=mp13"></script>
   <script defer src="../assets/quantity-system.js?v=1.0"></script>
+
+  <!-- Header -->
+  <link rel="stylesheet" href="../components/header/header-component.css">
+  <script defer src="../components/header/header-component.js"></script>
   <style>
     :root {
       --bg: #f7f8fb;
@@ -37,12 +39,6 @@
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="container inner"><a class="brand" href="/"><span class="brand-logo">C</span><span>Streamy<span
-            class="muted">BD</span></span></a>
-      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
-    </div>
-  </header>
   <main class="container" style="padding:24px 0" data-page="product" data-product="Disney+ Profile">
     <nav class="crumbs"><a href="/">Home</a> / <span>Disney+ Profile</span></nav>
     <section>
@@ -100,6 +96,12 @@
         class="muted">© <span id="year"></span> Tech Tiger BD</small><small class="muted">Reviews are public on our FB
         Group</small></div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+    });
+  </script>
 </body>
 
 </html>

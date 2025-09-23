@@ -7,10 +7,7 @@
   <title>ChatGPT কিনুন — Tech Tiger BD</title>
 
   <!-- Favicons (keep your existing) -->
-  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
+  <link rel="icon" type="image/svg+xml" href="../assets/og.jpg">
   <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
   <meta name="theme-color" content="#111827">
 
@@ -35,6 +32,11 @@
   <link rel="stylesheet" href="../assets/products.css?v=1.0" />
   <script defer src="../assets/app.js?v=mp21"></script>
   <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+
+  <!-- Header -->
+  <link rel="stylesheet" href="../components/header/header-component.css">
+  <script defer src="../components/header/header-component.js"></script>
+
   <!-- Integrated, page-scoped CSS (saved Tech Tiger BD style) -->
   <style>
     :root {
@@ -55,13 +57,6 @@
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="topbar">
-    <div class="container inner">
-      <a class="brand" href="/"><span class="brand-logo">C</span><span>Streamy<span class="muted">BD</span></span></a>
-      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
-    </div>
-  </header>
 
   <!-- Main -->
   <main class="container" style="padding:16px 0 0" data-page="product" data-product="ChatGPT">
@@ -196,7 +191,7 @@
               <li><strong>Don’t login on more than 1 device.</strong></li>
               <li>লগিন করার সময়, Code চাইলে <strong>“Try Another Method”</strong> দিয়ে, <strong>Email</strong> অপশন
                 সিলেক্ট করুন।</li>
-              <li>WhatsApp: <a href="https://wa.me/8801881738485" target="_blank" rel="noopener">+8801881738485</a></li>
+              <li>WhatsApp: <a href="https://wa.me/8801883044415" target="_blank" rel="noopener">+8801881738485</a></li>
               <li><strong>DO NOT ADD TEAMMATE — ACCOUNT WILL BE BANNED •.</strong></li>
             </ul>
             <p class="muted" style="margin-top:.4rem">
@@ -231,6 +226,12 @@
       <small class="muted">Reviews are public on our FB Group</small>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+    });
+  </script>
 
   <!-- Helpers: mirror price + minimal plan/qty logic + mobile auto-scroll -->
   <script>

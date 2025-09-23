@@ -7,9 +7,7 @@
   <title>Prime Video কিনুন — Tech Tiger BD</title>
 
   <!-- Favicons (optional keep same) -->
-  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="icon" type="image/svg+xml" href="../assets/og.jpg">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
   <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#00a8e1">
   <meta name="theme-color" content="#0b1b2b">
@@ -35,6 +33,10 @@
   <link rel="stylesheet" href="../assets/products.css?v=1.0" />
   <script defer src="../assets/app.js?v=mp21"></script>
   <script defer src="../assets/quantity-system.js?v=1.0" charset="utf-8"></script>
+
+  <!-- Header -->
+  <link rel="stylesheet" href="../components/header/header-component.css">
+  <script defer src="../components/header/header-component.js"></script>
   <!-- Integrated, page-scoped CSS (Tech Tiger BD saved style) -->
   <style>
     :root {
@@ -55,13 +57,6 @@
 <!-- Set checkout target here -->
 
 <body data-checkout="./pay.html">
-  <!-- Header -->
-  <header class="topbar">
-    <div class="container inner">
-      <a class="brand" href="/"><span class="brand-logo">P</span><span>Streamy<span class="muted">BD</span></span></a>
-      <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
-    </div>
-  </header>
 
   <!-- Main -->
   <main class="container" style="padding:16px 0 0" data-page="product" data-product="Prime Video Shared">
@@ -181,7 +176,7 @@
 
             </ul>
             <p class="muted" style="margin-top:.4rem">
-              Need help? WhatsApp: <a href="https://wa.me/8801881738485" target="_blank"
+              Need help? WhatsApp: <a href="https://wa.me/8801883044415" target="_blank"
                 rel="noopener">+8801881738485</a>
             </p>
           </details>
@@ -196,6 +191,12 @@
       <small class="muted">Reviews are public on our FB Group</small>
     </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+    });
+  </script>
 
   <!-- Helpers: mirror price + minimal plan/qty + Pay Now redirect + mobile auto-scroll -->
   <script>

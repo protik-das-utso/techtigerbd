@@ -1,0 +1,93 @@
+/**
+ * Header Component Styles
+ * Reusable header styling for all pages
+ */
+
+/* Topbar */
+.topbar {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(160%) blur(6px);
+    -webkit-backdrop-filter: saturate(160%) blur(6px);
+    border-bottom: 1px solid var(--border, #e6eaf3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.topbar .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.topbar .container.inner {
+    padding: 12px 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-weight: 900;
+    font-size: 18px;
+    text-decoration: none;
+    color: var(--text, #0f172a);
+}
+
+.brand:hover {
+    color: var(--accent, #7c5cff);
+}
+
+.primary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.primary a {
+    color: var(--muted, #64748b);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 14px;
+    transition: all 0.2s ease;
+}
+
+.primary a:hover {
+    color: var(--accent, #7c5cff);
+}
+
+.muted {
+    color: var(--muted, #64748b);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+
+    .topbar .inner,
+    .topbar .container.inner {
+        padding: 10px 12px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .primary {
+        gap: 8px;
+    }
+
+    .primary a {
+        padding: 6px 8px;
+        font-size: 14px;
+        margin-left: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .primary {
+        display: none;
+    }
+}

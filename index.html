@@ -18,25 +18,143 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/og.jpg">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/og.jpg">
 
-    <!-- OG/Twitter -->
+    <!-- OG/Twitter Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Tech Tiger BD">
     <meta property="og:url" content="https://ttigerbd.com/">
     <meta property="og:title" content="Tech Tiger BD — Premium Subscriptions & Free Fire Top-ups">
     <meta property="og:description"
         content="Local payments (bKash/Nagad/Rocket). Instant or manual delivery. বাংলা/English support.">
+
+    <!-- Primary OG Image -->
     <meta property="og:image" content="https://ttigerbd.com/assets/og.jpg">
     <meta property="og:image:secure_url" content="https://ttigerbd.com/assets/og.jpg">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:alt" content="Tech Tiger BD — Fast • Reliable • Trusted">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+
+    <!-- Additional OG Images for Products -->
+    <meta property="og:image" content="https://ttigerbd.com/assets/og/crunchyroll.jpg">
+    <meta property="og:image:alt" content="Crunchyroll Premium - Anime Streaming">
+
+    <meta property="og:image" content="https://ttigerbd.com/assets/og/netflix.jpg">
+    <meta property="og:image:alt" content="Netflix Personal - Movies & TV Shows">
+
+    <meta property="og:image" content="https://ttigerbd.com/assets/og/youtube.jpg">
+    <meta property="og:image:alt" content="YouTube Premium - Ad-Free Videos">
+
+    <meta property="og:image" content="https://ttigerbd.com/assets/og/spotify.jpg">
+    <meta property="og:image:alt" content="Spotify Premium - Music Streaming">
+
+    <meta property="og:image" content="https://ttigerbd.com/assets/og/chatgpt.jpg">
+    <meta property="og:image:alt" content="ChatGPT Plus - AI Assistant">
+
+    <!-- Locale and Additional Properties -->
     <meta property="og:locale" content="bn_BD">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@techtigerbd">
+    <meta name="twitter:creator" content="@techtigerbd">
     <meta name="twitter:title" content="Tech Tiger BD — Premium Subscriptions & Free Fire Top-ups">
     <meta name="twitter:description"
         content="Buy Crunchyroll, YouTube, Spotify, Netflix, Surfshark, Telegram, ChatGPT & Free Fire with local payments.">
     <meta name="twitter:image" content="https://ttigerbd.com/assets/og.jpg">
+    <meta name="twitter:image:alt" content="Tech Tiger BD — Fast • Reliable • Trusted">
+
+    <!-- Additional Meta Properties -->
+    <meta property="fb:app_id" content="your-facebook-app-id">
+    <meta property="article:author" content="Tech Tiger BD">
+    <meta property="article:publisher" content="https://www.facebook.com/techtigerbd">
+
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Tech Tiger BD",
+        "description": "Premium subscriptions and game top-ups in Bangladesh with instant delivery",
+        "url": "https://ttigerbd.com",
+        "logo": "https://ttigerbd.com/assets/og.jpg",
+        "image": [
+            "https://ttigerbd.com/assets/og.jpg",
+            "https://ttigerbd.com/assets/og/crunchyroll.jpg",
+            "https://ttigerbd.com/assets/og/netflix.jpg",
+            "https://ttigerbd.com/assets/og/youtube.jpg",
+            "https://ttigerbd.com/assets/og/spotify.jpg",
+            "https://ttigerbd.com/assets/og/chatgpt.jpg"
+        ],
+        "sameAs": [
+            "https://www.facebook.com/techtigerbd",
+            "https://twitter.com/techtigerbd"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+880-1883044415",
+            "contactType": "customer service",
+            "availableLanguage": ["Bengali", "English"]
+        },
+        "areaServed": "Bangladesh",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Premium Subscription Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Crunchyroll Premium",
+                        "description": "Anime streaming with ad-free HD quality",
+                        "image": "https://ttigerbd.com/assets/og/crunchyroll.jpg"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Netflix Personal",
+                        "description": "Movies and TV shows streaming",
+                        "image": "https://ttigerbd.com/assets/og/netflix.jpg"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "YouTube Premium",
+                        "description": "Ad-free videos and background play",
+                        "image": "https://ttigerbd.com/assets/og/youtube.jpg"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Spotify Premium",
+                        "description": "High quality music streaming",
+                        "image": "https://ttigerbd.com/assets/og/spotify.jpg"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "ChatGPT Plus",
+                        "description": "AI assistant with advanced features",
+                        "image": "https://ttigerbd.com/assets/og/chatgpt.jpg"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
     <script src="./assets/app.js?v=mp28"></script>
+
+    <!-- Header Component -->
+    <link rel="stylesheet" href="./components/header/header-component.css">
+    <script defer src="./components/header/header-component.js"></script>
 
 
     <style>
@@ -58,56 +176,12 @@
             background: var(--bg);
             color: var(--text);
             font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial;
-            font-size: clamp(14px, 0.65vw + 9px, 16px);
             line-height: 1.6;
         }
 
         .container {
             width: min(1200px, 94vw);
             margin: 0 auto;
-        }
-
-        /* Topbar */
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(255, 255, 255, .85);
-            backdrop-filter: saturate(160%) blur(6px);
-            border-bottom: 1px solid var(--border)
-        }
-
-        .topbar .inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0
-        }
-
-        .brand {
-            display: inline-flex;
-            align-items: center;
-            gap: .6rem;
-            color: inherit;
-            text-decoration: none;
-            font-weight: 900
-        }
-
-        .brand-logo {
-            width: 26px;
-            height: 26px;
-            display: grid;
-            place-items: center;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #ff9845, #ff7a18);
-            color: #111;
-            font-weight: 900
-        }
-
-        .primary a {
-            color: var(--muted);
-            text-decoration: none;
-            margin-left: 14px;
         }
 
         /* Hero */
@@ -231,6 +305,437 @@
             padding: .2rem .5rem;
             border-radius: 999px;
         }
+
+        /* ===== AUTO SLIDER SECTION ===== */
+        .auto-slider {
+            margin: 40px 0;
+            padding: 0;
+            background: transparent;
+            overflow: hidden;
+            position: relative;
+            font-family: "Inter", sans-serif;
+        }
+
+        .slider-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        .slider-header {
+            text-align: center;
+
+        }
+
+        .slider-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-top: -20px;
+            background: linear-gradient(135deg, var(--accent, #6c63ff), #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slider-header p {
+            color: var(--muted, #666);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Wrapper */
+        .slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: var(--bg, #111);
+            height: 480px;
+        }
+
+        /* Slides */
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            grid-template-rows: 1fr auto;
+            align-items: center;
+            justify-items: center;
+            gap: 30px;
+            color: #fff;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--slide-bg-1), var(--slide-bg-2));
+            opacity: 0;
+            transform: scale(0.95);
+            visibility: hidden;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Slide Color Themes */
+        .slide.cr {
+            --slide-bg-1: #ff6b35;
+            --slide-bg-2: #f7931e;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffab40 100%);
+        }
+
+        .slide.nf {
+            --slide-bg-1: #e50914;
+            --slide-bg-2: #b71c1c;
+            background: linear-gradient(135deg, #e50914 0%, #b71c1c 50%, #ff1744 100%);
+        }
+
+        .slide.yt {
+            --slide-bg-1: #ff0000;
+            --slide-bg-2: #cc0000;
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 50%, #ff5722 100%);
+        }
+
+        .slide.sfy {
+            --slide-bg-1: #1db954;
+            --slide-bg-2: #1ed760;
+            background: linear-gradient(135deg, #1db954 0%, #1ed760 50%, #4caf50 100%);
+        }
+
+        .slide.gpt {
+            --slide-bg-1: #10a37f;
+            --slide-bg-2: #1a9f73;
+            background: linear-gradient(135deg, #10a37f 0%, #1a9f73 50%, #00bcd4 100%);
+        }
+
+        /* Add overlay pattern for depth */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+            z-index: 2;
+        }
+
+        .slide.next {
+            z-index: 1;
+        }
+
+        /* Slide Content Glassmorphism */
+        .slide-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 30px 35px;
+            border-radius: 20px;
+            max-width: 100%;
+            text-align: left;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            grid-column: 1;
+            grid-row: 1;
+            align-self: center;
+            justify-self: start;
+        }
+
+        /* Badge */
+        .slide-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .slide-title {
+            font-size: clamp(1.8rem, 6vw, 2.6rem);
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .slide-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .slide-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Button */
+        .slide-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--slide-bg-1);
+            background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.9));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .slide-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+        }
+
+        /* Image */
+        .slide-image {
+            width: 280px;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 2;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            grid-column: 2;
+            grid-row: 1;
+            align-self: center;
+            justify-self: end;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .slide-image:hover {
+            transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .3s ease;
+        }
+
+        .slide-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Indicators */
+        .slider-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--accent, #6c63ff);
+            transform: scale(1.4);
+            box-shadow: 0 0 10px var(--accent, #6c63ff);
+        }
+
+        /* Progress bar */
+        .slider-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fff, var(--accent, #6c63ff));
+            border-radius: 2px;
+            width: 0%;
+            opacity: 0;
+            grid-column: 1 / -1;
+            grid-row: 2;
+            z-index: 3;
+        }
+
+        .slide.active .slider-progress {
+            opacity: 1;
+            animation: progress 4s linear forwards;
+        }
+
+        @keyframes progress {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .slide {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr auto;
+                text-align: center;
+                gap: 25px;
+                padding: 30px 20px;
+            }
+
+            .slide-content {
+                grid-column: 1;
+                grid-row: 1;
+                text-align: center;
+                justify-self: center;
+                max-width: 90%;
+                min-height: 400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            /* Add overlay for better text readability */
+            .slide-content::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.4);
+                border-radius: 20px;
+                z-index: 1;
+            }
+
+            /* Ensure text is above overlay */
+            .slide-content>* {
+                position: relative;
+                z-index: 2;
+            }
+
+            /* Hide separate image on tablet/mobile */
+            .slide-image {
+                display: none;
+            }
+
+            /* Set background images for each slide content */
+            .slide.cr .slide-content {
+                background-image: url('./assets/brand/cr_banner.jpg');
+            }
+
+            .slide.nf .slide-content {
+                background-image: url('./assets/brand/netflix.jpg');
+            }
+
+            .slide.yt .slide-content {
+                background-image: url('./assets/brand/youtube.jpg');
+            }
+
+            .slide.sfy .slide-content {
+                background-image: url('./assets/brand/spotify.png');
+            }
+
+            .slide.gpt .slide-content {
+                background-image: url('./assets/brand/chatgpt.png');
+            }
+
+            .slider-progress {
+                grid-row: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slider-wrapper {
+                height: 500px;
+            }
+
+            .slide {
+                padding: 25px 15px;
+            }
+
+            .slide-content {
+                padding: 30px 25px;
+                min-height: 350px;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .slide-content::before {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .slide-image {
+                display: none;
+            }
+
+            .slider-header h2 {
+                margin-top: 0px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-wrapper {
+                height: 450px;
+            }
+
+            .slide {
+                padding: 20px 15px;
+            }
+
+            .slide-content {
+                padding: 25px 20px;
+                min-height: 320px;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .slide-content::before {
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+            .slide-image {
+                display: none;
+            }
+
+            .slide-title {
+                font-size: 1.8rem;
+            }
+
+            .slide-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
 
         /* Section head */
         .section-head {
@@ -616,44 +1121,156 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <header class="topbar">
-        <div class="container inner">
-            <a class="brand" href="/"><span>Tech Tiger <span class="muted">BD</span></span></a>
-            <nav class="primary">
-                <a href="#plans">Plans</a>
-                <a href="#why">Why us</a>
-                <a href="#faq">FAQ</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Header will be injected by HeaderComponent -->
 
-    <!-- Hero (Special Offer — kept) -->
-    <section class="hero hero--crunchy">
-        <div class="container hero-wrap">
-            <div class="hero-card">
-                <span class="badge">⚡ Fast delivery</span>
-                <h1>Premium subscriptions at the best price.</h1>
-                <p class="muted">Instant start, secure checkout, local payments. Works great on mobile.</p>
-                <div class="split">
-                    <a class="btn btn-primary" href="#plans">Browse Plans</a>
-                    <a class="btn" href="#faq">How it works</a>
+
+    <!-- =============================================== -->
+    <!-- AUTO SLIDING SECTION - FEATURED PRODUCTS     -->
+    <!-- =============================================== -->
+    <section class="auto-slider">
+        <div class="slider-container">
+
+            <!-- Section Header -->
+            <div class="slider-header">
+                <h2>🔥 Featured Premium Services</h2>
+            </div>
+
+            <!-- Slider Wrapper -->
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+
+                    <!-- ===== SLIDE 1: CRUNCHYROLL ===== -->
+                    <div class="slide cr">
+                        <div class="slide-content">
+                            <div class="slide-badge">
+                                <span>⚡</span>
+                                <span>Special Offer</span>
+                            </div>
+                            <h3 class="slide-title">Crunchyroll Premium</h3>
+                            <p class="slide-description">
+                                Watch thousands of anime episodes ad-free with HD quality.
+                                Download for offline viewing and enjoy simulcast episodes!
+                            </p>
+                            <div class="slide-price">Starting from ৳50/month</div>
+                            <a href="./products/crunchyroll.html" class="slide-btn">
+                                <span>Get Started</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                        <div class="slide-image">
+                            <img src="./assets/brand/cr_banner.jpg" alt="Crunchyroll Premium" loading="lazy">
+                        </div>
+                        <div class="slider-progress"></div>
+                    </div>
+
+                    <!-- ===== SLIDE 2: NETFLIX ===== -->
+                    <div class="slide nf">
+                        <div class="slide-content">
+                            <div class="slide-badge">
+                                <span>🎬</span>
+                                <span>Entertainment</span>
+                            </div>
+                            <h3 class="slide-title">Netflix Personal</h3>
+                            <p class="slide-description">
+                                Unlimited movies, TV shows and more. Watch anywhere,
+                                cancel anytime. HD and Ultra HD available.
+                            </p>
+                            <div class="slide-price">Only ৳300/month</div>
+                            <a href="./products/netflix.html" class="slide-btn">
+                                <span>Watch Now</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                        <div class="slide-image">
+                            <img src="./assets/brand/netflix.jpg" alt="Netflix Personal" loading="lazy">
+                        </div>
+                        <div class="slider-progress"></div>
+                    </div>
+
+                    <!-- ===== SLIDE 3: YOUTUBE PREMIUM ===== -->
+                    <div class="slide yt">
+                        <div class="slide-content">
+                            <div class="slide-badge">
+                                <span>📺</span>
+                                <span>Ad-Free</span>
+                            </div>
+                            <h3 class="slide-title">YouTube Premium</h3>
+                            <p class="slide-description">
+                                Ad-free videos, background play, and YouTube Music included!
+                                Download videos for offline viewing.
+                            </p>
+                            <div class="slide-price">From ৳200/month</div>
+                            <a href="./products/youtube.html" class="slide-btn">
+                                <span>Go Premium</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                        <div class="slide-image">
+                            <img src="./assets/brand/youtube.jpg" alt="YouTube Premium" loading="lazy">
+                        </div>
+                        <div class="slider-progress"></div>
+                    </div>
+
+                    <!-- ===== SLIDE 4: SPOTIFY ===== -->
+                    <div class="slide sfy">
+                        <div class="slide-content">
+                            <div class="slide-badge">
+                                <span>🎵</span>
+                                <span>Music</span>
+                            </div>
+                            <h3 class="slide-title">Spotify Premium</h3>
+                            <p class="slide-description">
+                                Millions of songs, ad-free music streaming with high quality audio.
+                                Download music and listen offline anywhere.
+                            </p>
+                            <div class="slide-price">Starting ৳150/month</div>
+                            <a href="./products/spotify.html" class="slide-btn">
+                                <span>Listen Now</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                        <div class="slide-image">
+                            <img src="./assets/brand/spotify.png" alt="Spotify Premium" loading="lazy">
+                        </div>
+                        <div class="slider-progress"></div>
+                    </div>
+
+                    <!-- ===== SLIDE 5: CHATGPT ===== -->
+                    <div class="slide gpt">
+                        <div class="slide-content">
+                            <div class="slide-badge">
+                                <span>🤖</span>
+                                <span>AI Assistant</span>
+                            </div>
+                            <h3 class="slide-title">ChatGPT Plus</h3>
+                            <p class="slide-description">
+                                Get faster responses, priority access, and the latest features with ChatGPT Plus.
+                                Access to GPT-4 and advanced capabilities.
+                            </p>
+                            <div class="slide-price">Only ৳2000/month</div>
+                            <a href="./products/chatgpt.html" class="slide-btn">
+                                <span>Upgrade Now</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                        <div class="slide-image">
+                            <img src="./assets/brand/chatgpt.png" alt="ChatGPT Plus" loading="lazy">
+                        </div>
+                        <div class="slider-progress"></div>
+                    </div>
+
                 </div>
             </div>
-            <div class="hero-art">
-                <a class="hero-promo" href="./products/crunchyroll.html?select=1y_personal_auto"
-                    aria-label="Crunchyroll 1-Year Personal ৳550 — Special Offer">
-                    <img src="./assets/brand/cr_offer_550.jpg" alt="Crunchyroll — 1-Year Personal ৳550 (Special Offer)"
-                        width="1280" height="720" decoding="async" fetchpriority="high" />
-                    <div class="hero-promo__badge">Special Offer</div>
-                    <div class="hero-promo__caption">
-                        <div>
-                            <div class="hero-promo__title">Crunchyroll — 1Y Personal</div>
-                            <div class="hero-promo__price">৳550</div>
-                        </div>
-                    </div>
-                </a>
+
+            <!-- Slider Navigation Indicators -->
+            <div class="slider-indicators" id="sliderIndicators">
+                <div class="indicator active" data-slide="0" aria-label="Crunchyroll slide"></div>
+                <div class="indicator" data-slide="1" aria-label="Netflix slide"></div>
+                <div class="indicator" data-slide="2" aria-label="YouTube slide"></div>
+                <div class="indicator" data-slide="3" aria-label="Spotify slide"></div>
+                <div class="indicator" data-slide="4" aria-label="ChatGPT slide"></div>
             </div>
+
         </div>
     </section>
 
@@ -1005,10 +1622,229 @@
     </button>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+        });
+    </script>
+
+    <script>
         // Year
         document.getElementById('year').textContent = new Date().getFullYear();
         // (Optional) mark any product OUT OF STOCK by setting data-stock="out" and dimming button (easy to extend)
         // document.querySelector('[data-brand="nf"] .poster-btn').classList.add('disabled');
+
+        // Initialize Header Component
+        document.addEventListener('DOMContentLoaded', function () {
+            HeaderComponent.create(HeaderComponent.configs.home);
+        });
+
+        // Auto Slider Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const indicators = document.querySelectorAll('.indicator');
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentSlide = 0;
+            let isAutoPlay = true;
+            let autoPlayInterval;
+
+            // Initialize slider
+            function initSlider() {
+                updateSlider();
+                startAutoPlay();
+
+                // Add click events to indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        currentSlide = index;
+                        updateSlider();
+                        resetAutoPlay();
+                    });
+                });
+
+                // Pause auto-play on hover
+                const sliderWrapper = document.querySelector('.slider-wrapper');
+                sliderWrapper.addEventListener('mouseenter', () => {
+                    stopAutoPlay();
+                });
+
+                sliderWrapper.addEventListener('mouseleave', () => {
+                    if (isAutoPlay) {
+                        startAutoPlay();
+                    }
+                });
+
+                // Touch/swipe support for mobile - simplified for fade transition
+                let touchStartX = 0;
+                let touchEndX = 0;
+
+                sliderWrapper.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    stopAutoPlay();
+                }, { passive: true });
+
+                sliderWrapper.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    if (isAutoPlay) {
+                        startAutoPlay();
+                    }
+                }, { passive: true });
+
+                function handleSwipe() {
+                    const swipeThreshold = 80; // Increased threshold for fade transition
+                    const diff = touchStartX - touchEndX;
+
+                    if (Math.abs(diff) > swipeThreshold) {
+                        if (diff > 0) {
+                            // Swipe left - next slide
+                            nextSlide();
+                        } else {
+                            // Swipe right - previous slide
+                            prevSlide();
+                        }
+                    }
+                }
+            }
+
+            function updateSlider() {
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentSlide);
+                });
+
+                // Update active slide class with fade transition
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active', 'next');
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else if (index === (currentSlide + 1) % totalSlides) {
+                        slide.classList.add('next');
+                    }
+                });
+
+                // Update OG image based on current slide
+                updateOGImage();
+
+                // Restart progress animation
+                restartProgressAnimation();
+            }
+
+            // Function to update OG image dynamically
+            function updateOGImage() {
+                const ogImageMappings = {
+                    0: 'crunchyroll.jpg',  // Crunchyroll
+                    1: 'netflix.jpg',      // Netflix
+                    2: 'youtube.jpg',      // YouTube
+                    3: 'spotify.jpg',      // Spotify
+                    4: 'chatgpt.jpg'       // ChatGPT
+                };
+
+                const ogTitleMappings = {
+                    0: 'Crunchyroll Premium - Watch Anime Ad-Free | Tech Tiger BD',
+                    1: 'Netflix Personal Account - Movies & TV Shows | Tech Tiger BD',
+                    2: 'YouTube Premium - Ad-Free Videos & Music | Tech Tiger BD',
+                    3: 'Spotify Premium - High Quality Music Streaming | Tech Tiger BD',
+                    4: 'ChatGPT Plus - AI Assistant with GPT-4 | Tech Tiger BD'
+                };
+
+                const currentImage = ogImageMappings[currentSlide];
+                const currentTitle = ogTitleMappings[currentSlide];
+
+                if (currentImage && currentTitle) {
+                    // Update primary OG image
+                    const ogImage = document.querySelector('meta[property="og:image"]');
+                    const ogImageSecure = document.querySelector('meta[property="og:image:secure_url"]');
+                    const ogTitle = document.querySelector('meta[property="og:title"]');
+                    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+                    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+
+                    if (ogImage) {
+                        ogImage.content = `https://ttigerbd.com/assets/og/${currentImage}`;
+                    }
+                    if (ogImageSecure) {
+                        ogImageSecure.content = `https://ttigerbd.com/assets/og/${currentImage}`;
+                    }
+                    if (ogTitle) {
+                        ogTitle.content = currentTitle;
+                    }
+                    if (twitterImage) {
+                        twitterImage.content = `https://ttigerbd.com/assets/og/${currentImage}`;
+                    }
+                    if (twitterTitle) {
+                        twitterTitle.content = currentTitle;
+                    }
+                }
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+
+            function startAutoPlay() {
+                if (autoPlayInterval) clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(() => {
+                    nextSlide();
+                }, 4000); // 4 seconds per slide to match progress bar
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+            }
+
+            function resetAutoPlay() {
+                stopAutoPlay();
+                if (isAutoPlay) {
+                    startAutoPlay();
+                }
+            }
+
+            function restartProgressAnimation() {
+                slides.forEach(slide => {
+                    const progressBar = slide.querySelector('.slider-progress');
+                    if (progressBar) {
+                        progressBar.style.animation = 'none';
+                        progressBar.offsetHeight; // reflow
+                    }
+                });
+
+                const currentProgressBar = slides[currentSlide].querySelector('.slider-progress');
+                if (currentProgressBar) {
+                    currentProgressBar.style.animation = 'progress 4s linear forwards';
+                }
+            }
+
+
+            // Initialize the slider
+            initSlider();
+
+            // Intersection Observer to pause/resume when slider is not visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        isAutoPlay = true;
+                        startAutoPlay();
+                    } else {
+                        isAutoPlay = false;
+                        stopAutoPlay();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const sliderSection = document.querySelector('.auto-slider');
+            if (sliderSection) {
+                observer.observe(sliderSection);
+            }
+        });
     </script>
 </body>
 

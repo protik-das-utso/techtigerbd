@@ -7,9 +7,7 @@
   <title>YouTube Premium কিনুন — Tech Tiger BD</title>
 
   <!-- Keep your existing assets (won't break functionality) -->
-  <link rel="icon" type="image/svg+xml" href="../assets/images/icon.svg?v=1">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png?v=1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png?v=1">
+  <link rel="icon" type="image/svg+xml" href="../assets/og.jpg">
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png?v=1">
   <link rel="mask-icon" href="/assets/images/icon.svg?v=1" color="#7c5cff">
   <meta name="theme-color" content="#111827">
@@ -36,6 +34,10 @@
   <meta name="twitter:description" content="Ad-free + Background + HD Download — দ্রুত ডেলিভারি।">
   <meta name="twitter:image" content="https://ttigerbd.com/assets/brand/youtube.jpg">
 
+  <!-- Header -->
+  <link rel="stylesheet" href="../components/header/header-component.css">
+  <script defer src="../components/header/header-component.js"></script>
+
   <style>
     :root {
       --bg: #f7f8fb;
@@ -59,12 +61,7 @@
   </head>
 
   <body>
-    <header class="topbar">
-      <div class="container inner">
-        <a class="brand" href="/"><span class="brand-logo">Y</span><span>Streamy<span class="muted">BD</span></span></a>
-        <nav class="primary"><a href="/#plans">Plans</a><a href="/#why">Why us</a><a href="/#faq">FAQ</a></nav>
-      </div>
-    </header>
+    <!-- Header will be injected by HeaderComponent -->
 
     <main class="container" style="padding:16px 0 0" data-page="product" data-product="YouTube Premium">
       <nav class="crumbs" style="color:var(--muted);font-size:.9rem;margin:10px 0">
@@ -205,6 +202,12 @@
       </div>
     </footer>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        HeaderComponent.create(HeaderComponent.configs.PAGETYPE);
+      });
+    </script>
+
     <!-- Tiny helpers: price mirror + mobile auto-scroll -->
     <script>
       (function mirrorPrice() {
@@ -241,6 +244,9 @@
 
       // Year
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Initialize Header Component
+      HeaderComponent.create(HeaderComponent.configs.youtube);
     </script>
   </body>
 

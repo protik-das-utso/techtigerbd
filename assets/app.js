@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) { navigator.serviceWorker.getRegistrations().t
 
   // ---------- Config ----------
   const GAS_URL = "https://script.google.com/macros/s/AKfycbyLjru6Gqm9qlXUWgDYPCMaGGeEIam0OrWRguPVTGYj73eI6zyt745aZaWRLreVJmGt/exec";
-  const WHATSAPP_URL = "https://wa.me/8801881738485";
+  const WHATSAPP_URL = "https://wa.me/8801883044415";
 
   // Free Fire prices + labels
   const FF_PRICES = { 20: 25, 36: 45, 80: 83, 160: 160, 161: 160, 405: 400, 800: 800, 810: 800, 1625: 1600 };
