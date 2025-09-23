@@ -1,5 +1,5 @@
 /* ========================================
-   StreamyBD - Modern Quantity System JS
+   Tech Tiger BD - Modern Quantity System JS
    ======================================== */
 
 (function () {
@@ -170,7 +170,7 @@
     }
 
     // Public API for manual initialization
-    window.StreamyBDQuantity = {
+    window.TechTigerBDQuantity = {
         init: initQuantitySystem,
         version: '1.0.0'
     };
@@ -210,14 +210,14 @@ function injectQuantitySystem(containerId, theme = 'default') {
     if (container) {
         container.innerHTML = createQuantityHTML(theme);
         // Re-initialize the system for the new elements
-        if (window.StreamyBDQuantity) {
-            window.StreamyBDQuantity.init();
+        if (window.TechTigerBDQuantity) {
+            window.TechTigerBDQuantity.init();
         }
     }
 }
 
 // Export helpers
-window.StreamyBDQuantityHelpers = {
+window.TechTigerBDQuantityHelpers = {
     createHTML: createQuantityHTML,
     inject: injectQuantitySystem
 };
