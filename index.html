@@ -17,9 +17,9 @@
 
   <link rel="canonical" href="https://ttigerbd.com/">
   <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16.png?v=1" />
-    <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png?v=1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16.png?v=1" />
+  <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png?v=1" />
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Tech Tiger BD">
@@ -576,6 +576,40 @@
       margin-top: 14px;
     }
 
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .about-col {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 22px;
+    }
+
+    .about-col h3 {
+      font-family: var(--font-d);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 10px;
+      letter-spacing: .01em;
+    }
+
+    .about-col ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .about-col li {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
     /* ── FAQ (index uses <details>) ── */
     #faq {
       padding: 60px 0 88px;
@@ -722,6 +756,10 @@
 
       .about-box {
         padding: 26px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
       }
 
       .hero-collage {
@@ -1089,14 +1127,28 @@
         </div>
       </div>
       <div class="about-box reveal">
-        <p>Tech Tiger BD offers premium subs and fast game top-ups in Bangladesh with instant delivery, transparent
-          pricing, and বাংলা/English support.</p>
-        <p>Choose a plan, pay via bKash/Nagad/Rocket, share your TrxID, and receive your subscription or diamonds
-          quickly.</p>
-        <p>We clearly label personal vs profile offers, covering entertainment and tools like StealthWriter, YouTube
-          Premium, Spotify, Netflix, Surfshark, Telegram, ChatGPT, and more.</p>
-        <p>Prices in BDT, local methods first, real support. If you're new, start with Popular Plans or message us on
-          WhatsApp.</p>
+        <div class="about-grid">
+          <div class="about-col" lang="bn">
+            <h3>বাংলা</h3>
+            <ul>
+              <li>Tech Tiger BD বাংলাদেশের জন্য trusted digital subscription &amp; top-up service।</li>
+              <li>পেমেন্ট bKash, Nagad, Rocket — লোকাল ও সহজ।</li>
+              <li>ভ্যালিড TrxID দেওয়ার পর দ্রুত processing ও delivery করা হয়।</li>
+              <li>Personal/Profile plan পরিষ্কারভাবে দেখানো থাকে, hidden cost নেই।</li>
+              <li>আমরা বাংলা ও English — দুই ভাষায় real support দিই।</li>
+            </ul>
+          </div>
+          <div class="about-col" lang="en">
+            <h3>English</h3>
+            <ul>
+              <li>Tech Tiger BD provides trusted digital subscriptions and fast top-ups for Bangladesh.</li>
+              <li>Pay easily with local methods: bKash, Nagad, and Rocket.</li>
+              <li>After a valid TrxID, orders are processed quickly with smooth delivery.</li>
+              <li>Plans are clearly labeled (Personal/Profile) with transparent pricing.</li>
+              <li>We offer real customer support in both Bangla and English.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1195,8 +1247,7 @@
       <small>© <span id="year"></span> Tech Tiger BD</small>
       <small>Built with ❤️ for Bangladesh</small>
       <div class="footer-links">
-        <a href="https://www.facebook.com/techtigerbd" target="_blank"
-          rel="noopener nofollow">Facebook</a>
+        <a href="https://www.facebook.com/techtigerbd" target="_blank" rel="noopener nofollow">Facebook</a>
         <span class="sep">·</span>
       </div>
     </div>

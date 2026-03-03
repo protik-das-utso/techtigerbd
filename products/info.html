@@ -755,6 +755,23 @@
             gap: 10px;
         }
 
+        .captcha-wrap {
+            margin-top: 14px;
+            display: grid;
+            gap: 6px;
+        }
+
+        .captcha-note {
+            font-size: 12px;
+            color: var(--text-faint);
+        }
+
+        .grecaptcha-badge {
+            right: auto !important;
+            left: 14px !important;
+            bottom: 14px !important;
+        }
+
         /* Main order button */
         .btn-wa {
             display: flex;
@@ -997,6 +1014,47 @@
             text-align: center;
         }
 
+        .captchamodal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 11000;
+            background: rgba(2, 5, 9, .72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        .captchamodal.on {
+            display: flex;
+        }
+
+        .captchamodal-card {
+            width: min(420px, 100%);
+            border: 1px solid var(--border-b);
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            display: grid;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .captchamodal-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .captchamodal-text {
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
         /* ── TRUST STRIP ── */
         .trust-strip {
             display: flex;
@@ -1055,7 +1113,7 @@
             }
         }
     </style>
-    </head>
+</head>
 
 <body>
 
@@ -1235,6 +1293,10 @@
                                 <div class="preview-msg" id="previewMsg"></div>
                             </div>
 
+                            <div class="captcha-wrap">
+                                <div class="captcha-note" id="captchaStatus">Bot protection is enabled. Verification runs automatically when you press order.</div>
+                            </div>
+
                             <!-- Action buttons -->
                             <div class="factions">
 
@@ -1407,6 +1469,13 @@
         </div>
     </div>
 
+    <div class="captchamodal" id="captchaModal" aria-hidden="true">
+        <div class="captchamodal-card" role="dialog" aria-modal="true" aria-label="reCAPTCHA Verification">
+            <div class="captchamodal-title">Security Check</div>
+            <div class="captchamodal-text" id="captchaModalText">Verifying bot protection…</div>
+        </div>
+    </div>
+
     <!-- ── TOAST (copy notification) ── -->
     <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
         <div class="toast-in">
@@ -1496,6 +1565,7 @@
            PAGE LOGIC
         ───────────────────────────────────────── */
         (function () {
+            const RECAPTCHA_SITE_KEY = '6Le5tn4sAAAAAG_uNsXJF2DAm8CP7pyj3IGt2Uo9';
 
             /* ── READ URL PARAMS ── */
             const qs = new URLSearchParams(location.search);
@@ -1603,11 +1673,31 @@
             const orderModalClose = document.getElementById('orderModalClose');
             const orderModalCopy = document.getElementById('orderModalCopy');
             const orderModalOpenChat = document.getElementById('orderModalOpenChat');
+            const captchaModal = document.getElementById('captchaModal');
+            const captchaModalText = document.getElementById('captchaModalText');
+            const btnSendOrder = document.getElementById('btnSendWA');
             let pendingOrderMessage = '';
+            let isVerifyingCaptcha = false;
+            let captchaVerifiedForOrder = false;
 
             function syncBodyLock() {
-                const hasOpenModal = (qrModal && qrModal.classList.contains('on')) || (orderModal && orderModal.classList.contains('on'));
+                const hasOpenModal = (qrModal && qrModal.classList.contains('on')) || (orderModal && orderModal.classList.contains('on')) || (captchaModal && captchaModal.classList.contains('on'));
                 document.body.style.overflow = hasOpenModal ? 'hidden' : '';
+            }
+
+            function openCaptchaModal(text) {
+                if (!captchaModal) return;
+                if (captchaModalText) captchaModalText.textContent = text || 'Verifying bot protection…';
+                captchaModal.classList.add('on');
+                captchaModal.setAttribute('aria-hidden', 'false');
+                syncBodyLock();
+            }
+
+            function closeCaptchaModal() {
+                if (!captchaModal) return;
+                captchaModal.classList.remove('on');
+                captchaModal.setAttribute('aria-hidden', 'true');
+                syncBodyLock();
             }
 
             function openQr(title, src) {
@@ -1637,6 +1727,11 @@
 
             function openOrderModal(message) {
                 if (!orderModal || !orderModalMsg) return;
+                if (!captchaVerifiedForOrder) {
+                    showToast('Verification required', 'Please complete bot verification first.');
+                    return;
+                }
+                captchaVerifiedForOrder = false;
                 pendingOrderMessage = (message || '').trim();
                 orderModalMsg.textContent = pendingOrderMessage;
                 orderModal.classList.add('on');
@@ -1874,9 +1969,82 @@
                 return true;
             }
 
+            function validateRecaptcha() {
+                const errBox = document.getElementById('errBox');
+                const startedAt = Date.now();
+                const MIN_POPUP_MS = 700;
+                captchaVerifiedForOrder = false;
+
+                function closeCaptchaModalWithMinimumDelay() {
+                    const elapsed = Date.now() - startedAt;
+                    const wait = Math.max(0, MIN_POPUP_MS - elapsed);
+                    if (wait > 0) {
+                        return new Promise(resolve => {
+                            window.setTimeout(() => {
+                                closeCaptchaModal();
+                                resolve();
+                            }, wait);
+                        });
+                    }
+                    closeCaptchaModal();
+                    return Promise.resolve();
+                }
+
+                openCaptchaModal('Verifying bot protection…');
+
+                if (!window.grecaptcha || !window.grecaptcha.enterprise || typeof window.grecaptcha.enterprise.execute !== 'function') {
+                    return closeCaptchaModalWithMinimumDelay().then(() => {
+                        errBox.textContent = 'reCAPTCHA is loading. Please wait and try again.';
+                        errBox.classList.add('on');
+                        errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        return false;
+                    });
+                }
+
+                return window.grecaptcha.enterprise.execute(RECAPTCHA_SITE_KEY, { action: 'checkout_order' })
+                    .then(token => {
+                        if (!token) {
+                            return closeCaptchaModalWithMinimumDelay().then(() => {
+                                errBox.textContent = 'reCAPTCHA verification failed. Please try again.';
+                                errBox.classList.add('on');
+                                errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                return false;
+                            });
+                        }
+
+                        return closeCaptchaModalWithMinimumDelay().then(() => {
+                            captchaVerifiedForOrder = true;
+                            return true;
+                        });
+                    })
+                    .catch(() => {
+                        return closeCaptchaModalWithMinimumDelay().then(() => {
+                            errBox.textContent = 'reCAPTCHA verification could not be completed. Please try again.';
+                            errBox.classList.add('on');
+                            errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            return false;
+                        });
+                    });
+            }
+
+            function validateRecaptchaReady() {
+                return validateRecaptcha();
+            }
+
             /* ── SEND ORDER → LIVE CHAT ── */
-            document.getElementById('btnSendWA').addEventListener('click', () => {
+            btnSendOrder?.addEventListener('click', async () => {
+                if (isVerifyingCaptcha) return;
                 if (!validate()) return;
+                captchaVerifiedForOrder = false;
+
+                isVerifyingCaptcha = true;
+                if (btnSendOrder) btnSendOrder.disabled = true;
+
+                const captchaOk = await validateRecaptchaReady();
+                isVerifyingCaptcha = false;
+                if (btnSendOrder) btnSendOrder.disabled = false;
+
+                if (captchaOk !== true) return;
                 const msg = buildMessage();
                 openOrderModal(msg);
             });
@@ -1914,6 +2082,7 @@
 
         })();
     </script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Le5tn4sAAAAAG_uNsXJF2DAm8CP7pyj3IGt2Uo9" async defer></script>
     <script defer src="/assets/livechat.js?v=lc7"></script>
 </body>
 
