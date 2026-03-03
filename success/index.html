@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment Status — Tech Tiger BD</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16.png?v=1" />
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png?v=1" />
+    <meta name="theme-color" content="#00E5FF">
+
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="../products/product-base.css">
+
+    <style>
+        .suc-sec {
+            padding: 66px 0 84px;
+        }
+
+        .suc-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            padding: 18px;
+        }
+
+        .kv {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .kv:last-child {
+            border-bottom: 0;
+        }
+
+        .k {
+            color: var(--text-dim);
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .v {
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        @media (max-width: 720px) {
+            .kv {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .muted {
+            color: var(--text-dim);
+        }
+
+        .btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 800;
+            letter-spacing: .02em;
+        }
+
+        .btn.primary {
+            border-color: rgba(0, 229, 255, .45);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+    </style>
+    </head>
+
+<body>
+    <main class="suc-sec">
+        <div class="container suc-wrap">
+            <div class="sh">
+                <span class="sh-tag">Payment</span>
+                <h2 id="title">Checking payment…</h2>
+                <p class="muted" id="subtitle">This page updates your order status automatically.</p>
+            </div>
+
+            <div class="card" id="card">
+                <div class="kv">
+                    <div class="k">Order</div>
+                    <div class="v" id="vOrder">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">Status</div>
+                    <div class="v" id="vStatus">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">Method</div>
+                    <div class="v" id="vMethod">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">Amount</div>
+                    <div class="v" id="vAmount">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">Time</div>
+                    <div class="v" id="vTime">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">TrxID</div>
+                    <div class="v" id="vTrx">—</div>
+                </div>
+            </div>
+
+            <div class="btns">
+                <a class="btn" href="../products/info.html" id="btnBack">Back to Order Page</a>
+                <button class="btn primary" type="button" id="btnRefresh">Refresh</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            const qs = new URLSearchParams(location.search);
+
+            function normalizeDigits(v) {
+                return String(v || '').replace(/\D+/g, '').trim();
+            }
+
+            function isPaidString(v) {
+                const s = String(v || '').trim().toLowerCase();
+                return ['paid', 'success', 'successful', 'completed', 'complete', 'verified', 'done'].includes(s);
+            }
+
+            function buildLiveChatMessage(order, verifyResult) {
+                const lines = [];
+                const oid = (order?.order_id || orderId || '').trim();
+                lines.push('Payment Received');
+                if (oid) lines.push('Order: ' + oid);
+
+                const product = String(order?.product || '').trim();
+                const plan = String(order?.plan || '').trim();
+                const qty = String(order?.qty || '').trim();
+                if (product) lines.push('Product: ' + product + (plan ? (' • ' + plan) : '') + (qty ? (' • Qty ' + qty) : ''));
+
+                const amount = String(order?.amount || '').trim();
+                if (amount) lines.push('Amount: ' + amount + ' BDT');
+
+                const method = String(order?.payment_method || methodFromQs || verifyResult?.payment_method || '').trim();
+                if (method) lines.push('Method: ' + method);
+
+                const trx = String(order?.trx_id || tid || verifyResult?.transaction_id || '').trim();
+                if (trx) lines.push('TrxID: ' + trx);
+
+                const when = String(order?.paid_at || '').trim();
+                if (when) lines.push('Paid At: ' + when);
+
+                const providerStatus = String(order?.provider_status || verifyResult?.provider_status || statusFromQs || '').trim();
+                if (providerStatus) lines.push('Provider Status: ' + providerStatus);
+
+                const fullname = String(order?.fullname || '').trim();
+                const email = String(order?.email || '').trim();
+                const customerWa = String(order?.whatsapp || '').trim();
+                if (fullname) lines.push('Name: ' + fullname);
+                if (email) lines.push('Email: ' + email);
+                if (customerWa) lines.push('Customer WhatsApp: ' + customerWa);
+
+                const activationEmail = String(order?.activation_email || '').trim();
+                if (activationEmail) lines.push('Activation Email: ' + activationEmail);
+
+                return lines.join('\n');
+            }
+
+            function maybeSendToLiveChat(order, verifyResult) {
+                const oid = String(order?.order_id || orderId || '').trim();
+                if (!oid) return;
+
+                const sentKey = `tt_chat_sent_${oid}_${String(tid || '')}`;
+                try {
+                    if (sessionStorage.getItem(sentKey) === '1') return;
+                } catch { }
+
+                const paid = Boolean(
+                    verifyResult?.paid === true ||
+                    isPaidString(order?.status) ||
+                    isPaidString(statusFromQs) ||
+                    isPaidString(verifyResult?.provider_status)
+                );
+                if (!paid) return;
+
+                const msg = buildLiveChatMessage(order, verifyResult);
+
+                try { sessionStorage.setItem(sentKey, '1'); } catch { }
+                if (el.subtitle) el.subtitle.textContent = 'Opening live chat…';
+
+                if (window.TTBDLiveChat && typeof window.TTBDLiveChat.sendOrderToChat === 'function') {
+                    window.TTBDLiveChat.sendOrderToChat(msg, {
+                        source: 'payment-success',
+                        orderId: oid,
+                        name: String(order?.fullname || '').trim(),
+                        phone: String(order?.whatsapp || '').trim(),
+                        product: String(order?.product || '').trim(),
+                        plan: String(order?.plan || '').trim()
+                    });
+                    return;
+                }
+
+                if (window.TTBDLiveChat && typeof window.TTBDLiveChat.open === 'function') {
+                    window.TTBDLiveChat.open();
+                }
+            }
+
+            function getSheetApiFromUrl() {
+                const fromQs = (qs.get('pay_api') || qs.get('payApi') || qs.get('sheet_api') || qs.get('sheetApi') || '').trim();
+                if (fromQs) return fromQs;
+                const href = String(location.href || '');
+                const m = href.match(/pay_api=([^&#]+)/i) || href.match(/sheet_api=([^&#]+)/i);
+                if (!m) return '';
+                try {
+                    return decodeURIComponent(String(m[1] || '').replace(/\+/g, '%20')).trim();
+                } catch {
+                    return String(m[1] || '').trim();
+                }
+            }
+
+            const sheetApiBase = (getSheetApiFromUrl() || '').replace(/\/+$/, '');
+            const orderId = (qs.get('order_id') || qs.get('orderId') || '').trim();
+
+            const tid = (
+                qs.get('transaction_id') ||
+                qs.get('transactionId') ||
+                qs.get('trx_id') ||
+                qs.get('trxid') ||
+                qs.get('tid') ||
+                ''
+            ).trim();
+
+            const methodFromQs = (qs.get('payment_method') || qs.get('paymentMethod') || qs.get('method') || '').trim();
+            const statusFromQs = (qs.get('status') || qs.get('payment_status') || '').trim();
+
+            const el = {
+                title: document.getElementById('title'),
+                subtitle: document.getElementById('subtitle'),
+                vOrder: document.getElementById('vOrder'),
+                vStatus: document.getElementById('vStatus'),
+                vMethod: document.getElementById('vMethod'),
+                vAmount: document.getElementById('vAmount'),
+                vTime: document.getElementById('vTime'),
+                vTrx: document.getElementById('vTrx'),
+                btnRefresh: document.getElementById('btnRefresh'),
+                btnBack: document.getElementById('btnBack')
+            };
+
+            function jsonpCall(baseUrl, params) {
+                return new Promise((resolve, reject) => {
+                    const base = String(baseUrl || '').trim();
+                    if (!base) {
+                        reject(new Error('Missing pay_api (Apps Script Web App URL).'));
+                        return;
+                    }
+                    const cbName = `tt_cb_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+                    const url = new URL(base);
+                    Object.entries(params || {}).forEach(([k, v]) => {
+                        if (v === undefined || v === null) return;
+                        url.searchParams.set(k, String(v));
+                    });
+                    url.searchParams.set('callback', cbName);
+
+                    const script = document.createElement('script');
+                    let done = false;
+                    const cleanup = () => {
+                        if (done) return;
+                        done = true;
+                        try { delete window[cbName]; } catch { window[cbName] = undefined; }
+                        script.remove();
+                    };
+                    const t = setTimeout(() => {
+                        cleanup();
+                        reject(new Error('Request timeout'));
+                    }, 20000);
+
+                    window[cbName] = (data) => {
+                        clearTimeout(t);
+                        cleanup();
+                        resolve(data);
+                    };
+                    script.onerror = () => {
+                        clearTimeout(t);
+                        cleanup();
+                        reject(new Error('Request failed'));
+                    };
+                    script.src = url.toString();
+                    document.head.appendChild(script);
+                });
+            }
+
+            function setLine(valueEl, v) {
+                if (!valueEl) return;
+                valueEl.textContent = (v !== undefined && v !== null && String(v).trim() !== '') ? String(v) : '—';
+            }
+
+            function renderOrder(order) {
+                setLine(el.vOrder, order?.order_id || orderId);
+                setLine(el.vStatus, order?.status || statusFromQs);
+                setLine(el.vMethod, order?.payment_method || methodFromQs);
+                setLine(el.vAmount, order?.amount ? `${order.amount} BDT` : '');
+                setLine(el.vTime, order?.paid_at || order?.created_at);
+                setLine(el.vTrx, order?.trx_id || tid);
+
+                if (el.title) {
+                    const st = String(order?.status || statusFromQs || '').toLowerCase();
+                    el.title.textContent = (st === 'paid' || st === 'completed' || st === 'success' || st === 'successful')
+                        ? 'Payment Successful'
+                        : 'Payment Status';
+                }
+            }
+
+            async function refresh() {
+                if (!orderId) {
+                    if (el.title) el.title.textContent = 'Missing order_id';
+                    if (el.subtitle) el.subtitle.textContent = 'This page needs ?order_id=...';
+                    return;
+                }
+
+                let verifyResult = null;
+
+                // Try verify (if transaction id exists) to update the sheet
+                if (tid) {
+                    try {
+                        verifyResult = await jsonpCall(sheetApiBase, { action: 'verify', order_id: orderId, transaction_id: tid, payment_method: methodFromQs });
+                    } catch (e) {
+                        console.warn(e);
+                    }
+                }
+
+                const r = await jsonpCall(sheetApiBase, { action: 'order', order_id: orderId });
+                if (!r?.ok) throw new Error(String(r?.error || 'Failed to load order'));
+                renderOrder(r.order);
+
+                // After payment, open live chat with order details
+                try {
+                    maybeSendToLiveChat(r.order, verifyResult);
+                } catch (e) {
+                    console.warn(e);
+                }
+
+                if (el.subtitle) {
+                    el.subtitle.textContent = tid
+                        ? 'Order updated via verify + sheet.'
+                        : 'Order loaded from sheet. (No transaction id in URL)';
+                }
+            }
+
+            el.btnRefresh?.addEventListener('click', () => refresh().catch(err => alert(String(err?.message || err || 'Failed'))));
+
+            try {
+                const backUrl = new URL('../products/info.html', location.href);
+                if (qs.toString()) backUrl.search = qs.toString();
+                if (el.btnBack) el.btnBack.href = backUrl.toString();
+            } catch { }
+
+            refresh().catch((e) => {
+                console.error(e);
+                if (el.title) el.title.textContent = 'Payment Status';
+                if (el.subtitle) el.subtitle.textContent = String(e?.message || e || 'Failed');
+
+                // Even if the sheet/order fetch fails, still try to open live chat
+                // when the provider URL indicates a successful payment.
+                try {
+                    maybeSendToLiveChat({ order_id: orderId, status: statusFromQs, payment_method: methodFromQs, trx_id: tid }, null);
+                } catch (e2) {
+                    console.warn(e2);
+                }
+            });
+        })();
+    </script>
+    <script defer src="/assets/livechat.js?v=lc7"></script>
+</body>
+
+</html>

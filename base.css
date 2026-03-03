@@ -1,0 +1,921 @@
+/*
+ * ============================================================
+ *  base.css — Tech Tiger BD
+ *  Global shared styles: variables, reset, layout,
+ *  header, nav, buttons, footer, WA fab, animations.
+ *  Used by: index.html, products/*.html (via ../)
+ * ============================================================
+ */
+
+/* ── GOOGLE FONTS ── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Outfit:wght@100..900&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ── CSS VARIABLES ── */
+:root {
+  --bg: #020509;
+  --surface: #080E18;
+  --card: #0B1422;
+  --card-hover: #0F1B2E;
+  --text: #E8F0FF;
+  --text-dim: #7A90B5;
+  --text-faint: #3A4A62;
+  --accent: #00E5FF;
+  --accent-d: #00B8CC;
+  --accent-glow: rgba(0, 229, 255, 0.18);
+  --accent-hover: #00CFEA;
+  --pink: #FF2D78;
+  --pink-glow: rgba(255, 45, 120, 0.18);
+  --green: #00E676;
+  --amber: #FFB300;
+  --border: #172136;
+  --border-b: #1F3050;
+  --font-d: "Orbitron", sans-serif;
+  --font-b: 'Archivo', sans-serif;
+  --radius: 4px;
+  --t: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Aliases kept for backward compat */
+:root {
+  --font-display: var(--font-d);
+  --font-body: var(--font-b);
+  --border-bright: var(--border-b);
+  --card-hover: #0F1B2E;
+}
+
+/* ── RESET ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-b);
+  font-size: 16px;
+  /* ↑ was 15px */
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Grid texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, .022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, .022) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* Ambient glow blobs */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 45% at 85% 5%, rgba(0, 229, 255, .06) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 55% at 5% 95%, rgba(255, 45, 120, .04) 0%, transparent 55%);
+}
+
+/* ── GLOBAL ELEMENTS ── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Hide WhatsApp buttons/links globally */
+a[href*="wa.me"],
+a[href*="api.whatsapp.com"],
+a[href*="whatsapp.com/send"],
+a[href*="whatsapp://"] {
+  display: none !important;
+}
+
+/* Particle canvas + grid bg layer */
+#ptc,
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .45;
+}
+
+.bgl {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, .017) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, .017) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.bgl::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 0%, rgba(0, 229, 255, .055) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 0% 100%, rgba(255, 45, 120, .04) 0%, transparent 55%);
+}
+
+/* ── WRAPPER ── */
+/* Both .container (index) and .w (products) map to the same layout */
+.container,
+.w {
+  width: min(1140px, 94%);
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Legacy alias used in index inner row */
+.container.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.reveal.visible,
+.reveal.on {
+  opacity: 1;
+  transform: none;
+}
+
+.rv {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.rvl {
+  opacity: 0;
+  transform: translateX(-22px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.rvr {
+  opacity: 0;
+  transform: translateX(22px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.rv.on,
+.rvl.on,
+.rvr.on {
+  opacity: 1;
+  transform: none;
+}
+
+.d1 {
+  transition-delay: .05s
+}
+
+.d2 {
+  transition-delay: .10s
+}
+
+.d3 {
+  transition-delay: .16s
+}
+
+.d4 {
+  transition-delay: .22s
+}
+
+.d5 {
+  transition-delay: .28s
+}
+
+.d6 {
+  transition-delay: .34s
+}
+
+/* ── HEADER ── */
+/* Shared by .topbar (index) and .hd (products) */
+.topbar,
+.hd {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(2, 5, 9, .92);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown .5s var(--ease) both;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Header inner row */
+.topbar .inner,
+.hd-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 66px;
+  /* ↑ was 62-64px */
+}
+
+/* ── BRAND ── */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-d);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-d);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow), inset 0 0 12px rgba(0, 229, 255, .06);
+  transition: box-shadow .3s;
+  position: relative;
+}
+
+.brand:hover .brand-mark {
+  box-shadow: 0 0 28px var(--accent-glow), inset 0 0 20px rgba(0, 229, 255, .12);
+}
+
+/* Index brand text helpers */
+.brand span.dim,
+.bname .dim-c {
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+/* Product brand text */
+.bname em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ── NAVIGATION ── */
+/* Shared by nav.primary (index) and .nav (products) */
+nav.primary,
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+nav.primary a,
+.nav a {
+  padding: 8px 15px;
+  font-size: 13px;
+  /* ↑ was 11-12px */
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: color var(--t);
+  position: relative;
+  overflow: hidden;
+}
+
+nav.primary a::after,
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width .25s var(--ease);
+}
+
+nav.primary a:hover,
+.nav a:hover {
+  color: var(--accent);
+  border-color: var(--border);
+  background: rgba(0, 229, 255, .04);
+}
+
+nav.primary a:hover::after,
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* ── HAMBURGER (mobile) ── */
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: all var(--t);
+}
+
+.hamburger:hover {
+  border-color: var(--accent);
+}
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text);
+  position: relative;
+  transition: all .3s ease;
+}
+
+.hamburger span::before,
+.hamburger span::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text);
+  transition: all .3s ease;
+}
+
+.hamburger span::before {
+  top: -6px;
+}
+
+.hamburger span::after {
+  top: 6px;
+}
+
+.hamburger.open span {
+  background: transparent;
+}
+
+.hamburger.open span::before {
+  top: 0;
+  transform: rotate(45deg);
+  background: var(--accent);
+}
+
+.hamburger.open span::after {
+  top: 0;
+  transform: rotate(-45deg);
+  background: var(--accent);
+}
+
+/* ── MOBILE NAV ── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 66px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(2, 5, 9, .97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 199;
+  padding: 32px 24px;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+  border-top: 1px solid var(--border);
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 17px 20px;
+  font-family: var(--font-d);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: all var(--t);
+}
+
+.mobile-nav a:hover {
+  color: var(--accent);
+  border-color: var(--border);
+  background: rgba(0, 229, 255, .04);
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-b);
+  background: transparent;
+  color: var(--text-dim);
+  transition: all var(--t);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-101%);
+  transition: transform .3s var(--ease);
+  z-index: -1;
+}
+
+.btn:hover {
+  color: #000;
+  border-color: var(--accent);
+}
+
+.btn:hover::before {
+  transform: translateX(0);
+}
+
+/* Primary variants */
+.btn-primary,
+.btn-p,
+.btn-prime {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  box-shadow: 0 0 26px rgba(0, 229, 255, .3);
+}
+
+.btn-primary::before,
+.btn-p::before,
+.btn-prime::before {
+  background: var(--accent-d);
+}
+
+.btn-primary:hover,
+.btn-p:hover,
+.btn-prime:hover {
+  color: #000;
+  box-shadow: 0 0 44px rgba(0, 229, 255, .5);
+}
+
+/* ── TICKER (product pages) ── */
+.ticker-wrap {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.ticker-track {
+  display: flex;
+  animation: tkr 30s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tkr {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ti {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 28px;
+  font-size: 12px;
+  /* ↑ was 11px */
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--border);
+}
+
+.tidot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  animation: blk 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes blk {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: .2
+  }
+}
+
+/* ── BREADCRUMB ── */
+.bc {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+  z-index: 1;
+}
+
+.bc-in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+
+.bc-in a {
+  color: var(--text-dim);
+  transition: color .2s;
+}
+
+.bc-in a:hover {
+  color: var(--accent);
+}
+
+.bc-in span {
+  color: var(--text-faint);
+}
+
+/* ── RELATED PRODUCTS STRIP ── */
+.rp-sec {
+  padding: 24px 0 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.rp-wrap {
+  border: 1px solid var(--border-b);
+  background: var(--card);
+  overflow: hidden;
+}
+
+.rp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.rp-title {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.rp-sub {
+  font-size: 11px;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.rp-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rp-track::-webkit-scrollbar {
+  height: 8px;
+}
+
+.rp-track::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, .22);
+}
+
+.rp-item {
+  flex: 0 0 210px;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color var(--t), background var(--t), transform var(--t);
+}
+
+.rp-item:hover {
+  border-color: rgba(0, 229, 255, .45);
+  background: rgba(0, 229, 255, .04);
+  transform: translateY(-1px);
+}
+
+.rp-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border: 1px solid rgba(0, 229, 255, .18);
+  background: rgba(0, 229, 255, .04);
+  padding: 6px;
+}
+
+.rp-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.rp-meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .rp-sec {
+    padding: 18px 0 6px;
+  }
+
+  .rp-item {
+    flex-basis: 180px;
+  }
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 26px 0;
+  background: var(--surface);
+  position: relative;
+  z-index: 1;
+}
+
+/* Index footer row */
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-row small {
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: .03em;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color var(--t);
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+.footer-links .sep {
+  color: var(--text-faint);
+}
+
+/* Product page simple footer */
+footer p {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-align: center;
+  letter-spacing: .03em;
+}
+
+footer a {
+  color: var(--accent);
+  transition: opacity .2s;
+}
+
+footer a:hover {
+  opacity: .75;
+}
+
+/* ── WHATSAPP FAB ── */
+#whatsAppFab,
+.wab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 28px rgba(37, 211, 102, .4), 0 8px 24px rgba(0, 0, 0, .5);
+  z-index: 199;
+  border: none;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all var(--t);
+}
+
+#whatsAppFab::before,
+.wab::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(37, 211, 102, .28);
+  pointer-events: none;
+}
+
+#whatsAppFab:hover,
+.wab:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 42px rgba(37, 211, 102, .55), 0 12px 32px rgba(0, 0, 0, .5);
+}
+
+.wab svg,
+#whatsAppFab svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1)
+  }
+
+  50% {
+    opacity: .4;
+    transform: scale(.75)
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+@keyframes fiu {
+  from {
+    opacity: 0;
+    transform: translateY(18px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+@keyframes lgrow {
+  to {
+    transform: scaleX(1)
+  }
+}
+
+@keyframes hzm {
+  from {
+    transform: scale(1.05)
+  }
+
+  to {
+    transform: scale(1.12)
+  }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+
+  body::before {
+    display: none;
+  }
+}
+
+/* ── RESPONSIVE (header/nav) ── */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  nav.primary {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+  }
+}

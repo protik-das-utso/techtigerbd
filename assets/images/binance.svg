@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Binance">
+  <rect width="128" height="128" rx="18" fill="#0B0E11"/>
+  <g fill="#F3BA2F">
+    <polygon points="64,20 79,35 64,50 49,35"/>
+    <polygon points="64,58 79,73 64,88 49,73"/>
+    <polygon points="42,42 55,55 42,68 29,55"/>
+    <polygon points="86,42 99,55 86,68 73,55"/>
+    <polygon points="64,44 75,55 64,66 53,55"/>
+  </g>
+</svg>

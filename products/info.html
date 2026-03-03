@@ -1,0 +1,1920 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Order Info — Tech Tiger BD</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16.png?v=1" />
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png?v=1" />
+    <meta name="theme-color" content="#00E5FF">
+
+    <link rel="stylesheet" href="../base.css">
+    <link rel="stylesheet" href="./product-base.css">
+
+    <style>
+        /* ─── PAGE-SPECIFIC ONLY ─── */
+
+        /* Particle canvas */
+        #ptc {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: .38;
+        }
+
+        .bgl {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0, 229, 255, .015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, .015) 1px, transparent 1px);
+            background-size: 52px 52px;
+        }
+
+        .bgl::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 55% 45% at 90% 0%, rgba(0, 229, 255, .05) 0%, transparent 55%),
+                radial-gradient(ellipse 45% 50% at 0% 100%, rgba(255, 45, 120, .03) 0%, transparent 55%);
+        }
+
+        /* ── LAYOUT ── */
+        .info-sec {
+            padding: 56px 0 96px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* ── ORDER SUMMARY SIDEBAR ── */
+        .os {
+            background: var(--card);
+            border: 1px solid var(--border-b);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .os::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), rgba(0, 229, 255, .2) 70%, transparent);
+        }
+
+        .os-head {
+            padding: 22px 24px 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .os-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .os-tag::before {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 1px;
+            background: var(--accent);
+            box-shadow: 0 0 6px var(--accent);
+        }
+
+        .os-product {
+            font-family: var(--font-d);
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .os-plan {
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .os-price {
+            display: flex;
+            align-items: baseline;
+            gap: 3px;
+            margin-top: 16px;
+        }
+
+        .os-price .sym {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .os-price .amt {
+            font-family: var(--font-d);
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -.04em;
+            color: var(--text);
+        }
+
+        .os-price .cur {
+            font-size: 13px;
+            color: var(--text-dim);
+            align-self: flex-end;
+            padding-bottom: 4px;
+        }
+
+        .os-rows {
+            list-style: none;
+        }
+
+        .os-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 24px;
+            font-size: 13px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .os-row:last-child {
+            border-bottom: none;
+        }
+
+        .os-row .k {
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .os-row .v {
+            color: var(--text);
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .os-note {
+            padding: 14px 24px;
+            background: rgba(0, 229, 255, .04);
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            display: flex;
+            gap: 8px;
+        }
+
+        .os-note-icon {
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ── PAYMENT BOX (right sidebar) ── */
+        .paybox {
+            margin-top: 18px;
+            border-top: 1px solid var(--border);
+            padding: 16px 18px 18px;
+            background: rgba(0, 229, 255, .03);
+        }
+
+        .paybox-head {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .paybox-sub {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.55;
+            margin-top: 8px;
+        }
+
+        .paylist {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .payitem {
+            display: grid;
+            grid-template-columns: 28px 1fr auto;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 10px;
+            border: 1px solid rgba(0, 229, 255, .12);
+            background: rgba(8, 14, 24, .6);
+        }
+
+        .payacts {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .paycopy {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            padding: 8px 10px;
+            border: 1px solid rgba(0, 229, 255, .12);
+            background: transparent;
+            transition: all var(--t);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .paycopy:hover {
+            border-color: rgba(0, 229, 255, .35);
+            color: var(--text);
+            background: rgba(0, 229, 255, .04);
+        }
+
+        .paylogo {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            filter: brightness(1.15);
+            opacity: .92;
+        }
+
+        .paymeta {
+            display: grid;
+            gap: 2px;
+        }
+
+        .payname {
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: .02em;
+        }
+
+        .paynum {
+            font-size: 12px;
+            color: var(--text-dim);
+            font-weight: 700;
+            letter-spacing: .02em;
+        }
+
+        .payqr {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 8px 10px;
+            border: 1px solid rgba(0, 229, 255, .18);
+            background: rgba(0, 229, 255, .06);
+            transition: all var(--t);
+            white-space: nowrap;
+        }
+
+        .payqr:hover {
+            border-color: rgba(0, 229, 255, .45);
+            background: rgba(0, 229, 255, .1);
+        }
+
+        .payqr.payqr-off {
+            opacity: .45;
+            color: var(--text-faint);
+            border-color: rgba(0, 229, 255, .08);
+            background: transparent;
+            pointer-events: none;
+        }
+
+        /* ── TOAST (copy notification) ── */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 18px;
+            transform: translateX(-50%);
+            z-index: 10001;
+            width: min(520px, calc(100% - 36px));
+            display: none;
+        }
+
+        .toast.on {
+            display: block;
+        }
+
+        .toast-in {
+            background: var(--card);
+            border: 1px solid var(--border-b);
+            overflow: hidden;
+        }
+
+        .toast-in::before {
+            content: '';
+            display: block;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), rgba(0, 229, 255, .25) 70%, transparent);
+        }
+
+        .toast-body {
+            padding: 12px 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .toast-ico {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(0, 229, 255, .18);
+            background: rgba(0, 229, 255, .06);
+            color: var(--accent);
+            flex: 0 0 auto;
+            font-weight: 900;
+        }
+
+        .toast-txt {
+            display: grid;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .toast-ttl {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .toast-msg {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        /* ── QR POPUP (same tab) ── */
+        .qrmodal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(2, 5, 9, .78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qrmodal.on {
+            display: flex;
+        }
+
+        .qrmodal-in {
+            width: min(420px, 100%);
+            background: var(--card);
+            border: 1px solid var(--border-b);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 36px);
+            max-height: calc(100dvh - 36px);
+            border-radius: var(--radius);
+        }
+
+        .qrmodal-in::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), rgba(0, 229, 255, .2) 70%, transparent);
+        }
+
+        .qrmodal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            flex: 0 0 auto;
+        }
+
+        .qrmodal-ttl {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .qrmodal-x {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-dim);
+            transition: all var(--t);
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .qrmodal-x:hover {
+            border-color: rgba(0, 229, 255, .4);
+            color: var(--accent);
+        }
+
+        .qrmodal-body {
+            padding: 16px;
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qrmodal-img {
+            width: min(360px, 100%);
+            height: auto;
+            max-width: 100%;
+            max-height: calc(100vh - 36px - 56px - 32px);
+            max-height: calc(100dvh - 36px - 56px - 32px);
+            object-fit: contain;
+            display: block;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        /* ── FORM CARD ── */
+        .fc {
+            background: var(--card);
+            border: 1px solid var(--border-b);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), rgba(0, 229, 255, .2) 70%, transparent);
+        }
+
+        .fc-head {
+            padding: 26px 28px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .fc-head h3 {
+            font-family: var(--font-d);
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: -.01em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fc-head h3 span {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            padding: 3px 9px;
+            border: 1px solid var(--border);
+            font-family: var(--font-b);
+        }
+
+        .fc-head p {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        .fc-body {
+            padding: 24px 28px 28px;
+        }
+
+        /* ── FORM FIELDS ── */
+        .fgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .fgrid .full {
+            grid-column: 1 / -1;
+        }
+
+        .fg {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .fl {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .fl .req {
+            color: var(--accent);
+        }
+
+        .fl .opt {
+            color: var(--text-faint);
+            font-weight: 600;
+        }
+
+        .fi {
+            width: 100%;
+            min-height: 46px;
+            padding: 13px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            font-size: 15px;
+            line-height: 1.2;
+            outline: none;
+            caret-color: var(--accent);
+            transition: border-color .2s, box-shadow .2s, background-color .2s;
+        }
+
+        .fi::placeholder {
+            color: var(--text-faint);
+        }
+
+        .fi:hover {
+            border-color: rgba(0, 229, 255, .22);
+            background: rgba(8, 14, 24, .92);
+        }
+
+        .fi:focus {
+            border-color: rgba(0, 229, 255, .55);
+            box-shadow: 0 0 0 4px rgba(0, 229, 255, .08);
+        }
+
+        .fi:focus-visible {
+            border-color: rgba(0, 229, 255, .6);
+            box-shadow: 0 0 0 4px rgba(0, 229, 255, .1);
+        }
+
+        .fi.err {
+            border-color: rgba(239, 68, 68, .6);
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, .07);
+        }
+
+        textarea.fi {
+            min-height: 92px;
+            resize: vertical;
+            line-height: 1.45;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        .fi:disabled {
+            opacity: .65;
+            cursor: not-allowed;
+            background: rgba(8, 14, 24, .7);
+        }
+
+        /* Prevent Chrome autofill yellow/blue tint from breaking the theme */
+        input.fi:-webkit-autofill,
+        textarea.fi:-webkit-autofill,
+        select.fi:-webkit-autofill {
+            -webkit-text-fill-color: var(--text);
+            -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
+            box-shadow: 0 0 0 1000px var(--surface) inset;
+            transition: background-color 9999s ease-out 0s;
+            caret-color: var(--accent);
+        }
+
+        .fh {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* ── PAYMENT STATUS TOGGLE (form) ── */
+        .ptoggle {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .ptopt {
+            display: grid;
+            gap: 4px;
+            padding: 12px 12px;
+            border: 1px solid var(--border);
+            background: rgba(8, 14, 24, .75);
+            cursor: pointer;
+            user-select: none;
+            transition: border-color var(--t), background var(--t), box-shadow var(--t);
+        }
+
+        .ptopt:hover {
+            border-color: rgba(0, 229, 255, .22);
+            background: rgba(8, 14, 24, .9);
+        }
+
+        .ptopt input {
+            accent-color: var(--accent);
+        }
+
+        .ptopt .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .ptopt .ttl {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--text);
+        }
+
+        .ptopt .dsc {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.45;
+        }
+
+        .ptopt.on {
+            border-color: rgba(0, 229, 255, .55);
+            box-shadow: 0 0 0 4px rgba(0, 229, 255, .07);
+            background: rgba(0, 229, 255, .04);
+        }
+
+        @media (max-width: 860px) {
+            .ptoggle {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── DIVIDER ── */
+        .fdiv {
+            grid-column: 1 / -1;
+            height: 1px;
+            background: var(--border);
+            margin: 4px 0;
+            position: relative;
+        }
+
+        .fdiv::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            background: var(--card);
+            padding-right: 10px;
+        }
+
+        /* ── VALIDATION ERROR BOX ── */
+        .verr {
+            display: none;
+            padding: 13px 16px;
+            background: rgba(239, 68, 68, .08);
+            border: 1px solid rgba(239, 68, 68, .3);
+            font-size: 13px;
+            color: #ff6b6b;
+            margin-top: 2px;
+            border-radius: var(--radius);
+        }
+
+        .verr.on {
+            display: block;
+        }
+
+        /* ── ACTIONS ── */
+        .factions {
+            margin-top: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Main order button */
+        .btn-wa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 28px;
+            background: var(--accent);
+            border: 1px solid rgba(0, 229, 255, .55);
+            color: var(--bg);
+            font-family: var(--font-b);
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--t);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 229, 255, .22);
+        }
+
+        .btn-wa::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, .18);
+            transform: translateX(-101%);
+            transition: transform .3s var(--ease);
+            z-index: 0;
+        }
+
+        .btn-wa:hover {
+            box-shadow: 0 0 46px rgba(0, 229, 255, .35);
+        }
+
+        .btn-wa:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-wa>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-wa .btn-ico {
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        /* Secondary help button */
+        .btn-ghost {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            font-family: var(--font-b);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--t);
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(0, 229, 255, .45);
+            color: var(--accent);
+        }
+
+        .btn-ghost svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* ── PREVIEW BOX (shows before sending) ── */
+        .preview-box {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid rgba(0, 229, 255, .25);
+            background: rgba(0, 229, 255, .04);
+            position: relative;
+        }
+
+        .preview-box.on {
+            display: block;
+        }
+
+        .preview-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+        }
+
+        .preview-head {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 229, 255, .12);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-msg {
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        /* ── ORDER POPUP ── */
+        .ordermodal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(2, 5, 9, .78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 18px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ordermodal.on {
+            display: flex;
+        }
+
+        .ordermodal-in {
+            width: min(680px, 100%);
+            background: var(--card);
+            border: 1px solid var(--border-b);
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius);
+        }
+
+        .ordermodal-in::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), rgba(0, 229, 255, .2) 70%, transparent);
+        }
+
+        .ordermodal-head {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            padding: 14px 56px 14px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ordermodal-ttl {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .ordermodal-x {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-dim);
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .ordermodal-x:hover {
+            border-color: rgba(0, 229, 255, .4);
+            color: var(--accent);
+        }
+
+        .ordermodal-body {
+            padding: 16px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .ordermodal-steps {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--text-dim);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .ordermodal-msg {
+            min-height: 180px;
+            max-height: 320px;
+            overflow: auto;
+            padding: 12px;
+            border: 1px solid rgba(0, 229, 255, .2);
+            background: rgba(0, 229, 255, .04);
+            font-size: 12px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            color: var(--text-dim);
+            font-family: monospace;
+        }
+
+        .ordermodal-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .ordermodal-actions .btn {
+            flex: 1 1 180px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* ── TRUST STRIP ── */
+        .trust-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            border: 1px solid var(--border);
+            background: var(--border);
+            margin-top: 24px;
+        }
+
+        .ts-item {
+            flex: 1 1 calc(33.333% - 1px);
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--surface);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dim);
+            letter-spacing: .04em;
+        }
+
+        .ts-item .ico {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 860px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .os {
+                order: -1;
+            }
+
+            .fgrid {
+                grid-template-columns: 1fr;
+            }
+
+            .fgrid .full {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fc-body {
+                padding: 20px 18px 24px;
+            }
+
+            .fc-head {
+                padding: 20px 18px 16px;
+            }
+        }
+    </style>
+    </head>
+
+<body>
+
+    <canvas id="ptc"></canvas>
+    <div class="bgl"></div>
+
+    <!-- ── HEADER ── -->
+    <header class="hd">
+        <div class="w hd-in">
+            <a href="/" class="brand">
+                <span class="brand-mark">T</span>
+                <span class="bname">Tech Tiger <em>BD</em></span>
+            </a>
+            <nav class="nav">
+                <a href="/#plans">Plans</a>
+                <a href="/#why">Why Us</a>
+                <a href="/#faq">FAQ</a>
+            </nav>
+            <button class="hamburger" id="menuToggle" aria-label="Toggle menu"><span></span></button>
+        </div>
+    </header>
+
+    <!-- ── MOBILE NAV ── -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="/#plans" onclick="closeMobileNav()">Plans</a>
+        <a href="/#why" onclick="closeMobileNav()">Why Us</a>
+        <a href="/#faq" onclick="closeMobileNav()">FAQ</a>
+    </div>
+
+    <!-- ── BREADCRUMB ── -->
+    <div class="bc">
+        <div class="w">
+            <div class="bc-in">
+                <a href="/">Tech Tiger BD</a>
+                <span>›</span>
+                <a href="/#plans">Products</a>
+                <span>›</span>
+                <span id="bcProduct">Order</span>
+                <span>›</span>
+                <span>Info</span>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="info-sec">
+            <div class="w">
+
+                <!-- PAGE HEADER -->
+                <div class="sh rv" style="margin-bottom:32px">
+                    <span class="sh-tag">Checkout</span>
+                    <h2>Complete Your Order</h2>
+                    <p>Fill in your details — we'll confirm in live chat within minutes.</p>
+                </div>
+
+                <div class="info-grid">
+
+                    <!-- ── FORM SIDE ── -->
+                    <div class="fc rv d1">
+                        <div class="fc-head">
+                            <h3>
+                                Your Details
+                                <span>Step 1 of 1</span>
+                            </h3>
+                            <p>We need these to deliver your subscription and send you support.</p>
+                        </div>
+                        <div class="fc-body">
+
+                            <!-- Error box -->
+                            <div class="verr" id="errBox"></div>
+
+                            <div class="fgrid">
+
+                                <!-- Full name -->
+                                <div class="fg full">
+                                    <label class="fl" for="infoName">Full Name <span class="req">*</span></label>
+                                    <input class="fi" id="infoName" placeholder="Your full name" autocomplete="name"
+                                        inputmode="text">
+                                    <div class="fh">Used for order verification and delivery.</div>
+                                </div>
+
+                                <!-- WhatsApp -->
+                                <div class="fg full">
+                                    <label class="fl" for="infoWhatsApp">WhatsApp Number <span
+                                            class="req">*</span></label>
+                                    <input class="fi" id="infoWhatsApp" placeholder="01XXXXXXXXX" inputmode="tel"
+                                        pattern="[0-9+ \-]*" autocomplete="tel">
+                                    <div class="fh">We'll send your subscription details here.</div>
+                                </div>
+
+                                <div class="fdiv" data-label="Payment"></div>
+
+                                <!-- Payment status (Paid vs Due) -->
+                                <div class="fg full">
+                                    <label class="fl">Payment Status <span class="req">*</span></label>
+                                    <div class="ptoggle" id="payStatusToggle">
+                                        <label class="ptopt" id="payOptDue">
+                                            <div class="row">
+                                                <span class="ttl">Payment Due</span>
+                                                <input type="radio" name="payStatus" value="due" checked>
+                                            </div>
+                                            <div class="dsc">Send order first, then pay after live chat confirmation.
+                                            </div>
+                                        </label>
+                                        <label class="ptopt" id="payOptPaid">
+                                            <div class="row">
+                                                <span class="ttl">Paid</span>
+                                                <input type="radio" name="payStatus" value="paid">
+                                            </div>
+                                            <div class="dsc">Already sent money — TrxID is required.</div>
+                                        </label>
+                                    </div>
+                                    <div class="fh">If you select <strong>Paid</strong>, you must provide payment method
+                                        and TrxID.</div>
+                                </div>
+
+                                <!-- Payment method (only when Paid) -->
+                                <div class="fg full" id="payMethodWrap" style="display:none">
+                                    <label class="fl" for="infoPayMethod">Payment Method <span
+                                            class="req">*</span></label>
+                                    <select class="fi" id="infoPayMethod">
+                                        <option value="" selected>Select method</option>
+                                        <option value="bKash">bKash</option>
+                                        <option value="Nagad">Nagad</option>
+                                        <option value="Rocket">Rocket</option>
+                                        <option value="Binance">Binance</option>
+                                    </select>
+                                    <div class="fh">Choose the method you used for payment.</div>
+                                </div>
+
+                                <div class="fdiv" data-label="Additional Info"></div>
+
+                                <!-- Activation Gmail (controlled by URL param: email=hide|optional|required) -->
+                                <div class="fg full" id="emailWrap" style="display:none">
+                                    <label class="fl" id="lblEmail" for="infoEmail">Activation Gmail <span class="req"
+                                            id="lblEmailReq">*</span></label>
+                                    <input class="fi" id="infoEmail" placeholder="yourname@gmail.com" type="email"
+                                        inputmode="email" autocomplete="email">
+                                    <div class="fh" id="emailHint">This Gmail will be used to activate your
+                                        subscription.</div>
+                                </div>
+
+                                <!-- Free Fire UID (only when mode=freefire) -->
+                                <div class="fg full" id="ffUidWrap" style="display:none">
+                                    <label class="fl" for="infoFfUid">Free Fire UID <span class="req">*</span></label>
+                                    <input class="fi" id="infoFfUid" placeholder="Enter your Free Fire UID"
+                                        inputmode="numeric" autocomplete="off">
+                                    <div class="fh">Required for Free Fire top-up delivery.</div>
+                                </div>
+
+                                <!-- TrxID / Payment Reference (required when Paid) -->
+                                <div class="fg full" id="trxWrap" style="display:none">
+                                    <label class="fl" for="infoTrx">Transaction ID (TrxID) <span class="req"
+                                            id="trxReq">*</span></label>
+                                    <input class="fi" id="infoTrx" placeholder="e.g. 8XY12ABC34" autocomplete="off">
+                                    <div class="fh" id="trxHint">Paste your bKash/Nagad/Rocket/Binance TrxID here
+                                        (required if
+                                        Paid).</div>
+                                </div>
+
+                                <!-- Note / extra info -->
+                                <div class="fg full">
+                                    <label class="fl" for="infoNote">Note <span class="opt">(optional)</span></label>
+                                    <textarea class="fi" id="infoNote" placeholder="Any special request or info..."
+                                        rows="2"></textarea>
+                                </div>
+
+                            </div>
+
+                            <!-- Message preview -->
+                            <div class="preview-box" id="previewBox">
+                                <div class="preview-head">
+                                    <span>📋 Message Preview</span>
+                                    <span id="previewClose"
+                                        style="cursor:pointer;color:var(--text-faint);font-size:14px">✕</span>
+                                </div>
+                                <div class="preview-msg" id="previewMsg"></div>
+                            </div>
+
+                            <!-- Action buttons -->
+                            <div class="factions">
+
+                                <!-- PRIMARY: Send order to Live Chat -->
+                                <button class="btn-wa" id="btnSendWA" type="button">
+                                    <span class="btn-ico" aria-hidden="true">🧾</span>
+                                    <span>Press Order</span>
+                                </button>
+
+                                <!-- SECONDARY: Preview message first -->
+                                <button class="btn-ghost" id="btnPreview" type="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        style="fill:none">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                    Preview Message
+                                </button>
+
+                            </div>
+
+                        </div><!-- /fc-body -->
+                    </div><!-- /fc -->
+
+                    <!-- ── ORDER SUMMARY SIDEBAR ── -->
+                    <div class="os rv d2">
+                        <div class="os-head">
+                            <div class="os-tag">Order Summary</div>
+                            <div class="os-product" id="osProduct">—</div>
+                            <div class="os-plan" id="osPlan">—</div>
+                            <div class="os-price">
+                                <span class="sym">৳</span>
+                                <span class="amt" id="osAmt">0</span>
+                                <span class="cur">BDT</span>
+                            </div>
+                        </div>
+                        <ul class="os-rows">
+                            <li class="os-row">
+                                <span class="k">Plan</span>
+                                <span class="v" id="osRowPlan">—</span>
+                            </li>
+                            <li class="os-row">
+                                <span class="k">Qty</span>
+                                <span class="v" id="osRowQty">1</span>
+                            </li>
+                            <li class="os-row">
+                                <span class="k">Payment</span>
+                                <span class="v" id="osPayRow">Payment Due</span>
+                            </li>
+                            <li class="os-row">
+                                <span class="k">Delivery</span>
+                                <span class="v" style="color:var(--green)">~5 Minutes</span>
+                            </li>
+                            <li class="os-row" style="border-bottom:none">
+                                <span class="k">Total</span>
+                                <span class="v"
+                                    style="font-family:var(--font-d);font-size:1.1rem;color:var(--accent)">৳<span
+                                        id="osTotal">0</span></span>
+                            </li>
+                        </ul>
+                        <div class="os-note">
+                            <span class="os-note-icon">💬</span>
+                            <span>After tapping <strong>Press Order</strong>, a popup will show instructions to copy
+                                your order and open live chat.</span>
+                        </div>
+
+                        <!-- Payment numbers + QR -->
+                        <div class="paybox" aria-label="Send Money payment numbers">
+                            <div class="paybox-head">
+                                <span>Send Money</span>
+                                <span style="color:var(--text-faint);font-size:10px;letter-spacing:.12em;">BDT</span>
+                            </div>
+                            <ul class="paylist">
+                                <li class="payitem">
+                                    <img class="paylogo" src="../assets/images/bkash.png" alt="bKash" loading="lazy">
+                                    <div class="paymeta">
+                                        <div class="payname">bKash</div>
+                                        <div class="paynum" id="numBkash">01883044415</div>
+                                    </div>
+                                    <div class="payacts">
+                                        <button class="paycopy" type="button" data-copy="#numBkash">Copy</button>
+                                        <a class="payqr" id="qrBkash" href="../assets/images/qr/bkash-qr.jpeg">QR</a>
+                                    </div>
+                                </li>
+                                <li class="payitem">
+                                    <img class="paylogo" src="../assets/images/nagad.svg" alt="Nagad" loading="lazy">
+                                    <div class="paymeta">
+                                        <div class="payname">Nagad</div>
+                                        <div class="paynum" id="numNagad">01883044415</div>
+                                    </div>
+                                    <div class="payacts">
+                                        <button class="paycopy" type="button" data-copy="#numNagad">Copy</button>
+                                    </div>
+                                </li>
+                                <li class="payitem">
+                                    <img class="paylogo" src="../assets/images/rocket.png" alt="Rocket" loading="lazy">
+                                    <div class="paymeta">
+                                        <div class="payname">Rocket</div>
+                                        <div class="paynum" id="numRocket">01883044415</div>
+                                    </div>
+                                    <div class="payacts">
+                                        <button class="paycopy" type="button" data-copy="#numRocket">Copy</button>
+                                        <a class="payqr" id="qrRocket" href="../assets/images/qr/rocket-qr.png">QR</a>
+                                    </div>
+                                </li>
+                                <li class="payitem">
+                                    <img class="paylogo" src="../assets/images/binance.svg" alt="Binance"
+                                        loading="lazy">
+                                    <div class="paymeta">
+                                        <div class="payname">Binance</div>
+                                        <div class="paynum" id="numBinance">1207429984</div>
+                                    </div>
+                                    <div class="payacts">
+                                        <button class="paycopy" type="button" data-copy="#numBinance">Copy</button>
+                                        <a class="payqr" id="qrBinance" href="../assets/images/qr/binance-qr.jpg">QR</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <div class="paybox-sub">Tip: Tap <strong>QR</strong> to view the image here.</div>
+                        </div>
+
+                        <!-- Trust strip -->
+                        <div class="trust-strip">
+                            <div class="ts-item"><span class="ico">⚡</span> Instant delivery</div>
+                            <div class="ts-item"><span class="ico">🔒</span> Secure & legit</div>
+                            <div class="ts-item"><span class="ico">♻️</span> Replacement policy</div>
+                        </div>
+                    </div><!-- /os -->
+
+                </div><!-- /info-grid -->
+            </div><!-- /w -->
+        </section>
+    </main>
+
+    <!-- ── QR POPUP (same tab) ── -->
+    <div class="qrmodal" id="qrModal" aria-hidden="true">
+        <div class="qrmodal-in" role="dialog" aria-modal="true" aria-label="Payment QR">
+            <div class="qrmodal-head">
+                <div class="qrmodal-ttl" id="qrModalTitle">QR Code</div>
+                <button type="button" class="qrmodal-x" id="qrModalClose" aria-label="Close">✕</button>
+            </div>
+            <div class="qrmodal-body">
+                <img class="qrmodal-img" id="qrModalImg" alt="QR code">
+            </div>
+        </div>
+    </div>
+
+    <!-- ── ORDER POPUP ── -->
+    <div class="ordermodal" id="orderModal" aria-hidden="true">
+        <div class="ordermodal-in" role="dialog" aria-modal="true" aria-label="Order Instructions">
+            <div class="ordermodal-head">
+                <div class="ordermodal-ttl">Order Instructions</div>
+                <button type="button" class="ordermodal-x" id="orderModalClose" aria-label="Close">✕</button>
+            </div>
+            <div class="ordermodal-body">
+                <ol class="ordermodal-steps">
+                    <li>Click <strong>Copy Order</strong>.</li>
+                    <li>Click <strong>Open Live Chat</strong>.</li>
+                    <li>Paste the copied details in chat and send.</li>
+                </ol>
+                <div class="ordermodal-msg" id="orderModalMsg"></div>
+                <div class="ordermodal-actions">
+                    <button type="button" class="btn" id="orderModalCopy">Copy Order</button>
+                    <button type="button" class="btn btn-primary" id="orderModalOpenChat">Open Live Chat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── TOAST (copy notification) ── -->
+    <div class="toast" id="toast" aria-live="polite" aria-atomic="true">
+        <div class="toast-in">
+            <div class="toast-body">
+                <div class="toast-ico">⧉</div>
+                <div class="toast-txt">
+                    <div class="toast-ttl" id="toastTitle">Copied</div>
+                    <div class="toast-msg" id="toastMsg">Number copied.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+        <div class="w">
+            <p>© <span id="yr"></span> Tech Tiger BD — Questions? <a href="https://wa.me/8801883044415"
+                    target="_blank">WhatsApp us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        /* ─────────────────────────────────────────
+           PARTICLES
+        ───────────────────────────────────────── */
+        (function () {
+            const c = document.getElementById('ptc');
+            if (!c) return;
+            const ctx = c.getContext('2d');
+            let W, H, pts = [];
+            function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
+            resize(); addEventListener('resize', resize);
+            for (let i = 0; i < 55; i++) pts.push({
+                x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+                r: Math.random() * 1.1 + .3, dx: (Math.random() - .5) * .35, dy: (Math.random() - .5) * .35,
+                o: Math.random() * .45 + .08
+            });
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                pts.forEach(p => {
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0,229,255,${p.o})`; ctx.fill();
+                    p.x += p.dx; p.y += p.dy;
+                    if (p.x < 0 || p.x > W) p.dx *= -1;
+                    if (p.y < 0 || p.y > H) p.dy *= -1;
+                });
+                for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+                    const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < 115) {
+                        ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y);
+                        ctx.strokeStyle = `rgba(0,229,255,${.045 * (1 - d / 115)})`; ctx.lineWidth = .5; ctx.stroke();
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        /* ─────────────────────────────────────────
+           REVEAL
+        ───────────────────────────────────────── */
+        const rObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+        }, { threshold: .1 });
+        document.querySelectorAll('.rv,.rvl,.rvr').forEach(el => rObs.observe(el));
+
+        /* ─────────────────────────────────────────
+           MOBILE NAV
+        ───────────────────────────────────────── */
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        menuToggle?.addEventListener('click', () => {
+            menuToggle.classList.toggle('open');
+            mobileNav.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        });
+        function closeMobileNav() {
+            menuToggle?.classList.remove('open');
+            mobileNav?.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('yr').textContent = new Date().getFullYear();
+
+        /* ─────────────────────────────────────────
+           PAGE LOGIC
+        ───────────────────────────────────────── */
+        (function () {
+
+            /* ── READ URL PARAMS ── */
+            const qs = new URLSearchParams(location.search);
+            const p = {
+                product: (qs.get('product') || 'Product').trim(),
+                plan: (qs.get('plan') || '').trim(),
+                price: Number(qs.get('price') || 0),
+                qty: Number(qs.get('qty') || 1),
+                validity: (qs.get('validity') || qs.get('duration') || '').trim(),
+                mode: (qs.get('mode') || '').trim(),
+            };
+            const total = p.price * (p.qty || 1);
+            const isFreeFireMode = p.mode.toLowerCase() === 'freefire';
+
+            /* ── POPULATE SUMMARY ── */
+            document.getElementById('bcProduct').textContent = p.product;
+            document.getElementById('osProduct').textContent = p.product;
+            document.getElementById('osPlan').textContent = p.plan || '—';
+            document.getElementById('osAmt').textContent = total || p.price || '0';
+            document.getElementById('osTotal').textContent = total || p.price || '0';
+            document.getElementById('osRowPlan').textContent = p.plan || '—';
+            document.getElementById('osRowQty').textContent = p.qty || 1;
+
+            /* ── PAYMENT NUMBERS + QR LINKS ── */
+            const PAY_NUMBERS = {
+                bkash: '01883044415',
+                nagad: '01883044415',
+                rocket: '01883044415',
+                binance: '1207429984'
+            };
+
+            const numBkash = document.getElementById('numBkash');
+            const numNagad = document.getElementById('numNagad');
+            const numRocket = document.getElementById('numRocket');
+            const numBinance = document.getElementById('numBinance');
+            if (numBkash) numBkash.textContent = PAY_NUMBERS.bkash;
+            if (numNagad) numNagad.textContent = PAY_NUMBERS.nagad;
+            if (numRocket) numRocket.textContent = PAY_NUMBERS.rocket;
+            if (numBinance) numBinance.textContent = PAY_NUMBERS.binance;
+
+            /* ── TOAST ── */
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMsg = document.getElementById('toastMsg');
+            let toastTimer = null;
+
+            function showToast(title, message) {
+                if (!toast) return;
+                toastTitle && (toastTitle.textContent = title || 'Notice');
+                toastMsg && (toastMsg.textContent = message || '');
+                toast.classList.add('on');
+                if (toastTimer) clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('on');
+                }, 5000);
+            }
+
+            async function copyToClipboard(text) {
+                const t = (text || '').toString();
+                if (!t) return false;
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(t);
+                        return true;
+                    }
+                } catch (_) { }
+
+                // Fallback for non-secure contexts
+                try {
+                    const ta = document.createElement('textarea');
+                    ta.value = t;
+                    ta.setAttribute('readonly', '');
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    ta.style.top = '0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    ta.setSelectionRange(0, ta.value.length);
+                    const ok = document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    return ok;
+                } catch (_) {
+                    return false;
+                }
+            }
+
+            document.querySelectorAll('[data-copy]').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const sel = btn.getAttribute('data-copy');
+                    const el = sel ? document.querySelector(sel) : null;
+                    const number = (el?.textContent || '').trim();
+                    const ok = await copyToClipboard(number);
+                    if (ok) showToast('Copied', `Number copied: ${number}`);
+                    else showToast('Copy failed', 'Please copy the number manually.');
+                });
+            });
+
+            /* ── QR POPUP (same tab) ── */
+            const qrModal = document.getElementById('qrModal');
+            const qrModalImg = document.getElementById('qrModalImg');
+            const qrModalTitle = document.getElementById('qrModalTitle');
+            const qrModalClose = document.getElementById('qrModalClose');
+            const orderModal = document.getElementById('orderModal');
+            const orderModalMsg = document.getElementById('orderModalMsg');
+            const orderModalClose = document.getElementById('orderModalClose');
+            const orderModalCopy = document.getElementById('orderModalCopy');
+            const orderModalOpenChat = document.getElementById('orderModalOpenChat');
+            let pendingOrderMessage = '';
+
+            function syncBodyLock() {
+                const hasOpenModal = (qrModal && qrModal.classList.contains('on')) || (orderModal && orderModal.classList.contains('on'));
+                document.body.style.overflow = hasOpenModal ? 'hidden' : '';
+            }
+
+            function openQr(title, src) {
+                if (!src) return;
+                if (!qrModal || !qrModalImg) {
+                    // Fallback: open the image in the same tab
+                    location.href = src;
+                    return;
+                }
+                qrModalTitle && (qrModalTitle.textContent = title || 'QR Code');
+                qrModalImg.alt = (title ? `${title} QR` : 'QR code');
+                qrModalImg.src = src;
+                qrModal.classList.add('on');
+                qrModal.setAttribute('aria-hidden', 'false');
+                syncBodyLock();
+            }
+
+            function closeQr() {
+                if (!qrModal) return;
+                qrModal.classList.remove('on');
+                qrModal.setAttribute('aria-hidden', 'true');
+                if (qrModalImg) {
+                    qrModalImg.removeAttribute('src');
+                }
+                syncBodyLock();
+            }
+
+            function openOrderModal(message) {
+                if (!orderModal || !orderModalMsg) return;
+                pendingOrderMessage = (message || '').trim();
+                orderModalMsg.textContent = pendingOrderMessage;
+                orderModal.classList.add('on');
+                orderModal.setAttribute('aria-hidden', 'false');
+                syncBodyLock();
+            }
+
+            function closeOrderModal() {
+                if (!orderModal) return;
+                orderModal.classList.remove('on');
+                orderModal.setAttribute('aria-hidden', 'true');
+                syncBodyLock();
+            }
+
+            qrModalClose?.addEventListener('click', closeQr);
+            qrModal?.addEventListener('click', (e) => {
+                if (e.target === qrModal) closeQr();
+            });
+            orderModalClose?.addEventListener('click', closeOrderModal);
+            orderModal?.addEventListener('click', (e) => {
+                if (e.target === orderModal) closeOrderModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && qrModal?.classList.contains('on')) closeQr();
+                if (e.key === 'Escape' && orderModal?.classList.contains('on')) closeOrderModal();
+            });
+
+            orderModalCopy?.addEventListener('click', async () => {
+                const ok = await copyToClipboard(pendingOrderMessage || '');
+                if (ok) showToast('Copied', 'Order details copied.');
+                else showToast('Copy failed', 'Please copy the order details manually.');
+            });
+
+            orderModalOpenChat?.addEventListener('click', () => {
+                if (window.TTBDLiveChat && typeof window.TTBDLiveChat.openWithRetries === 'function') {
+                    window.TTBDLiveChat.openWithRetries(12, 300);
+                } else if (window.TTBDLiveChat && typeof window.TTBDLiveChat.open === 'function') {
+                    window.TTBDLiveChat.open();
+                }
+                showToast('Live chat opened', 'Paste your copied order details in chat.');
+            });
+
+            function bindQrLink(id, title) {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('click', (ev) => {
+                    ev.preventDefault();
+                    openQr(title, el.getAttribute('href'));
+                });
+            }
+            bindQrLink('qrBkash', 'bKash');
+            bindQrLink('qrRocket', 'Rocket');
+            bindQrLink('qrBinance', 'Binance');
+
+            /* ── PAYMENT STATUS (Paid vs Due) ── */
+            const payOptDue = document.getElementById('payOptDue');
+            const payOptPaid = document.getElementById('payOptPaid');
+            const payMethodWrap = document.getElementById('payMethodWrap');
+            const payMethodSel = document.getElementById('infoPayMethod');
+            const trxWrap = document.getElementById('trxWrap');
+            const trxInp = document.getElementById('infoTrx');
+            const osPayRow = document.getElementById('osPayRow');
+
+            const getPayStatus = () => (document.querySelector('input[name="payStatus"]:checked')?.value || 'due');
+            const getPayMethod = () => (payMethodSel?.value || '').trim();
+
+            function syncPayUI() {
+                const status = getPayStatus();
+                const isPaid = status === 'paid';
+
+                payOptDue && payOptDue.classList.toggle('on', !isPaid);
+                payOptPaid && payOptPaid.classList.toggle('on', isPaid);
+
+                if (payMethodWrap) payMethodWrap.style.display = isPaid ? 'flex' : 'none';
+                if (trxWrap) trxWrap.style.display = isPaid ? 'flex' : 'none';
+
+                if (!isPaid) {
+                    // Keep values but remove error styling so user can switch back/forth.
+                    payMethodSel && payMethodSel.classList.remove('err');
+                    trxInp && trxInp.classList.remove('err');
+                }
+
+                if (osPayRow) {
+                    if (isPaid) {
+                        const m = getPayMethod();
+                        osPayRow.textContent = m ? `Paid • ${m}` : 'Paid';
+                    } else {
+                        osPayRow.textContent = 'Payment Due';
+                    }
+                }
+            }
+
+            document.querySelectorAll('input[name="payStatus"]').forEach(r => {
+                r.addEventListener('change', syncPayUI);
+            });
+            payMethodSel?.addEventListener('change', syncPayUI);
+            syncPayUI();
+
+            /* ── EMAIL FIELD VISIBILITY ── */
+            const emailModeRaw = (qs.get('email') || '').trim().toLowerCase();
+            const showEmail = emailModeRaw === 'required' || emailModeRaw === 'optional';
+            const requireEmail = emailModeRaw === 'required';
+
+            const emailWrap = document.getElementById('emailWrap');
+            const emailInp = document.getElementById('infoEmail');
+            const lblReq = document.getElementById('lblEmailReq');
+            const emailHint = document.getElementById('emailHint');
+            const ffUidWrap = document.getElementById('ffUidWrap');
+            const ffUidInp = document.getElementById('infoFfUid');
+            if (showEmail) {
+                emailWrap.style.display = 'flex';
+                if (requireEmail) {
+                    lblReq.textContent = '*'; lblReq.className = 'req';
+                    emailHint.textContent = 'Required — this Gmail will receive your subscription activation.';
+                } else {
+                    lblReq.textContent = '(optional)'; lblReq.className = 'opt';
+                    emailHint.textContent = 'Provide if you want activation on a specific Gmail.';
+                }
+            }
+            if (isFreeFireMode && ffUidWrap) {
+                ffUidWrap.style.display = 'flex';
+                const ffUidFromUrl = (qs.get('uid') || '').trim();
+                if (ffUidInp && ffUidFromUrl) ffUidInp.value = ffUidFromUrl;
+            }
+
+            /* pay_url is accepted for backward compatibility, but TrxID is controlled by Paid/Due now */
+            const payUrl = (qs.get('pay_url') || qs.get('payUrl') || '').trim();
+
+            /* ── BUILD ORDER MESSAGE ── */
+            function buildMessage() {
+                const name = (document.getElementById('infoName')?.value || '').trim();
+                const wa = (document.getElementById('infoWhatsApp')?.value || '').trim();
+                const actEmail = (document.getElementById('infoEmail')?.value || '').trim();
+                const payStatus = getPayStatus();
+                const payMethod = getPayMethod();
+                const trx = (document.getElementById('infoTrx')?.value || '').trim();
+                const note = (document.getElementById('infoNote')?.value || '').trim();
+                const ffUid = (document.getElementById('infoFfUid')?.value || '').trim();
+
+                const now = new Date();
+                const dt = now.toLocaleString('en-GB', {
+                    year: 'numeric', month: 'short', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit'
+                });
+
+                const lines = [
+                    '🛒 *NEW ORDER — Tech Tiger BD*',
+                    '━━━━━━━━━━━━━━━━━━━━━━',
+                    '',
+                    `📦 *Product:* ${p.product}`,
+                    p.plan ? `📋 *Plan:* ${p.plan}` : '',
+                    p.validity ? `⏳ *Validity:* ${p.validity}` : '',
+                    `💰 *Price:* ৳${total || p.price} BDT`,
+                    p.qty > 1 ? `🔢 *Qty:* ${p.qty}` : '',
+                    isFreeFireMode && ffUid ? `🎮 *Free Fire UID:* ${ffUid}` : '',
+                    payStatus === 'paid' ? `✅ *Payment Status:* Paid` : `⏳ *Payment Status:* Payment Due`,
+                    payStatus === 'paid' && payMethod ? `💳 *Payment Method:* ${payMethod}` : '',
+                    payStatus === 'paid' && trx ? `🧾 *TrxID:* ${trx}` : '',
+                    '',
+                    '━━━━━━━━━━━━━━━━━━━━━━',
+                    '👤 *Customer Details*',
+                    '━━━━━━━━━━━━━━━━━━━━━━',
+                    '',
+                    name ? `• *Name:* ${name}` : '• *Name:* Not provided',
+                    `• *WhatsApp:* ${wa || 'Not provided'}`,
+                    (showEmail && actEmail) ? `• *Activation Gmail:* ${actEmail}` : '',
+                    note ? `• *Note:* ${note}` : '',
+                    '',
+                    '━━━━━━━━━━━━━━━━━━━━━━',
+                    `🕐 *Date:* ${dt}`,
+                    `🔗 *Page:* ${location.href.split('?')[0]}`,
+                    '━━━━━━━━━━━━━━━━━━━━━━',
+                ];
+
+                return lines.filter(l => l !== null && l !== undefined && (typeof l !== 'string' || l !== '' || lines.indexOf(l) % 3 === 0)).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+            }
+
+            /* ── VALIDATE ── */
+            function validate() {
+                const errBox = document.getElementById('errBox');
+                const name = (document.getElementById('infoName')?.value || '').trim();
+                const wa = (document.getElementById('infoWhatsApp')?.value || '').trim();
+                const waDigits = wa.replace(/\D+/g, '');
+                const payStatus = getPayStatus();
+                const isPaid = payStatus === 'paid';
+                const payMethod = getPayMethod();
+                const trx = (document.getElementById('infoTrx')?.value || '').trim();
+                const ffUid = (document.getElementById('infoFfUid')?.value || '').trim();
+
+                // Clear previous errors
+                document.querySelectorAll('.fi.err').forEach(el => el.classList.remove('err'));
+                errBox.classList.remove('on');
+
+                let errors = [];
+
+                if (!name) {
+                    errors.push('Please enter your full name.');
+                    document.getElementById('infoName').classList.add('err');
+                }
+                if (!waDigits || waDigits.length < 10) {
+                    errors.push('Please enter a valid WhatsApp number (at least 10 digits).');
+                    document.getElementById('infoWhatsApp').classList.add('err');
+                }
+                if (showEmail && requireEmail) {
+                    const em = (document.getElementById('infoEmail')?.value || '').trim();
+                    if (!em || !em.includes('@')) {
+                        errors.push('Please enter a valid activation Gmail address.');
+                        document.getElementById('infoEmail').classList.add('err');
+                    }
+                }
+                if (isFreeFireMode) {
+                    if (!ffUid || ffUid.length < 5) {
+                        errors.push('Please enter a valid Free Fire UID.');
+                        document.getElementById('infoFfUid').classList.add('err');
+                    }
+                }
+
+                if (isPaid) {
+                    if (!payMethod) {
+                        errors.push('Please select your payment method (bKash/Nagad/Rocket/Binance).');
+                        payMethodSel && payMethodSel.classList.add('err');
+                    }
+                    if (!trx || trx.length < 5) {
+                        errors.push('Please enter a valid TrxID (at least 5 characters).');
+                        document.getElementById('infoTrx').classList.add('err');
+                    }
+                }
+
+                if (errors.length) {
+                    errBox.textContent = errors.join(' ');
+                    errBox.classList.add('on');
+                    errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    return false;
+                }
+                return true;
+            }
+
+            /* ── SEND ORDER → LIVE CHAT ── */
+            document.getElementById('btnSendWA').addEventListener('click', () => {
+                if (!validate()) return;
+                const msg = buildMessage();
+                openOrderModal(msg);
+            });
+
+            /* ── PREVIEW MESSAGE ── */
+            document.getElementById('btnPreview').addEventListener('click', () => {
+                if (!validate()) return;
+                const msg = buildMessage();
+                document.getElementById('previewMsg').textContent = msg;
+                const box = document.getElementById('previewBox');
+                box.classList.add('on');
+                box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+
+            document.getElementById('previewClose').addEventListener('click', () => {
+                document.getElementById('previewBox').classList.remove('on');
+            });
+
+            /* ── CLEAR ERROR ON FOCUS ── */
+            document.querySelectorAll('.fi').forEach(inp => {
+                inp.addEventListener('focus', () => {
+                    inp.classList.remove('err');
+                    const errBox = document.getElementById('errBox');
+                    errBox.classList.remove('on');
+                });
+            });
+
+            // Clear error for payment status toggle changes
+            document.querySelectorAll('input[name="payStatus"]').forEach(r => {
+                r.addEventListener('change', () => {
+                    const errBox = document.getElementById('errBox');
+                    errBox.classList.remove('on');
+                });
+            });
+
+        })();
+    </script>
+    <script defer src="/assets/livechat.js?v=lc7"></script>
+</body>
+
+</html>

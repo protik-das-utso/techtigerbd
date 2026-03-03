@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment Status — Tech Tiger BD</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16.png?v=1" />
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png?v=1" />
+    <meta name="theme-color" content="#00E5FF">
+
+    <meta http-equiv="refresh" content="0; url=../success/" />
+    <script>
+        (function () {
+            var target = new URL('../success/', location.href);
+            target.search = location.search || '';
+            location.replace(target.toString());
+        })();
+    </script>
+
+    <style>
+        .suc-sec {
+            padding: 66px 0 84px;
+        }
+
+        .suc-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            padding: 18px;
+        }
+
+        .kv {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .kv:last-child {
+            border-bottom: 0;
+        }
+
+        .k {
+            color: var(--text-dim);
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .v {
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        @media (max-width: 720px) {
+            .kv {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .muted {
+            color: var(--text-dim);
+        }
+
+        .btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 800;
+            letter-spacing: .02em;
+        }
+
+        .btn.primary {
+            border-color: rgba(0, 229, 255, .45);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+    </style>
+</head>
+
+<body>
+    <p>Redirecting…</p>
+    <script defer src="/assets/livechat.js?v=lc7"></script>
+</body>
+
+</html>
