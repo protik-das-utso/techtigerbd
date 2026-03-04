@@ -1,3 +1,4 @@
+
 // Tawk.to Live Chat loader + bridge (site-wide)
 if (!window.__TTBD_TAWK_LOADED__) {
     window.__TTBD_TAWK_LOADED__ = true;
@@ -329,4 +330,47 @@ if (!window.__TTBD_TAWK_LOADED__) {
 
         loadAttempt();
     })();
+}
+
+if (!window.__TTBD_SECURE_UI__) {
+    window.__TTBD_SECURE_UI__ = true;
+
+    document.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    }, { capture: true });
+
+    document.addEventListener('keydown', function (event) {
+        const key = String(event.key || '').toLowerCase();
+        const ctrl = event.ctrlKey || event.metaKey;
+        const blocked =
+            key === 'f12' ||
+            (ctrl && event.shiftKey && (key === 'i' || key === 'j' || key === 'c' || key === 'k')) ||
+            (ctrl && (key === 'u' || key === 's'));
+
+        if (blocked) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+    }, { capture: true });
+
+    let tripped = false;
+    function handleDevtoolsOpen() {
+        if (tripped) return;
+        tripped = true;
+        try {
+            document.documentElement.innerHTML = '';
+        } catch (_) { }
+        try {
+            window.location.replace('about:blank');
+        } catch (_) { }
+    }
+
+    window.setInterval(function () {
+        const widthGap = Math.abs(window.outerWidth - window.innerWidth);
+        const heightGap = Math.abs(window.outerHeight - window.innerHeight);
+        if (widthGap > 160 || heightGap > 160) {
+            handleDevtoolsOpen();
+        }
+    }, 900);
 }

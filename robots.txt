@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://techtigerbd.com/sitemap.xml
+Disallow: /products/info.html
+Disallow: /products/success.html
+Disallow: /products/success/
+Disallow: /success/
+Sitemap: https://ttigerbd.com/sitemap.xml
