@@ -1,0 +1,109 @@
+{
+    "items": [
+        {
+            "name": "ChatGPT",
+            "image": "/assets/brand/chatgpt.webp",
+            "link": "/products/chatgpt/",
+            "price": "৳200–৳3999",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Grammarly Premium",
+            "image": "/assets/brand/grammarly.webp",
+            "link": "/products/grammarly/",
+            "price": "৳200 / 1 Month",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Spotify Premium",
+            "image": "/assets/brand/spotify.webp",
+            "link": "/products/spotify/",
+            "price": "৳60–৳120",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Perplexity AI",
+            "image": "/assets/brand/perplexity.webp",
+            "link": "/products/perplexity/",
+            "price": "৳100–৳150",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Netflix Personal",
+            "image": "/assets/brand/netflix.webp",
+            "link": "/products/netflix/",
+            "price": "৳300–৳350",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "YouTube Premium",
+            "image": "/assets/brand/youtube.webp",
+            "link": "/products/youtube/",
+            "price": "৳70–৳1500",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Amazon Prime Video",
+            "image": "/assets/brand/prime-video.webp",
+            "link": "/products/prime-video/",
+            "price": "৳50–৳200",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "CapCut Premium",
+            "image": "/assets/brand/capcut.webp",
+            "link": "/products/capcut/",
+            "price": "৳300 / 1 Month",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "StealthWriter",
+            "image": "/assets/brand/stealthwriter.webp",
+            "link": "/products/stealthwriter/",
+            "price": "৳200–৳400 / 1 Month",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Surfshark VPN",
+            "image": "/assets/brand/surfshark.webp",
+            "link": "/products/surfshark/",
+            "price": "৳100 / mo",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Disney+ Profile",
+            "image": "/assets/brand/disney.webp",
+            "link": "/products/disney-plus/",
+            "price": "৳350",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "HBO Profile",
+            "image": "/assets/brand/hbo.webp",
+            "link": "/products/hbo/",
+            "price": "৳350",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Telegram Premium",
+            "image": "/assets/brand/telegram.webp",
+            "link": "/products/telegram-premium/",
+            "price": "৳500+",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Gemini + VEO3",
+            "image": "/assets/brand/gemini-veo3.webp",
+            "link": "/products/gemini-veo3.html",
+            "price": "৳500–৳1500",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Free Fire UC",
+            "image": "/assets/brand/freefire.webp",
+            "link": "/products/free-fire/",
+            "price": "Top-up",
+            "cta": "TOP UP"
+        }
+    ]
+}
