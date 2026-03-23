@@ -335,6 +335,13 @@ if (!window.__TTBD_TAWK_LOADED__) {
 if (!window.__TTBD_SECURE_UI__) {
     window.__TTBD_SECURE_UI__ = true;
 
+    const ua = String(navigator.userAgent || '').toLowerCase();
+    const isLikelyMobileOrInApp =
+        /android|iphone|ipad|ipod|mobile|fbav|fban|instagram|line|micromessenger|wv/.test(ua);
+    const hasFinePointer =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
     document.addEventListener('contextmenu', function (event) {
         event.preventDefault();
     }, { capture: true });
@@ -358,19 +365,16 @@ if (!window.__TTBD_SECURE_UI__) {
     function handleDevtoolsOpen() {
         if (tripped) return;
         tripped = true;
-        try {
-            document.documentElement.innerHTML = '';
-        } catch (_) { }
-        try {
-            window.location.replace('about:blank');
-        } catch (_) { }
+        // Avoid redirecting to about:blank because it can false-trigger on mobile/in-app browsers.
     }
 
-    window.setInterval(function () {
-        const widthGap = Math.abs(window.outerWidth - window.innerWidth);
-        const heightGap = Math.abs(window.outerHeight - window.innerHeight);
-        if (widthGap > 160 || heightGap > 160) {
-            handleDevtoolsOpen();
-        }
-    }, 900);
+    if (!isLikelyMobileOrInApp && hasFinePointer) {
+        window.setInterval(function () {
+            const widthGap = Math.abs(window.outerWidth - window.innerWidth);
+            const heightGap = Math.abs(window.outerHeight - window.innerHeight);
+            if (widthGap > 260 || heightGap > 260) {
+                handleDevtoolsOpen();
+            }
+        }, 1200);
+    }
 }
