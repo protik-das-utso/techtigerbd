@@ -4,13 +4,32 @@
             "name": "ChatGPT",
             "image": "/assets/brand/chatgpt.webp",
             "link": "/products/chatgpt/",
-            "price": "৳200–৳3999",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳350–৳2700",
+            "priceMonthly": "From ৳350",
+            "price": "৳350–৳2700",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Canva Pro",
+            "image": "/assets/brand/canva.svg",
+            "link": "/products/canva-pro/",
+            "category": "creative",
+            "available": true,
+            "priceRange": "৳150",
+            "priceMonthly": "From ৳150 / 1 Year",
+            "price": "৳150 / 1 Year",
             "cta": "BUY NOW"
         },
         {
             "name": "Grammarly Premium",
             "image": "/assets/brand/grammarly.webp",
             "link": "/products/grammarly/",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳200",
+            "priceMonthly": "From ৳200 / 1 Month",
             "price": "৳200 / 1 Month",
             "cta": "BUY NOW"
         },
@@ -18,6 +37,10 @@
             "name": "Spotify Premium",
             "image": "/assets/brand/spotify.webp",
             "link": "/products/spotify/",
+            "category": "music",
+            "available": true,
+            "priceRange": "৳60–৳120",
+            "priceMonthly": "From ৳60 / mo",
             "price": "৳60–৳120",
             "cta": "BUY NOW"
         },
@@ -25,41 +48,159 @@
             "name": "Perplexity AI",
             "image": "/assets/brand/perplexity.webp",
             "link": "/products/perplexity/",
-            "price": "৳100–৳150",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳2100",
+            "priceMonthly": "From ৳2100",
+            "price": "৳2100",
+            "plans": {
+                "shared": {
+                    "available": false,
+                    "label": "Shared (Our mail)",
+                    "price": 100,
+                    "priceText": "৳100",
+                    "buyText": "Not Available"
+                },
+                "personal": {
+                    "available": true,
+                    "label": "Personal (Your mail)",
+                    "price": 2100,
+                    "priceText": "৳2100",
+                    "buyText": "Pay Now — ৳2100",
+                    "productKey": "manual_perplexity_personal_yourmail",
+                    "email": "required"
+                }
+            },
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "Claude Pro",
+            "image": "/assets/brand/claude.svg",
+            "link": "/products/claude-pro/",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳2700",
+            "priceMonthly": "From ৳2700 / 1 Month",
+            "price": "৳2700 / 1 Month",
             "cta": "BUY NOW"
         },
         {
             "name": "Netflix Personal",
             "image": "/assets/brand/netflix.webp",
             "link": "/products/netflix/",
-            "price": "৳300–৳350",
+            "category": "streaming",
+            "available": true,
+            "priceRange": "৳350–৳430",
+            "priceMonthly": "From ৳350",
+            "price": "৳350–৳430",
             "cta": "BUY NOW"
         },
         {
             "name": "YouTube Premium",
             "image": "/assets/brand/youtube.webp",
             "link": "/products/youtube/",
+            "category": "streaming",
+            "available": true,
+            "priceRange": "৳70–৳1500",
+            "priceMonthly": "From ৳70",
             "price": "৳70–৳1500",
+            "plans": {
+                "renew-1m": {
+                    "available": true,
+                    "duration": "1 Month",
+                    "title": "Renewable",
+                    "price": 180,
+                    "subText": "Test our service",
+                    "buyText": "Pay Now — ৳180",
+                    "href": "../info.html?product=YouTube%20Premium&plan=1%20Month%20Renewable&price=180&qty=1&mode=manual&productkey=manual_youtube_renew&email=required"
+                },
+                "renew-3m": {
+                    "available": true,
+                    "duration": "3 Months",
+                    "title": "Renewable",
+                    "price": 525,
+                    "subText": "৳175/month — Save 2.78% (৳15)",
+                    "buyText": "Pay Now — ৳525",
+                    "href": "../info.html?product=YouTube%20Premium&plan=3%20Month%20Renewable&price=525&qty=1&mode=manual&productkey=manual_youtube_renew_3m&email=required"
+                },
+                "renew-6m": {
+                    "available": true,
+                    "duration": "6 Months",
+                    "title": "Renewable",
+                    "price": 1020,
+                    "subText": "৳170/month — Save 5.56% (৳60)",
+                    "buyText": "Pay Now — ৳1020",
+                    "href": "../info.html?product=YouTube%20Premium&plan=6%20Month%20Renewable&price=1020&qty=1&mode=manual&productkey=manual_youtube_renew_6m&email=required"
+                },
+                "renew-12m": {
+                    "available": true,
+                    "duration": "12 Months",
+                    "title": "Renewable",
+                    "price": 1980,
+                    "subText": "৳165/month — Save 8.33% (৳180)",
+                    "buyText": "Pay Now — ৳1980",
+                    "href": "../info.html?product=YouTube%20Premium&plan=12%20Month%20Renewable&price=1980&qty=1&mode=manual&productkey=manual_youtube_renew_12m&email=required"
+                },
+                "nonrenew-1m": {
+                    "available": false,
+                    "duration": "1 Month",
+                    "title": "Non-Renewable",
+                    "price": 70,
+                    "subText": "Budget-friendly option",
+                    "buyText": "STOCKOUT",
+                    "href": "../info.html?product=YouTube%20Premium&plan=1%20Month%20Non-Renew&price=70&qty=1&mode=manual&productkey=manual_youtube_nonrenew&email=required"
+                }
+            },
             "cta": "BUY NOW"
         },
         {
             "name": "Amazon Prime Video",
             "image": "/assets/brand/prime-video.webp",
             "link": "/products/prime-video/",
+            "category": "streaming",
+            "available": true,
+            "priceRange": "৳50–৳200",
+            "priceMonthly": "From ৳50",
             "price": "৳50–৳200",
+            "plans": {
+                "1m": {
+                    "available": true,
+                    "duration": "1 Month",
+                    "title": "Shared Profile",
+                    "price": 50,
+                    "buyText": "Pay Now — ৳50",
+                    "href": "../info.html?product=Prime%20Video&plan=1%20Month&validity=1%20Month&price=50&qty=1&mode=auto-cr&email=hide"
+                },
+                "6m": {
+                    "available": true,
+                    "duration": "6 Month",
+                    "title": "Shared Profile",
+                    "price": 200,
+                    "buyText": "Pay Now — ৳200",
+                    "href": "../info.html?product=Prime%20Video&plan=6%20Month&validity=6%20Month&price=200&qty=1&mode=manual&productkey=manual_prime_6m&email=hide"
+                }
+            },
             "cta": "BUY NOW"
         },
         {
             "name": "CapCut Premium",
             "image": "/assets/brand/capcut.webp",
             "link": "/products/capcut/",
-            "price": "৳300 / 1 Month",
+            "category": "creative",
+            "available": true,
+            "priceRange": "৳900",
+            "priceMonthly": "From ৳900 / 1 Month",
+            "price": "৳900 / 1 Month",
             "cta": "BUY NOW"
         },
         {
             "name": "StealthWriter",
             "image": "/assets/brand/stealthwriter.webp",
             "link": "/products/stealthwriter/",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳200–৳400",
+            "priceMonthly": "From ৳200 / 1 Month",
             "price": "৳200–৳400 / 1 Month",
             "cta": "BUY NOW"
         },
@@ -67,6 +208,10 @@
             "name": "Surfshark VPN",
             "image": "/assets/brand/surfshark.webp",
             "link": "/products/surfshark/",
+            "category": "vpn",
+            "available": true,
+            "priceRange": "৳100",
+            "priceMonthly": "From ৳100 / mo",
             "price": "৳100 / mo",
             "cta": "BUY NOW"
         },
@@ -74,6 +219,10 @@
             "name": "Disney+ Profile",
             "image": "/assets/brand/disney.webp",
             "link": "/products/disney-plus/",
+            "category": "streaming",
+            "available": true,
+            "priceRange": "৳350",
+            "priceMonthly": "From ৳350",
             "price": "৳350",
             "cta": "BUY NOW"
         },
@@ -81,6 +230,10 @@
             "name": "HBO Profile",
             "image": "/assets/brand/hbo.webp",
             "link": "/products/hbo/",
+            "category": "streaming",
+            "available": true,
+            "priceRange": "৳350",
+            "priceMonthly": "From ৳350",
             "price": "৳350",
             "cta": "BUY NOW"
         },
@@ -88,20 +241,32 @@
             "name": "Telegram Premium",
             "image": "/assets/brand/telegram.webp",
             "link": "/products/telegram-premium/",
-            "price": "৳500+",
+            "category": "messaging",
+            "available": true,
+            "priceRange": "৳600–৳5000",
+            "priceMonthly": "From ৳600",
+            "price": "৳600–৳5000",
             "cta": "BUY NOW"
         },
         {
-            "name": "Gemini + VEO3",
-            "image": "/assets/brand/gemini-veo3.webp",
+            "name": "Google AI Pro",
+            "image": "/assets/brand/gemini.webp",
             "link": "/products/gemini-veo3.html",
-            "price": "৳500–৳1500",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳450",
+            "priceMonthly": "৳450 / mo",
+            "price": "৳450 / mo",
             "cta": "BUY NOW"
         },
         {
             "name": "Free Fire UC",
             "image": "/assets/brand/freefire.webp",
             "link": "/products/free-fire/",
+            "category": "gaming",
+            "available": true,
+            "priceRange": "Top-up",
+            "priceMonthly": "Top-up",
             "price": "Top-up",
             "cta": "TOP UP"
         }

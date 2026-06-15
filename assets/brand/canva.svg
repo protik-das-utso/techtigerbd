@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Canva Pro</title>
+  <desc id="desc">Stylized Canva Pro product artwork for Tech Tiger BD.</desc>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00c4cc" />
+      <stop offset="50%" stop-color="#7a5cff" />
+      <stop offset="100%" stop-color="#ff8a00" />
+    </linearGradient>
+    <radialGradient id="g2" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".18" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" rx="64" fill="#07111f" />
+  <circle cx="220" cy="120" r="220" fill="url(#g2)" />
+  <circle cx="1020" cy="520" r="260" fill="url(#g2)" />
+  <rect x="84" y="84" width="1032" height="462" rx="42" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" />
+  <circle cx="600" cy="315" r="160" fill="url(#g1)" opacity=".95" />
+  <circle cx="600" cy="315" r="100" fill="#07111f" opacity=".45" />
+  <text x="600" y="302" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="700">Canva</text>
+  <text x="600" y="360" text-anchor="middle" fill="rgba(255,255,255,.88)" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="600">Pro</text>
+  <text x="600" y="450" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="500">Personal 1 Year</text>
+</svg>

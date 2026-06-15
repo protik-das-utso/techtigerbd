@@ -1,0 +1,262 @@
+/*
+ * ============================================================
+ *  product-theme.css — Tech Tiger BD (2026 redesign)
+ *  Product-page styles on top of theme.css.
+ *  Requires: theme.css loaded first.
+ * ============================================================
+ */
+
+/* ── BREADCRUMB ── */
+.crumb {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.crumb-in { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-faint); flex-wrap: wrap; }
+.crumb-in a { color: var(--text-dim); transition: color var(--t); }
+.crumb-in a:hover { color: var(--accent); }
+
+/* ── PRODUCT HERO ── */
+.phero {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0 0;
+}
+.phero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 44px;
+  align-items: center;
+}
+.phero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  margin-bottom: 20px;
+}
+.phero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  margin-bottom: 18px;
+}
+.phero h1 .hl { color: var(--accent); }
+.phero p { font-size: 16px; color: var(--text-dim); line-height: 1.7; max-width: 480px; margin-bottom: 28px; }
+.phero-art {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4/3;
+  position: relative;
+}
+.phero-art img { width: 100%; height: 100%; object-fit: cover; }
+.phero-art::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, transparent 50%, color-mix(in srgb, var(--accent) 30%, transparent));
+}
+
+/* ── PAYMENT STRIP ── */
+.paystrip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 18px 0;
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-tint);
+}
+.paystrip-lbl { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); }
+.paystrip .picons { display: flex; gap: 10px; align-items: center; }
+.paystrip .picons img { height: 28px; width: auto; }
+
+/* ── STEPS ── */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.step {
+  position: relative;
+  padding: 26px 22px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: transform var(--t), box-shadow var(--t);
+}
+.step:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.step-n { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--accent); }
+.step-ico { font-size: 26px; margin: 10px 0 12px; }
+.step-ttl { font-family: var(--font-display); font-size: 15.5px; font-weight: 600; margin-bottom: 6px; }
+.step-dsc { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; }
+
+/* ── PRICING ── */
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.plans.plans-3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 920px;
+}
+@media (max-width: 820px) { .plans.plans-3 { grid-template-columns: 1fr; max-width: 420px; } }
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 26px;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+}
+.plan:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.plan.best {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow: 0 20px 50px -18px var(--glow);
+}
+.plan.best::before {
+  content: 'BEST VALUE';
+  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 10.5px; font-weight: 700; letter-spacing: .1em;
+  color: #fff;
+  background: linear-gradient(135deg, var(--c-violet), var(--c-blue));
+  box-shadow: 0 8px 18px -6px rgba(109, 94, 247, .6);
+}
+.plan-dur { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; }
+.plan-type { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 4px 0 18px; }
+.plan-price { display: flex; align-items: baseline; gap: 3px; margin-bottom: 6px; }
+.plan-price .sym { font-size: 1.3rem; color: var(--text-dim); font-weight: 600; }
+.plan-price .amt { font-family: var(--font-display); font-size: 3rem; font-weight: 700; line-height: 1; letter-spacing: -.03em; }
+.plan-sub { font-size: 12.5px; color: var(--c-green); font-weight: 600; margin-bottom: 20px; }
+.plan-feats { flex: 1; margin-bottom: 22px; }
+.plan-feats li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 0;
+  font-size: 13.5px; color: var(--text-dim);
+  border-bottom: 1px solid var(--hairline);
+}
+.plan-feats li:last-child { border-bottom: none; }
+.plan-feats li svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; stroke: var(--c-green); }
+.plan-cta {
+  display: block; text-align: center;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600; font-size: 14px;
+  color: var(--text);
+  background: var(--bg-tint);
+  border: 1px solid var(--border-b);
+  transition: all var(--t);
+}
+.plan-cta:hover { color: #fff; background: var(--accent); border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 24px -8px var(--accent); }
+.plan.best .plan-cta { color: #fff; background: linear-gradient(135deg, var(--c-violet), var(--c-blue)); border: none; }
+
+/* ── COMPARE ── */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 820px; margin: 0 auto; }
+.ccard { border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); overflow: hidden; }
+.ccard.hl { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.ccard-head { padding: 22px 24px; border-bottom: 1px solid var(--border); }
+.ccard-head h3 { font-family: var(--font-display); font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ccard-head .rtag { font-size: 10px; padding: 3px 9px; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; letter-spacing: .06em; }
+.ccard-from { font-size: 13px; color: var(--text-dim); margin-top: 5px; }
+.ccard-from strong { font-family: var(--font-display); color: var(--accent); font-size: 16px; }
+.ccard li { display: flex; align-items: center; gap: 12px; padding: 13px 24px; font-size: 14px; color: var(--text-dim); border-bottom: 1px solid var(--hairline); }
+.ccard li:last-child { border-bottom: none; }
+.ccard li svg { width: 16px; height: 16px; flex-shrink: 0; }
+.ccard li svg.c { stroke: var(--c-green); }
+.ccard li svg.i { stroke: var(--c-amber); }
+
+/* ── REVIEWS ── */
+.rsumm {
+  display: flex; align-items: center; gap: 22px;
+  padding: 22px 26px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.rsumm-n { font-family: var(--font-display); font-size: 3.2rem; font-weight: 700; line-height: 1; letter-spacing: -.03em; }
+.rsumm-n span { color: var(--accent); font-size: 1.5rem; }
+.rsumm-stars { color: var(--c-amber); font-size: 18px; letter-spacing: 2px; }
+.rsumm-c { font-size: 13px; color: var(--text-dim); margin-top: 3px; }
+
+.rev-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.rev-link { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; border-radius: 10px; border: 1px solid var(--border-b); font-size: 13px; font-weight: 600; color: var(--text-dim); transition: all var(--t); }
+.rev-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.rev-wrap { position: relative; }
+.rev-wrap.no-scroll .rev-arr { display: none; }
+.rev-arr {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border-b); color: var(--text);
+  z-index: 3; box-shadow: var(--shadow); transition: all var(--t);
+}
+.rev-arr svg { width: 18px; height: 18px; }
+.rev-arr:hover { border-color: var(--accent); color: var(--accent); }
+.rev-arr:disabled { opacity: .3; cursor: default; }
+.rev-arr-l { left: -16px; }
+.rev-arr-r { right: -16px; }
+
+.revg {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: min(360px, 80vw);
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 4px;
+  scrollbar-width: none;
+}
+.revg::-webkit-scrollbar { display: none; }
+.rc {
+  position: relative;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 14px;
+  scroll-snap-align: start;
+}
+.rc-stars { color: var(--c-amber); font-size: 14px; letter-spacing: 2px; }
+.rc-txt { font-size: 14.5px; color: var(--text); line-height: 1.65; flex: 1; }
+.rc-auth { display: flex; align-items: center; gap: 12px; }
+.rc-av {
+  width: 40px; height: 40px; border-radius: 50%; overflow: hidden;
+  display: grid; place-items: center; flex-shrink: 0;
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  color: #fff; background: linear-gradient(135deg, var(--c-violet), var(--c-blue));
+}
+.rc-av img { width: 100%; height: 100%; object-fit: cover; }
+.rc-name { font-weight: 600; font-size: 13.5px; }
+.rc-date { font-size: 12px; color: var(--text-faint); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 980px) {
+  .phero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .phero-art { max-width: 460px; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .compare { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .plans { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .revg { grid-template-rows: 1fr; grid-auto-columns: 84vw; }
+}

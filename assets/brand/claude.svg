@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Pro</title>
+  <desc id="desc">Stylized Claude Pro product artwork for Tech Tiger BD.</desc>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6b6b" />
+      <stop offset="55%" stop-color="#ff9f43" />
+      <stop offset="100%" stop-color="#ffd166" />
+    </linearGradient>
+    <radialGradient id="g2" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".16" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" rx="64" fill="#08111e" />
+  <circle cx="180" cy="120" r="210" fill="url(#g2)" />
+  <circle cx="1010" cy="510" r="250" fill="url(#g2)" />
+  <rect x="84" y="84" width="1032" height="462" rx="42" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" />
+  <circle cx="600" cy="315" r="168" fill="url(#g1)" opacity=".95" />
+  <circle cx="600" cy="315" r="98" fill="#08111e" opacity=".42" />
+  <text x="600" y="300" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700">Claude</text>
+  <text x="600" y="360" text-anchor="middle" fill="rgba(255,255,255,.9)" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="600">Pro</text>
+  <text x="600" y="450" text-anchor="middle" fill="rgba(255,255,255,.7)" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="500">Personal 1 Month</text>
+</svg>
