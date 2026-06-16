@@ -600,19 +600,19 @@
     <div class="ordermodal" id="orderModal" aria-hidden="true">
         <div class="ordermodal-in" role="dialog" aria-modal="true" aria-label="Order Instructions">
             <div class="ordermodal-head">
-                <div class="ordermodal-ttl">Order Instructions</div>
+                <div class="ordermodal-ttl">Review Your Order</div>
                 <button type="button" class="ordermodal-x" id="orderModalClose" aria-label="Close">✕</button>
             </div>
             <div class="ordermodal-body">
                 <ol class="ordermodal-steps">
-                    <li>Click <strong>Copy Order</strong>.</li>
-                    <li>Click <strong>Open Live Chat</strong>.</li>
-                    <li>Paste the copied details in chat and send.</li>
+                    <li>Review your order details below.</li>
+                    <li>Click <strong>Confirm Order</strong> — if paid, WhatsApp opens pre-filled (just press send); if payment is due, our live chat opens to assist you.</li>
+                    <li>Or click <strong>Copy Order</strong> to copy the details yourself.</li>
                 </ol>
                 <div class="ordermodal-msg" id="orderModalMsg"></div>
                 <div class="ordermodal-actions">
                     <button type="button" class="btn" id="orderModalCopy">Copy Order</button>
-                    <button type="button" class="btn btn-primary" id="orderModalOpenChat">Open Live Chat</button>
+                    <button type="button" class="btn btn-primary" id="orderModalOpenChat">Confirm Order</button>
                 </div>
             </div>
         </div>
@@ -688,6 +688,37 @@
         (function () {
             const RECAPTCHA_SITE_KEY = '6Le5tn4sAAAAAG_uNsXJF2DAm8CP7pyj3IGt2Uo9';
 
+            /* ── TELEGRAM ORDER CAPTURE ──
+               Paste your bot token (from @BotFather) and chat ID (from @userinfobot) below.
+               Leave blank to disable. Orders are sent automatically when a customer confirms. */
+            const TELEGRAM = {
+                botToken: '8653745092:AAHgLvvLOgfElF_8WeptnMbC1MB86jPpwzE',
+                chatId: '8166856274'
+            };
+
+            /* ── WHATSAPP ORDER LINE ──
+               Confirm Order opens WhatsApp with the full order pre-filled. Digits only, country code first. */
+            const WHATSAPP_NUMBER = '8801883044415';
+
+            function sendOrderToTelegram(message) {
+                if (!TELEGRAM.botToken || !TELEGRAM.chatId) return Promise.resolve(false);
+                const url = `https://api.telegram.org/bot${TELEGRAM.botToken}/sendMessage`;
+                const post = (useMarkdown) => fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM.chatId,
+                        text: message,
+                        ...(useMarkdown ? { parse_mode: 'Markdown' } : {}),
+                        disable_web_page_preview: true
+                    })
+                });
+                // Try Markdown first; if Telegram rejects it (e.g. unbalanced * or _), resend as plain text.
+                return post(true)
+                    .then(r => r.ok ? true : post(false).then(r2 => r2.ok))
+                    .catch(() => false);
+            }
+
             /* ── READ URL PARAMS ── */
             const qs = new URLSearchParams(location.search);
             const p = {
@@ -734,7 +765,7 @@
             const toastMsg = document.getElementById('toastMsg');
             let toastTimer = null;
 
-            function showToast(title, message) {
+            function showToast(title, message, duration) {
                 if (!toast) return;
                 toastTitle && (toastTitle.textContent = title || 'Notice');
                 toastMsg && (toastMsg.textContent = message || '');
@@ -742,7 +773,7 @@
                 if (toastTimer) clearTimeout(toastTimer);
                 toastTimer = setTimeout(() => {
                     toast.classList.remove('on');
-                }, 5000);
+                }, Number(duration) || 5000);
             }
 
             async function copyToClipboard(text) {
@@ -885,13 +916,42 @@
                 else showToast('Copy failed', 'Please copy the order details manually.');
             });
 
-            orderModalOpenChat?.addEventListener('click', () => {
-                if (window.TTBDLiveChat && typeof window.TTBDLiveChat.openWithRetries === 'function') {
-                    window.TTBDLiveChat.openWithRetries(12, 300);
-                } else if (window.TTBDLiveChat && typeof window.TTBDLiveChat.open === 'function') {
-                    window.TTBDLiveChat.open();
+            orderModalOpenChat?.addEventListener('click', async () => {
+                const message = (pendingOrderMessage || '').trim();
+                const name = (document.getElementById('infoName')?.value || '').trim();
+                const phone = (document.getElementById('infoWhatsApp')?.value || '').trim();
+                const isPaid = getPayStatus() === 'paid';
+
+                /* 1) Automatic order capture → Telegram (always, independent of any widget) */
+                sendOrderToTelegram(message);
+
+                /* 2) Post order data to the Tawk dashboard + open live chat */
+                if (window.TTBDLiveChat && typeof window.TTBDLiveChat.sendOrderToChat === 'function') {
+                    window.TTBDLiveChat.sendOrderToChat(message, {
+                        source: 'order-form',
+                        name: name,
+                        phone: phone,
+                        product: p.product,
+                        plan: p.plan
+                    });
                 }
-                showToast('Live chat opened', 'Paste your copied order details in chat.');
+
+                if (isPaid && WHATSAPP_NUMBER) {
+                    /* PAID → open WhatsApp with the full order pre-filled (one-tap send).
+                       window.open (not an <a> click) bypasses the WhatsApp→Tawk interceptor. */
+                    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+                    window.open(waUrl, '_blank', 'noopener');
+                    closeOrderModal();
+                    showToast('Order confirmed', 'WhatsApp opened with your order — just press send.');
+                } else {
+                    /* PAYMENT DUE → handle the order/query in Tawk live chat (no WhatsApp).
+                       Copy the order so the customer can paste it into the chat. */
+                    const copied = await copyToClipboard(message);
+                    closeOrderModal();
+                    showToast('✅ Order received', copied
+                        ? 'For a fast response, paste your order in the live chat — it\'s already copied, just tap the chat box and paste (Ctrl+V / long-press → Paste).'
+                        : 'For a fast response, please paste your order in the live chat box.', 10000);
+                }
             });
 
             function bindQrLink(id, title) {
@@ -1020,7 +1080,6 @@
                     '',
                     '━━━━━━━━━━━━━━━━━━━━━━',
                     `🕐 *Date:* ${dt}`,
-                    `🔗 *Page:* ${location.href.split('?')[0]}`,
                     '━━━━━━━━━━━━━━━━━━━━━━',
                 ];
 

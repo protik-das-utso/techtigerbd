@@ -260,6 +260,17 @@
             "cta": "BUY NOW"
         },
         {
+            "name": "Grok Super",
+            "image": "/assets/brand/grok.webp",
+            "link": "/products/grok.html",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳900",
+            "priceMonthly": "৳900 / 1 Month",
+            "price": "৳900 / 1 Month",
+            "cta": "BUY NOW"
+        },
+        {
             "name": "Free Fire UC",
             "image": "/assets/brand/freefire.webp",
             "link": "/products/free-fire/",
