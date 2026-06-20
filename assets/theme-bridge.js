@@ -67,3 +67,37 @@
     injectToggle();
   }
 })();
+
+/* Infinite seamless auto-scroll for the "Explore Other Products" row (.rp-track).
+   Items are cloned once so the row loops forever with no visible stop/reset. */
+(function () {
+  function init(track) {
+    var items = Array.prototype.slice.call(track.children);
+    if (!items.length) return;
+    if (track.scrollWidth - track.clientWidth < 12) return; // not enough to scroll
+    // duplicate the set so scrolling can wrap seamlessly
+    items.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+    var loopWidth = track.children[items.length].offsetLeft - items[0].offsetLeft; // width of one full set
+    track.style.scrollBehavior = 'auto';
+    var speed = 0.5, paused = false;
+    function loop() {
+      if (!paused) {
+        track.scrollLeft += speed;
+        if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth; // seamless wrap
+      }
+      requestAnimationFrame(loop);
+    }
+    var pause = function () { paused = true; }, resume = function () { paused = false; };
+    track.addEventListener('mouseenter', pause);
+    track.addEventListener('mouseleave', resume);
+    track.addEventListener('touchstart', pause, { passive: true });
+    track.addEventListener('touchend', function () { setTimeout(resume, 1500); }, { passive: true });
+    requestAnimationFrame(loop);
+  }
+  function start() {
+    try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+    document.querySelectorAll('.rp-track').forEach(init);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

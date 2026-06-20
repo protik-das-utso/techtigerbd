@@ -56,6 +56,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -154,7 +155,7 @@ a[href*="whatsapp://"] {
 /* Both .container (index) and .w (products) map to the same layout */
 .container,
 .w {
-  width: min(1140px, 94%);
+  width: min(1180px, 92%);
   margin-inline: auto;
   position: relative;
   z-index: 1;
@@ -261,8 +262,8 @@ a[href*="whatsapp://"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 66px;
-  /* ↑ was 62-64px */
+  height: 68px;
+  /* match home header (.nav-in) for consistent header size across pages */
 }
 
 /* ── BRAND ── */
@@ -386,6 +387,7 @@ nav.primary a:hover::after,
 .hamburger span::after {
   content: '';
   position: absolute;
+  left: 0;
   width: 18px;
   height: 1.5px;
   background: var(--text);

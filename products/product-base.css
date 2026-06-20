@@ -1386,3 +1386,53 @@
     font-size: 1.4rem;
   }
 }
+
+/* ── Explore Other Products (rp-) — tuning ── */
+.rp-sec { padding: 8px 0 60px; }
+.rp-item { flex-basis: 250px; grid-template-columns: 64px 1fr; padding: 12px; border-radius: 12px; }
+.rp-logo { width: 64px; height: 64px; padding: 8px; border-radius: 12px; }
+.rp-name { font-size: 13.5px; }
+.rp-meta { font-size: 12px; margin-top: 3px; }
+/* row auto-scrolls via JS — hide the horizontal scrollbar */
+.rp-track { scroll-behavior: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.rp-track::-webkit-scrollbar { display: none; height: 0; }
+
+/* ── Footer (product pages) ── */
+footer .w { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.foot-fb {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 700; color: var(--text-dim); text-decoration: none;
+  padding: 7px 14px; border: 1px solid var(--border-b); border-radius: 999px;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.foot-fb:hover { color: #fff; background: #1877F2; border-color: #1877F2; }
+.foot-fb svg { width: 16px; height: 16px; }
+
+/* no borders on the Explore row — clean look */
+.rp-wrap { border: none; }
+.rp-head { border-bottom: none; }
+.rp-item, .rp-item:hover { border: none; }
+.rp-logo { border: none; }
+
+/* bigger product logo image in the Explore row */
+.rp-item { flex-basis: 300px; grid-template-columns: 88px 1fr; gap: 14px; }
+.rp-logo { width: 88px; height: 88px; padding: 6px; }
+
+/* even bigger logo image */
+.rp-item { flex-basis: 340px; grid-template-columns: 120px 1fr; }
+.rp-logo { width: 120px; height: 120px; padding: 6px; }
+
+/* vertical card: image on top, product name, then price */
+.rp-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  flex-basis: 240px;
+  padding: 18px 14px;
+}
+/* clean image — no box/border/background behind the logo */
+.rp-logo { width: 200px; height: 200px; padding: 0; border: 0 !important; background: transparent !important; }
+.rp-name { font-size: 14px; }
+.rp-meta { font-size: 12.5px; margin-top: 0; }
