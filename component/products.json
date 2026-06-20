@@ -262,7 +262,7 @@
         {
             "name": "Grok Super",
             "image": "/assets/brand/grok.webp",
-            "link": "/products/grok.html",
+            "link": "/products/grok/",
             "category": "ai",
             "available": true,
             "priceRange": "৳1500",
@@ -280,6 +280,28 @@
             "priceMonthly": "Top-up",
             "price": "Top-up",
             "cta": "TOP UP"
+        },
+        {
+            "name": "Super Duolingo",
+            "image": "/assets/brand/duolingo.webp",
+            "link": "/products/duolingo-super/",
+            "category": "education",
+            "available": true,
+            "priceRange": "৳200",
+            "priceMonthly": "৳200 / 1 Month",
+            "price": "৳200 / 1 Month",
+            "cta": "BUY NOW"
+        },
+        {
+            "name": "QuillBot Premium",
+            "image": "/assets/brand/quillbot.webp",
+            "link": "/products/quillbot/",
+            "category": "ai",
+            "available": true,
+            "priceRange": "৳200",
+            "priceMonthly": "৳200 / 1 Month",
+            "price": "৳200 / 1 Month",
+            "cta": "BUY NOW"
         }
     ]
 }

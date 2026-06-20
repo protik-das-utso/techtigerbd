@@ -21,7 +21,8 @@
     creative:  { label: 'Creative',    color: '#E84CC4' },
     vpn:       { label: 'VPN',         color: '#15C0D8' },
     messaging: { label: 'Messaging',   color: '#2E83FF' },
-    gaming:    { label: 'Gaming',      color: '#F5A524' }
+    gaming:    { label: 'Gaming',      color: '#F5A524' },
+    education: { label: 'Education',    color: '#58CC02' }
   };
 
   function catOf(item) {
