@@ -201,6 +201,44 @@
         .ptopt.on { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); background: var(--accent-soft); }
         @media (max-width: 860px) { .ptoggle { grid-template-columns: 1fr; } }
 
+        /* ── ORDER FLOW NOTICE (inline banner) ── */
+        .order-flow-note {
+            display: flex; gap: 13px; align-items: flex-start;
+            padding: 14px 16px; margin-bottom: 22px;
+            border: 1px solid color-mix(in srgb, var(--c-amber) 40%, var(--border));
+            border-left: 3px solid var(--c-amber);
+            border-radius: 12px;
+            background: color-mix(in srgb, var(--c-amber) 9%, var(--surface));
+        }
+        .ofn-ico {
+            flex: 0 0 auto; width: 30px; height: 30px; border-radius: 9px;
+            display: grid; place-items: center; font-size: 16px;
+            background: color-mix(in srgb, var(--c-amber) 18%, transparent);
+        }
+        .ofn-body { display: grid; gap: 3px; }
+        .ofn-ttl { font-size: 13.5px; font-weight: 700; color: var(--text); }
+        .ofn-txt { font-size: 12.8px; line-height: 1.55; color: var(--text-dim); margin: 0; }
+        .ofn-txt strong { color: var(--text); }
+
+        /* ── ORDER FLOW POPUP ── */
+        .flowmodal-lead { font-size: 13.5px; color: var(--text-dim); line-height: 1.6; margin: 0; }
+        .flow-steps { list-style: none; display: grid; gap: 11px; margin: 2px 0 0; padding: 0; }
+        .flow-steps li { display: grid; grid-template-columns: 26px 1fr; gap: 11px; align-items: start; }
+        .flow-steps .fs-n {
+            width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+            font-family: var(--font-display); font-size: 12.5px; font-weight: 700; color: #fff;
+            background: linear-gradient(135deg, var(--c-violet), var(--c-blue));
+        }
+        .flow-steps li > div { font-size: 13.5px; line-height: 1.5; color: var(--text-dim); padding-top: 2px; }
+        .flow-steps li strong { color: var(--text); }
+        .flow-tip {
+            display: flex; gap: 9px; align-items: flex-start;
+            padding: 11px 13px; border-radius: 10px; font-size: 12.8px; line-height: 1.5;
+            color: var(--text-dim);
+            background: color-mix(in srgb, var(--c-amber) 10%, var(--surface));
+            border: 1px solid color-mix(in srgb, var(--c-amber) 32%, var(--border));
+        }
+
         /* ── DIVIDER ── */
         .fdiv { grid-column: 1 / -1; height: 1px; background: var(--border); margin: 6px 0; position: relative; }
         .fdiv::before {
@@ -376,7 +414,7 @@
                 <div class="sec-head reveal" style="margin-bottom:32px">
                     <span class="eyebrow">Checkout</span>
                     <h2>Complete your order</h2>
-                    <p>Fill in your details — we'll confirm in live chat within minutes.</p>
+                    <p>Fill in your details — we'll confirm on WhatsApp within minutes.</p>
                 </div>
 
                 <div class="info-grid">
@@ -391,6 +429,15 @@
                             <p>We need these to deliver your subscription and send you support.</p>
                         </div>
                         <div class="fc-body">
+
+                            <!-- Ordering flow notice -->
+                            <div class="order-flow-note">
+                                <div class="ofn-ico" aria-hidden="true">⚠️</div>
+                                <div class="ofn-body">
+                                    <div class="ofn-ttl">Please read before you pay</div>
+                                    <p class="ofn-txt">Select <strong>“Payment Due”</strong> and confirm your order <strong>first</strong>. Your order is sent to us on WhatsApp — once we verify the account is available, our admin shares the payment details there, and <strong>then</strong> you make the payment.</p>
+                                </div>
+                            </div>
 
                             <!-- Error box -->
                             <div class="verr" id="errBox"></div>
@@ -422,7 +469,7 @@
                                                 <span class="ttl">Payment Due</span>
                                                 <input type="radio" name="payStatus" value="due" checked>
                                             </div>
-                                            <div class="dsc">Send order first, then pay after live chat confirmation.</div>
+                                            <div class="dsc">Send order first, then pay after we confirm on WhatsApp.</div>
                                         </label>
                                         <label class="ptopt" id="payOptPaid">
                                             <div class="row">
@@ -531,7 +578,7 @@
                         </ul>
                         <div class="os-note">
                             <span class="os-note-icon">💬</span>
-                            <span>After tapping <strong>Press Order</strong>, a popup will show instructions to copy your order and open live chat.</span>
+                            <span>After tapping <strong>Press Order</strong>, a popup opens your order in WhatsApp — just press send.</span>
                         </div>
 
                         <!-- Payment numbers + QR -->
@@ -624,13 +671,36 @@
             <div class="ordermodal-body">
                 <ol class="ordermodal-steps">
                     <li>Review your order details below.</li>
-                    <li>Click <strong>Confirm Order</strong> — if paid, WhatsApp opens pre-filled (just press send); if payment is due, our live chat opens to assist you.</li>
+                    <li>Click <strong>Confirm Order</strong> — WhatsApp opens with your order pre-filled, just press send.</li>
                     <li>Or click <strong>Copy Order</strong> to copy the details yourself.</li>
                 </ol>
                 <div class="ordermodal-msg" id="orderModalMsg"></div>
                 <div class="ordermodal-actions">
                     <button type="button" class="btn" id="orderModalCopy">Copy Order</button>
                     <button type="button" class="btn btn-primary" id="orderModalOpenChat">Confirm Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── ORDER FLOW WARNING POPUP ── -->
+    <div class="ordermodal" id="flowModal" aria-hidden="true">
+        <div class="ordermodal-in" role="dialog" aria-modal="true" aria-label="How ordering works">
+            <div class="ordermodal-head">
+                <div class="ordermodal-ttl">⚠️ Before You Pay — Please Read</div>
+                <button type="button" class="ordermodal-x" id="flowModalClose" aria-label="Close">✕</button>
+            </div>
+            <div class="ordermodal-body">
+                <p class="flowmodal-lead">To make sure the account is in stock, please follow these steps in order:</p>
+                <ol class="flow-steps">
+                    <li><span class="fs-n">1</span><div>Select <strong>“Payment Due”</strong> as your payment status.</div></li>
+                    <li><span class="fs-n">2</span><div><strong>Confirm your order</strong> — it opens in WhatsApp, just press send. No payment yet.</div></li>
+                    <li><span class="fs-n">3</span><div>Our <strong>admin checks availability</strong> and shares the payment details on WhatsApp.</div></li>
+                    <li><span class="fs-n">4</span><div><strong>Make the payment</strong> — then receive your subscription within minutes.</div></li>
+                </ol>
+                <div class="flow-tip"><span aria-hidden="true">💡</span><span>Paying before confirmation may cause delays if the account is out of stock. Always confirm first.</span></div>
+                <div class="ordermodal-actions">
+                    <button type="button" class="btn btn-primary" id="flowModalOk" style="flex:1 1 100%">Got it — Continue</button>
                 </div>
             </div>
         </div>
@@ -845,14 +915,42 @@
             const orderModalOpenChat = document.getElementById('orderModalOpenChat');
             const captchaModal = document.getElementById('captchaModal');
             const captchaModalText = document.getElementById('captchaModalText');
+            const flowModal = document.getElementById('flowModal');
+            const flowModalClose = document.getElementById('flowModalClose');
+            const flowModalOk = document.getElementById('flowModalOk');
             const btnSendOrder = document.getElementById('btnSendWA');
             let pendingOrderMessage = '';
             let isVerifyingCaptcha = false;
             let captchaVerifiedForOrder = false;
 
             function syncBodyLock() {
-                const hasOpenModal = (qrModal && qrModal.classList.contains('on')) || (orderModal && orderModal.classList.contains('on')) || (captchaModal && captchaModal.classList.contains('on'));
+                const hasOpenModal = (qrModal && qrModal.classList.contains('on')) || (orderModal && orderModal.classList.contains('on')) || (captchaModal && captchaModal.classList.contains('on')) || (flowModal && flowModal.classList.contains('on'));
                 document.body.style.overflow = hasOpenModal ? 'hidden' : '';
+            }
+
+            /* ── ORDER FLOW WARNING POPUP (once per session) ── */
+            function closeFlowModal() {
+                if (!flowModal) return;
+                flowModal.classList.remove('on');
+                flowModal.setAttribute('aria-hidden', 'true');
+                syncBodyLock();
+            }
+            function openFlowModal() {
+                if (!flowModal) return;
+                flowModal.classList.add('on');
+                flowModal.setAttribute('aria-hidden', 'false');
+                syncBodyLock();
+            }
+            flowModalClose?.addEventListener('click', closeFlowModal);
+            flowModalOk?.addEventListener('click', closeFlowModal);
+            flowModal?.addEventListener('click', (e) => { if (e.target === flowModal) closeFlowModal(); });
+            try {
+                if (flowModal && !sessionStorage.getItem('ttbd_flow_seen')) {
+                    sessionStorage.setItem('ttbd_flow_seen', '1');
+                    setTimeout(openFlowModal, 450);
+                }
+            } catch (_) {
+                if (flowModal) setTimeout(openFlowModal, 450);
             }
 
             function openCaptchaModal(text) {
@@ -926,6 +1024,7 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && qrModal?.classList.contains('on')) closeQr();
                 if (e.key === 'Escape' && orderModal?.classList.contains('on')) closeOrderModal();
+                if (e.key === 'Escape' && flowModal?.classList.contains('on')) closeFlowModal();
             });
 
             orderModalCopy?.addEventListener('click', async () => {
@@ -936,39 +1035,29 @@
 
             orderModalOpenChat?.addEventListener('click', async () => {
                 const message = (pendingOrderMessage || '').trim();
-                const name = (document.getElementById('infoName')?.value || '').trim();
-                const phone = (document.getElementById('infoWhatsApp')?.value || '').trim();
                 const isPaid = getPayStatus() === 'paid';
 
-                /* 1) Automatic order capture → Telegram (always, independent of any widget) */
+                /* Automatic order capture → Telegram (silent backend record). */
                 sendOrderToTelegram(message);
 
-                /* 2) Post order data to the Tawk dashboard + open live chat */
-                if (window.TTBDLiveChat && typeof window.TTBDLiveChat.sendOrderToChat === 'function') {
-                    window.TTBDLiveChat.sendOrderToChat(message, {
-                        source: 'order-form',
-                        name: name,
-                        phone: phone,
-                        product: p.product,
-                        plan: p.plan
-                    });
-                }
-
-                if (isPaid && WHATSAPP_NUMBER) {
-                    /* PAID → open WhatsApp with the full order pre-filled (one-tap send).
-                       window.open (not an <a> click) bypasses the WhatsApp→Tawk interceptor. */
+                /* BOTH Paid and Payment Due go straight to WhatsApp with the order
+                   pre-filled (one-tap send). Live chat is reserved for questions only.
+                   window.open (not an <a> click) bypasses the WhatsApp→Tawk interceptor. */
+                if (WHATSAPP_NUMBER) {
                     const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
                     window.open(waUrl, '_blank', 'noopener');
                     closeOrderModal();
-                    showToast('Order confirmed', 'WhatsApp opened with your order — just press send.');
+                    showToast('Order ready', isPaid
+                        ? 'WhatsApp opened with your order — just press send.'
+                        : 'WhatsApp opened with your order — just press send. We\'ll confirm availability and share payment details there.');
                 } else {
-                    /* PAYMENT DUE → handle the order/query in Tawk live chat (no WhatsApp).
-                       Copy the order so the customer can paste it into the chat. */
+                    /* Fallback if no WhatsApp number is configured — copy so the
+                       customer can send it to us manually. */
                     const copied = await copyToClipboard(message);
                     closeOrderModal();
-                    showToast('✅ Order received', copied
-                        ? 'For a fast response, paste your order in the live chat — it\'s already copied, just tap the chat box and paste (Ctrl+V / long-press → Paste).'
-                        : 'For a fast response, please paste your order in the live chat box.', 10000);
+                    showToast('✅ Order copied', copied
+                        ? 'Your order is copied — please send it to us on WhatsApp.'
+                        : 'Please copy your order and send it to us on WhatsApp.', 8000);
                 }
             });
 
