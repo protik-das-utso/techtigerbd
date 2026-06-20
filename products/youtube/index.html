@@ -1099,7 +1099,7 @@
               img.alt = String(it.name || 'Customer');
               img.loading = 'lazy';
               av.textContent = '';
-              av.appendChild(img);
+              img.onerror = function () { av.textContent = initial; }; av.appendChild(img);
             } else {
               av.textContent = initial;
             }
@@ -1250,6 +1250,7 @@
   </script>
   <script defer src="/assets/product-plans.js?v=1"></script>
   <script defer src="/assets/livechat.js?v=lc7"></script>
+  <script defer src="/assets/social-proof.js?v=1"></script>
 </body>
 
 </html>

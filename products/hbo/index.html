@@ -469,7 +469,7 @@
                     card.innerHTML = `\n            <div class="rc-q">\"</div>\n            <div class="rc-stars">${stars}</div>\n            <p class="rc-txt"></p>\n            <div class="rc-auth">\n              <div class="rc-av"></div>\n              <div>\n                <div class="rc-name"></div>\n                <div class="rc-date"></div>\n              </div>\n            </div>\n          `;
                     card.querySelector('.rc-txt').textContent = String(it.text || '');
                     const av = card.querySelector('.rc-av');
-                    if (av) { if (avatarUrl) { const img = document.createElement('img'); img.src = avatarUrl; img.alt = String(it.name || 'Customer'); img.loading = 'lazy'; av.textContent = ''; av.appendChild(img); } else { av.textContent = initial; } }
+                    if (av) { if (avatarUrl) { const img = document.createElement('img'); img.src = avatarUrl; img.alt = String(it.name || 'Customer'); img.loading = 'lazy'; av.textContent = ''; img.onerror = function () { av.textContent = initial; }; av.appendChild(img); } else { av.textContent = initial; } }
                     card.querySelector('.rc-name').textContent = String(it.name || '');
                     card.querySelector('.rc-date').textContent = String(it.date || '');
                     grid.appendChild(card);
@@ -496,6 +496,7 @@
     </script>
     <script defer src="/assets/other-products.js?v=op2"></script>
     <script defer src="/assets/livechat.js?v=lc7"></script>
+    <script defer src="/assets/social-proof.js?v=1"></script>
 </body>
 
 </html>

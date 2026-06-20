@@ -399,7 +399,7 @@
                             img.alt = String(it.name || 'Customer');
                             img.loading = 'lazy';
                             av.textContent = '';
-                            av.appendChild(img);
+                            img.onerror = function () { av.textContent = initial; }; av.appendChild(img);
                         } else { av.textContent = initial; }
                     }
                     card.querySelector('.rc-name').textContent = String(it.name || '');
@@ -413,6 +413,7 @@
         initReviewArrows();
     </script>
     <script defer src="/assets/livechat.js?v=lc7"></script>
+    <script defer src="/assets/social-proof.js?v=1"></script>
 </body>
 
 </html>
