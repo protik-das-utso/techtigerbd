@@ -13,7 +13,7 @@
         },
         {
             "name": "Canva Pro",
-            "image": "/assets/brand/canva.svg",
+            "image": "/assets/brand/canva.webp",
             "link": "/products/canva-pro/",
             "category": "creative",
             "available": true,
@@ -75,7 +75,7 @@
         },
         {
             "name": "Claude Pro",
-            "image": "/assets/brand/claude.svg",
+            "image": "/assets/brand/claude.webp",
             "link": "/products/claude-pro/",
             "category": "ai",
             "available": true,
