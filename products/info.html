@@ -1037,8 +1037,7 @@
                 const message = (pendingOrderMessage || '').trim();
                 const isPaid = getPayStatus() === 'paid';
 
-                /* Automatic order capture → Telegram (silent backend record). */
-                sendOrderToTelegram(message);
+                /* Order is already captured to Telegram when "Press Order" was pressed. */
 
                 /* BOTH Paid and Payment Due go straight to WhatsApp with the order
                    pre-filled (one-tap send). Live chat is reserved for questions only.
@@ -1329,6 +1328,10 @@
 
                 if (captchaOk !== true) return;
                 const msg = buildMessage();
+
+                /* Capture the order to Telegram the moment "Press Order" is pressed. */
+                sendOrderToTelegram(msg);
+
                 openOrderModal(msg);
             });
 
