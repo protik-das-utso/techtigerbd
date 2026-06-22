@@ -116,11 +116,11 @@ img { max-width: 100%; display: block; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 ul { list-style: none; }
 
-/* Hide raw WhatsApp links globally (kept from old behavior) */
-a[href*="wa.me"],
-a[href*="api.whatsapp.com"],
-a[href*="whatsapp.com/send"],
-a[href*="whatsapp://"] { display: none !important; }
+/* Hide raw WhatsApp links globally (kept from old behavior), except explicit direct-contact links */
+a[href*="wa.me"]:not([data-wa-direct="1"]),
+a[href*="api.whatsapp.com"]:not([data-wa-direct="1"]),
+a[href*="whatsapp.com/send"]:not([data-wa-direct="1"]),
+a[href*="whatsapp://"]:not([data-wa-direct="1"]) { display: none !important; }
 
 /* ── LAYOUT WRAPPER ── */
 .wrap {
@@ -493,7 +493,6 @@ a[href*="whatsapp://"] { display: none !important; }
 .pcard.dim { opacity: .45; }
 .pcard__media {
   display: block;
-  aspect-ratio: 16/11;
   overflow: hidden;
   background: var(--bg-tint);
   position: relative;

@@ -1,0 +1,87 @@
+# ==========================================================================
+# Tech Tiger BD — Apache config (shared cPanel)
+# Addresses Semrush Site Audit issues: HTTPS, www canonicalization, HSTS,
+# browser caching, gzip compression, and default charset.
+# ==========================================================================
+
+# --------------------------------------------------------------------------
+# 1. Force HTTPS + canonical non-www host (ttigerbd.com)
+#    Fixes: "non-secure pages", "links on HTTPS pages lead to HTTP page",
+#           "pages have a WWW resolve issue"
+# --------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect any http:// request to https://
+  RewriteCond %{HTTPS} off [OR]
+  # Redirect www. to the bare domain
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://ttigerbd.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 1b. Permanent redirects for moved pages (preserve SEO of old URLs)
+# --------------------------------------------------------------------------
+<IfModule mod_alias.c>
+  Redirect 301 /products/crunchyroll.html /products/crunchyroll/
+  Redirect 301 /products/gemini-veo3.html /products/gemini/
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 2. Security headers
+#    Fixes: "subdomains don't support HSTS"
+# --------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # HSTS — 1 year, include subdomains, eligible for preload list
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
+
+  # Sensible extra hardening (no Semrush impact, good practice)
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Cache static assets aggressively; they are versioned via ?v= query strings
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|gif|svg|ico|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Never cache HTML so content updates go live immediately
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 3. Browser caching via Expires (fallback if mod_headers is unavailable)
+#    Fixes: "issues with uncached JavaScript and CSS files"
+# --------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType text/javascript         "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType image/x-icon            "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+  ExpiresByType application/json        "access plus 1 day"
+  ExpiresByType text/html               "access plus 0 seconds"
+  ExpiresDefault                        "access plus 1 month"
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 4. Gzip / Deflate compression — shrinks transferred CSS/JS/HTML
+# --------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml application/rss+xml
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 5. Default charset — ensures UTF-8 is always declared in the response
+#    Fixes: "pages don't have character encoding declared"
+# --------------------------------------------------------------------------
+AddDefaultCharset UTF-8

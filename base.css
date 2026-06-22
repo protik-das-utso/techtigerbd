@@ -113,11 +113,11 @@ button {
   background: none;
 }
 
-/* Hide WhatsApp buttons/links globally */
-a[href*="wa.me"],
-a[href*="api.whatsapp.com"],
-a[href*="whatsapp.com/send"],
-a[href*="whatsapp://"] {
+/* Hide WhatsApp buttons/links globally, except explicit direct-contact links (data-wa-direct="1") */
+a[href*="wa.me"]:not([data-wa-direct="1"]),
+a[href*="api.whatsapp.com"]:not([data-wa-direct="1"]),
+a[href*="whatsapp.com/send"]:not([data-wa-direct="1"]),
+a[href*="whatsapp://"]:not([data-wa-direct="1"]) {
   display: none !important;
 }
 

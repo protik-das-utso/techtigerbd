@@ -24,7 +24,7 @@
   // Map product path → category accent. Falls back to violet.
   var ACCENT_BY_PATH = {
     'chatgpt': 'ai', 'claude-pro': 'ai', 'perplexity': 'ai', 'grammarly': 'ai',
-    'stealthwriter': 'ai', 'gemini-veo3': 'ai',
+    'stealthwriter': 'ai', 'gemini': 'ai',
     'netflix': 'streaming', 'youtube': 'streaming', 'prime-video': 'streaming',
     'disney-plus': 'streaming', 'hbo': 'streaming', 'crunchyroll': 'streaming',
     'spotify': 'music',

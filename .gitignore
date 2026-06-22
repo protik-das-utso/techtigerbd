@@ -3,3 +3,10 @@
 /test.zip
 /crunchyroll.html
 /catalog_media_title.csv
+
+# Local scratch / tooling
+/.gemini_temp/
+/node_modules/
+
+# Semrush audit export (kept locally, not committed)
+/assets/Semrush-Site_Audit__Full_Report-ttigerbd_com-22nd_Jun_2026.pdf

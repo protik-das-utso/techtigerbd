@@ -238,6 +238,17 @@
             "cta": "BUY NOW"
         },
         {
+            "name": "Crunchyroll Premium",
+            "image": "/assets/brand/crunchyroll.webp",
+            "link": "/products/crunchyroll/",
+            "category": "streaming",
+            "available": true,
+            "priceRange": "৳50–৳900",
+            "priceMonthly": "From ৳50",
+            "price": "৳50–৳900",
+            "cta": "BUY NOW"
+        },
+        {
             "name": "Telegram Premium",
             "image": "/assets/brand/telegram.webp",
             "link": "/products/telegram-premium/",
@@ -251,7 +262,7 @@
         {
             "name": "Google AI Pro",
             "image": "/assets/brand/gemini.webp",
-            "link": "/products/gemini-veo3.html",
+            "link": "/products/gemini/",
             "category": "ai",
             "available": true,
             "priceRange": "৳450",
